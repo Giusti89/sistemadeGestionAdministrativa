@@ -1,0 +1,17 @@
+ .modificar {
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.modificar:hover {
+    background-color: #45a049;
+}
+
+.modificar:active {
+    background-color: #3e8e41;
+}
