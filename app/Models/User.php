@@ -51,8 +51,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(TipoUsuario::class, 'tipousuario_id');
     }
-    // public function clientes()
-    // {
-    //     return $this->hasMany(Cliente::class, 'usuario_id');
-    // }
+    public function clientes()
+    {
+        return $this->hasMany(Cliente::class, 'usuario_id');
+    }
 }

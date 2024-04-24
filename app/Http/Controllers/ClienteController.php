@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use Exception;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -13,7 +14,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        
+
         return view('clientes.index');
     }
 
@@ -32,7 +33,7 @@ class ClienteController extends Controller
     {
         $request->validate([
             'nombre' => ['required', 'string', 'max:255'],
-            'apellido' => ['nullable','string', 'max:255'],
+            'apellido' => ['nullable', 'string', 'max:255'],
             'contacto' => ['required', 'numeric'],
             'nit' => ['required', 'numeric'],
             'email' => ['required', 'email', 'max:255'],
@@ -49,7 +50,7 @@ class ClienteController extends Controller
 
         $cliente->save();
 
-        
+
         return redirect()->route('clientIndex')->with('success', 'ok');
     }
 
@@ -64,24 +65,57 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
-        //
+        $clie = Cliente::find($id);
+        $this->authorize('autor', $clie);
+        return view('clientes.edit', compact('clie'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        //
+        // Validar los datos recibidos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'nullable|string|max:255',
+            'contacto' => 'required|string|max:255',
+            'nit' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+
+        $clie = Cliente::find($id);
+        $this->authorize('autor', $clie);
+
+
+        $clie->nombre = $request->nombre;
+        $clie->apellido = $request->apellido;
+        $clie->contacto = $request->contacto;
+        $clie->nit = $request->nit;
+        $clie->email = $request->email;
+
+        // Guardar los cambios en la base de datos
+        $clie->save();
+
+        // Redirigir a la ruta 'dashboard'
+        return redirect()->route('clientIndex')->with('msj', 'cambio');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+        try {
+            $cliente = Cliente::findOrFail($id);
+            $this->authorize('autor', $cliente);
+            $cliente->delete(); 
+            return redirect()->route('clientIndex')->with('msj', 'ok');
+        } catch (Exception $e) {
+            return redirect()->route('clientIndex')->with(['msj' => 'prohibido']);
+        }
     }
 }

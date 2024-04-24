@@ -47,21 +47,23 @@
                             {{ $cli->email }}
                         </td>
                         <td class="filas-tabla">
-                            {{-- <div>
-                                <x-layouts.btnmodif rutaEnvio="edicli" dato="{{$cli->id}}" nombre="Modificar">
-                            </x-layouts.btnenviodat> --}}
+                            <div>
+                                <x-layouts.btnmodif rutaEnvio="editCliente" dato="{{$cli->id}}" nombre="Modificar">
+                                </x-layouts.btnenviodat>
                             </div>
                         </td>
                         <td class="filas-tabla">
-                            {{-- <div>
-                                <form class="eli" action="{{ route('elicliente', $cli->id) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-layouts.btnelim contenido="Eliminar">
-                                    </x-layouts.btnelim>
-                                </form>
-                            </div> --}}
+                            <div>
+                                <div>
+                                    <form class="eli" action="{{ route('elicliente', $cli->id) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-layouts.btnelim contenido="Eliminar">
+                                        </x-layouts.btnelim>
+                                    </form>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
