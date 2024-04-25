@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrabajoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +39,26 @@ Route::middleware(['auth', 'CheckSubscription'])->group(function () {
         Route::get('/clientes.edit/{id}', 'edit')->name('editCliente');      
         Route::put('/clientes/{cliente}', 'update')->name('clienteUpdate');
         Route::delete('/clientes/{cliente}', 'destroy')->name('elicliente');
+       
+    });
+
+    Route::controller(TrabajoController::class)->group(function () {
+        Route::get('trabajos.index', 'index')->name('trabIndex');
+        Route::get('/trabajos.nuevo', 'create')->name('nuevoTrab');        
+        Route::post('/trabajos.store', 'store')->name('crearTrab');
+        Route::get('/trabajos.edit/{id}', 'edit')->name('editTrab'); 
+        Route::put('/trabajos/{id}', 'update')->name('updateTrab');
+        Route::delete('/trabajos/{id}', 'destroy')->name('eliTrab');
+       
+    });
+
+    Route::controller(InsumoController::class)->group(function () {
+        Route::get('insumos.index/{id}', 'index')->name('insumoIndex');
+        Route::post('/insumos.store', 'store')->name('createInsumo');
+        Route::get('/insumos.edit/{id}', 'edit')->name('editInsumo');
+        Route::put('/insumos.update/{id}', 'update')->name('updateInsumo');
+        Route::delete('/insumos/{id}', 'destroy')->name('eliInsumo');
+
        
     });
 });
