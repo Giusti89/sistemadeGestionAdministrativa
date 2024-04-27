@@ -26,7 +26,7 @@
         <script>
             Swal.fire({
                 title: "Correcto",
-                text: "Su solicitud a sido ejecutada.",
+                text: "Su insumo fue agregado correctamente.",
                 icon: "success"
             });
         </script>
@@ -41,6 +41,16 @@
             });
         </script>
     @endif
+
+    @if (session('chk') == 'realizado')
+    <script>
+        Swal.fire({
+            title: "REALIZADO",
+            text: "Su insumo fue modificado correctamente.",
+            icon: "success"
+        });
+    </script>
+@endif
 
     <!-- mensajes de confirmacion -->
 

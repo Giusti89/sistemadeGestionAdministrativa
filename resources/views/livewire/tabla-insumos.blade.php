@@ -40,7 +40,7 @@
                                             {{ $trab->costo }}
                                         </td>
                                         <td class="filas-tabla">
-                                            <x-layouts.btnmodif rutaEnvio="editInsumo" dato="{{$trab->id}}" nombre="Modificar">
+                                            <x-layouts.btnmodif class="modificar" rutaEnvio="editInsumo" dato="{{$trab->id}}" nombre="Modificar">
                                             </x-layouts.btnenviodat>
                                         </td>
                                         <td class="filas-tabla">
@@ -122,7 +122,7 @@
             e.preventDefault()
 
             Swal.fire({
-                title: "¿Estas seguro de eliminar este trabajo?",
+                title: "¿Estas seguro de eliminar este insumo?",
                 text: "¡No podrás revertir esto!",
                 icon: "warning",
                 showCancelButton: true,

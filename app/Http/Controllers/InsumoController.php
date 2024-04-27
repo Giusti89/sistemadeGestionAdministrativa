@@ -90,7 +90,7 @@ class InsumoController extends Controller
             $cot = Insumo::findOrFail($id);
             $this->authorize('view', $cot);
             $cot->delete();
-            return redirect()->route('insumoIndex', ['id' => $cot->trabajo_id])->with('msj', 'ok');
+            return redirect()->route('insumoIndex', ['id' => $cot->trabajo_id])->with('chk', 'realizado');
         } catch (Exception $e) {
             return redirect()->route('insumoIndex', ['id' => $cot->trabajo_id])->with(['msj' => 'prohibido']);
         }
