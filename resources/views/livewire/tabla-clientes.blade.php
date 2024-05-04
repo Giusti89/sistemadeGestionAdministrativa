@@ -1,18 +1,27 @@
 <div>
     <link rel="stylesheet" href="./css/dashbord.css">
+
     <div class="botones">
         <div>
             <x-layouts.btnconfirmar contenido="Crear Cliente" enlace="clientes.nuevo">
             </x-layouts.btnconfirmar>
         </div>
         <div>
-          <label for="">Buscar por nombre:</label>
-          <input type="text" wire:model.live="search">
+            <label for="">Buscar por nombre:</label>
+            <input type="text" wire:model.live="search">
         </div>
         <div>
             <label for="paginate">Mostrar numero de registros</label>
             <input type="number" wire:model.live="paginate">
         </div>
+
+        @if ($diferenciaDias <= 5)
+            <div id="anuncio" class="anuncio">
+                <h1>Le quedan {{ $diferenciaDias }} dias de suscripcion</h1>                
+            </div>
+        @endif
+
+
 
     </div>
     <div class="table-container">
@@ -48,15 +57,15 @@
                         </td>
                         <td class="filas-tabla">
                             <div>
-                                <x-layouts.btnmodif rutaEnvio="editCliente" dato="{{$cli->id}}" nombre="Modificar">
-                                </x-layouts.btnenviodat>
+                                <x-layouts.btnmodif rutaEnvio="editCliente" dato="{{ $cli->id }}"
+                                    nombre="Modificar">
+                                    </x-layouts.btnenviodat>
                             </div>
                         </td>
                         <td class="filas-tabla">
                             <div>
                                 <div>
-                                    <form class="eli" action="{{ route('elicliente', $cli->id) }}"
-                                        method="POST">
+                                    <form class="eli" action="{{ route('elicliente', $cli->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <x-layouts.btnelim contenido="Eliminar">
@@ -69,7 +78,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{$clientes->links()}}
+        {{ $clientes->links() }}
     </div>
     @section('js')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -39,13 +39,15 @@ class TrabajoController extends Controller
             'descripcion' => 'required|string',
             'cliente' => 'required|exists:clientes,id',
             'cantidades' => 'required|numeric',
-            'ganancia' => 'required|numeric'
+            'ganancia' => 'required|numeric',
+            'iva' => 'numeric|nullable'
         ]);
 
         $trabajo = new Trabajo();
 
         $trabajo->trabajo = $request->trabajo;
         $trabajo->ganancia = $request->ganancia;
+        $trabajo->iva = $request->iva;
         $trabajo->descripcion = $request->descripcion;
         $trabajo->cliente_id = $request->cliente;
         $trabajo->cantidad = $request->cantidades;

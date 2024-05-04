@@ -31,7 +31,7 @@ Route::middleware(['auth', 'CheckAdmin'])->group(function () {
     });
 });
 
-Route::middleware(['auth', 'CheckSubscription'])->group(function () {
+Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function () {
     Route::controller(ClienteController::class)->group(function () {
         Route::get('clientes.index', 'index')->name('clientIndex');
         Route::get('/clientes.nuevo', 'create')->name('nuevoCliente');
@@ -58,8 +58,7 @@ Route::middleware(['auth', 'CheckSubscription'])->group(function () {
         Route::get('/insumos.edit/{id}', 'edit')->name('editInsumo');
         Route::put('/insumos.update/{id}', 'update')->name('updateInsumo');
         Route::delete('/insumos/{id}', 'destroy')->name('eliInsumo');
-
-       
+        Route::post('/insumos', 'terminar')->name('terminarInsumo');
     });
 });
 

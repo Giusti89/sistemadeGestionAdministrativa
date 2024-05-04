@@ -28,6 +28,10 @@
                     <th>Trabajo</th>
                     <th>Descripcion</th>
                     <th>Catidad</th>
+                    <th>Costo Produccion</th>
+                    <th>ganancia Efectivo</th>
+                    <th>ivaefectivo</th>
+                    <th>Costo Final</th>
                     <th>Cotizar</th>
                     <th>Modificación</th>
                     <th>Eliminar</th>
@@ -54,10 +58,33 @@
                         <td class="filas-tabla">
                             {{ $insumos->cantidad }}
                         </td>
+                        {{-- prueba --}}
+                        <td class="filas-tabla">
+                            {{ $insumos->Costoproduccion }}
+                        </td>
+                        
+                        <td class="filas-tabla">
+                            {{ $insumos->gananciaefectivo }}
+                        </td>
+                        
+                        
+
+                        <td class="filas-tabla">
+                            {{ $insumos->ivaefectivo }}
+                        </td>
+
+
+
+                        <td class="filas-tabla">
+                            {{ $insumos->Costofinal }}
+                        </td>
+                        {{-- prueba --}}
+                        
                         <td>
                             <div>
-                                <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}" nombre="Cotizar">
-                                    </x-layouts.btnenviodat>
+                                <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}"
+                                    nombre="Cotizar">
+                                </x-layouts.btnenviodat>
                             </div>
                         </td>
 
@@ -85,25 +112,25 @@
 
     </div>
     @section('js')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $('.eli').submit(function(e) {
-            e.preventDefault()
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $('.eli').submit(function(e) {
+                e.preventDefault()
 
-            Swal.fire({
-                title: "¿Estas seguro de eliminar este trabajo?",
-                text: "¡No podrás revertir esto!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Si, eliminar"
-            }).then((result) => {
-                if (result.value) {
-                    this.submit();
-                }
+                Swal.fire({
+                    title: "¿Estas seguro de eliminar este trabajo?",
+                    text: "¡No podrás revertir esto!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si, eliminar"
+                }).then((result) => {
+                    if (result.value) {
+                        this.submit();
+                    }
+                });
             });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
 </div>

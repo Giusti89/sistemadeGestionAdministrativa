@@ -18,7 +18,7 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="text" required id="trabajo" name="trabajo" :value="old('trabajo')" required autofocus
+                <input type="text" required id="trabajo" name="trabajo" :value="old('trabajo')"  autofocus
                     autocomplete="trabajo">
                 <label for="">Trabajo/Servicio</label>
                 <x-input-error :messages="$errors->get('trabajo')" class="mt-2" />
@@ -31,7 +31,7 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="number" required id="cantidades" name="cantidades" :value="old('cantidades')" required
+                <input type="number" required id="cantidades" name="cantidades" :value="old('cantidades')" 
                     autofocus autocomplete="cantidades">
                 <label for="">Cantidad</label>
                 <x-input-error :messages="$errors->get('cantidades')" class="mt-2" />
@@ -39,10 +39,18 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="number" required id="ganancia" name="ganancia" :value="old('ganancia')" required
+                <input type="decimal" required id="ganancia" name="ganancia" :value="old('ganancia')" 
                     autofocus autocomplete="ganancia">
                 <label for="">Ganancia en porcentaje</label>
                 <x-input-error :messages="$errors->get('ganancia')" class="mt-2" />
+            </div>
+
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="decimal"  id="iva" name="iva" :value="old('iva')" 
+                    autofocus autocomplete="iva">
+                <label for="">IVA</label>
+                <x-input-error :messages="$errors->get('iva')" class="mt-2" />
             </div>
 
             <button>

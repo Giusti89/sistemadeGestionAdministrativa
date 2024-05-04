@@ -15,10 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('trabajo');
             $table->text('descripcion');
-            $table->integer('cantidad');
+            $table->decimal('cantidad', 10, 2);
             $table->boolean('estado')->default(false);
 
             $table->decimal('ganancia', 10, 2)->default(0.00)->nullable();
+            $table->decimal('gananciaefectivo', 10, 2)->default(0.00)->nullable();
+
+            $table->decimal('iva', 10, 2)->default(0.00)->nullable();
+            $table->decimal('ivaefectivo', 10, 2)->default(0.00)->nullable();
+
+            $table->decimal('Costofactura', 10, 2)->default(0.00)->nullable();
+
             $table->decimal('Costoproduccion', 10, 2)->default(0.00)->nullable();
             $table->decimal('Costofinal', 10, 2)->default(0.00)->nullable();
             

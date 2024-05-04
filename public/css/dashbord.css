@@ -47,3 +47,18 @@ table tr:hover {
     flex-direction: row;
     gap: 50px;
 }
+.anuncio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid red;
+    padding: 5px;
+    background-color: rgb(218, 102, 102);
+    display: block;
+}
+.anuncio h1{
+    color: aliceblue;
+    text-align: center;
+}
+

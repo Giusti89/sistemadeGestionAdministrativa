@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insumo;
+use App\Models\Trabajo;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -36,7 +37,7 @@ class InsumoController extends Controller
         $item->costo = $request->costo;
         $item->trabajo_id = $request->trabajo_id;
         $item->save();
-        
+
         return redirect()->route('insumoIndex', ['id' => $request->trabajo_id])->with('msj', 'cambio');
     }
 
@@ -76,14 +77,12 @@ class InsumoController extends Controller
         $insumo->detalle = $request->detalle;
         $insumo->costo = $request->costo;
 
-        
+
         $insumo->update();
         return redirect()->route('insumoIndex', ['id' => $insumo->trabajo_id])->with('msj', 'ok');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Request $request, $id)
     {
         try {
@@ -94,5 +93,33 @@ class InsumoController extends Controller
         } catch (Exception $e) {
             return redirect()->route('insumoIndex', ['id' => $cot->trabajo_id])->with(['msj' => 'prohibido']);
         }
+    }
+    public function terminar(Request $request)
+    {
+        $actualizar = Trabajo::findOrFail($request->id);
+        $costoProduccion = $request->total;
+        $actualizar->Costoproduccion= $costoProduccion;
+        $porcentaje = $actualizar->ganancia / 100;
+        $total = $costoProduccion + ($costoProduccion * $porcentaje);
+        $ganefec = ($total - $costoProduccion);
+        $actualizar->gananciaefectivo = $ganefec;
+
+        if ($actualizar->iva <= 0) {
+
+            $actualizar->estado = true;
+            $actualizar->Costoproduccion = $request->total;
+            $actualizar->Costofinal = $total;
+            $actualizar->update();
+            return redirect()->route('trabIndex')->with('chk', 'realizado');
+        } else {
+
+            $impuesto = $actualizar->iva / 100;
+            $Costofac = $total + ($total * $impuesto);
+            $actualizar->Costofinal = $Costofac;
+            $actualizar->ivaefectivo=($Costofac-$total );
+            $actualizar->update();
+            return redirect()->route('trabIndex')->with('chk', 'realizado');
+        }
+       
     }
 }

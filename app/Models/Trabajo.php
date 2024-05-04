@@ -12,6 +12,14 @@ class Trabajo extends Model
         'trabajo',
         'descripcion',
         'cantidad',
+        'estado',
+        'ganancia',
+        'gananciaefectivo',
+        'iva',
+        'ivaefectivo',
+        'Costofactura',
+        'Costoproduccion',
+        'Costofinal',
         'cliente_id',
     ];
 

@@ -5,10 +5,14 @@ namespace App\Livewire;
 use App\Models\Insumo;
 use Livewire\Component;
 use App\Models\Trabajo;
+use Livewire\WithPagination;
 
 class TablaInsumos extends Component
 {
+    use WithPagination;
     public $identificador;
+    public $paginate = 4;
+    
 
 
     public function mount($identificador)
@@ -20,8 +24,10 @@ class TablaInsumos extends Component
     {
         
         $trabajo = Trabajo::where('id', $this->identificador)->value('trabajo');
+        $trabajoid = Trabajo::where('id', $this->identificador)->value('id');
 
-        $insumos = Insumo::where('trabajo_id', $this->identificador)->get();
+
+        $insumos = Insumo::where('trabajo_id', $this->identificador)->paginate($this->paginate);
 
         $total = Insumo::where('trabajo_id', $this->identificador)->sum('costo');
     
@@ -30,6 +36,6 @@ class TablaInsumos extends Component
             $this->authorize('view', $cotizacion);
         }
     
-        return view('livewire.tabla-insumos', compact('insumos','total','trabajo'));
+        return view('livewire.tabla-insumos', compact('insumos','total','trabajo','trabajoid'));
     }
 }
