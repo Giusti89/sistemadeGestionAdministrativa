@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Insumo;
+use App\Models\ordenpago;
 use App\Models\Trabajo;
 use Illuminate\Http\Request;
 use Exception;
@@ -97,18 +98,35 @@ class InsumoController extends Controller
     public function terminar(Request $request)
     {
         $actualizar = Trabajo::findOrFail($request->id);
+        $ordendopago =new ordenpago();
+        $ordendopago->trabajo_id=$request->id; 
+
+        $ordendopago->fechpago= now(); 
+         
+        
+        
+
+
         $costoProduccion = $request->total;
         $actualizar->Costoproduccion= $costoProduccion;
         $porcentaje = $actualizar->ganancia / 100;
         $total = $costoProduccion + ($costoProduccion * $porcentaje);
         $ganefec = ($total - $costoProduccion);
         $actualizar->gananciaefectivo = $ganefec;
+        $actualizar->estado = true;
+
 
         if ($actualizar->iva <= 0) {
 
             $actualizar->estado = true;
             $actualizar->Costoproduccion = $request->total;
             $actualizar->Costofinal = $total;
+
+            $ordendopago->total=$total;
+            $ordendopago->saldo=$total;
+
+
+            $ordendopago->save();
             $actualizar->update();
             return redirect()->route('trabIndex')->with('chk', 'realizado');
         } else {
@@ -117,6 +135,11 @@ class InsumoController extends Controller
             $Costofac = $total + ($total * $impuesto);
             $actualizar->Costofinal = $Costofac;
             $actualizar->ivaefectivo=($Costofac-$total );
+
+            $ordendopago->total=$Costofac;
+            $ordendopago->saldo=$Costofac;
+            
+            $ordendopago->save();
             $actualizar->update();
             return redirect()->route('trabIndex')->with('chk', 'realizado');
         }

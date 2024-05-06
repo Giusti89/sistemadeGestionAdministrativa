@@ -11,7 +11,7 @@
                         </div>
                         <div>
                             <label for="filtro">Filtrar por nombre: </label>
-                            <input type="text" wire:model.live="serch">
+                            <input type="text" wire:model.live="search">
                         </div>
                         <div>
                             <label for="filtro">Paginas: </label>

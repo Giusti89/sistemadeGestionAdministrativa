@@ -62,12 +62,12 @@
                         <td class="filas-tabla">
                             {{ $insumos->Costoproduccion }}
                         </td>
-                        
+
                         <td class="filas-tabla">
                             {{ $insumos->gananciaefectivo }}
                         </td>
-                        
-                        
+
+
 
                         <td class="filas-tabla">
                             {{ $insumos->ivaefectivo }}
@@ -79,7 +79,7 @@
                             {{ $insumos->Costofinal }}
                         </td>
                         {{-- prueba --}}
-                        
+
                         <td>
                             <div>
                                 <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}"
@@ -90,8 +90,15 @@
 
                         <td class="filas-tabla">
                             <div>
-                                <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}" nombre="Verificar">
-                                    </x-layouts.btnenviodat>
+                                @if ($insumos->estado)
+                                    <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"
+                                        nombre="Verificar" estado="disabled">
+                                        </x-layouts.btnenviodat>
+                                    @else
+                                        <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"
+                                            nombre="Verificar">
+                                            </x-layouts.btnenviodat>
+                                @endif
                             </div>
                         </td>
                         <td class="filas-tabla">

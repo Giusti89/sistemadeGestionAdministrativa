@@ -11,6 +11,7 @@ class ordenpago extends Model
     protected $fillable = [
         'total',
         'saldo',
+        'cuenta',
         'trabajo_id',
         'estadopago_id',
     ];
