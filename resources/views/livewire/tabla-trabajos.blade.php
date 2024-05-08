@@ -82,9 +82,16 @@
 
                         <td>
                             <div>
-                                <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}"
-                                    nombre="Cotizar">
-                                </x-layouts.btnenviodat>
+                                @if ($insumos->estado)
+                                    <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}"
+                                        nombre="Cotizar" estado="disabled">
+                                    </x-layouts.btnenviodat>
+                                @else
+                                    <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}"
+                                        nombre="Cotizar" >
+                                    </x-layouts.btnenviodat>
+                                @endif
+
                             </div>
                         </td>
 

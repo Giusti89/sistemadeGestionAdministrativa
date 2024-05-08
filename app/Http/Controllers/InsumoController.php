@@ -101,9 +101,7 @@ class InsumoController extends Controller
         $ordendopago =new ordenpago();
         $ordendopago->trabajo_id=$request->id; 
 
-        $ordendopago->fechpago= now(); 
-         
-        
+        $ordendopago->fechpago= now();         
         
 
 

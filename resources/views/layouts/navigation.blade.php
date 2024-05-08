@@ -14,7 +14,7 @@
                 @if (Auth::user()->tipousuario_id == 1)
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('adminIndex')" :active="request()->routeIs('adminIndex')">
-                            {{ __('Administracion') }}
+                            {{ __('Administración') }}
                         </x-nav-link>
                     </div>
                 @endif
@@ -28,6 +28,12 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('trabIndex')" :active="request()->routeIs('trabIndex')">
                         {{ __('Trabajos') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('pagoIndex')" :active="request()->routeIs('pagoIndex')">
+                        {{ __('Cuentas por cobrar') }}
                     </x-nav-link>
                 </div>
 
@@ -96,9 +102,29 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+
+        @if (Auth::user()->tipousuario_id == 1)
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('adminIndex')" :active="request()->routeIs('adminIndex')">
+                    {{ __('Administración') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('clientIndex')" :active="request()->routeIs('clientIndex')">
                 {{ __('Clientes') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('trabIndex')" :active="request()->routeIs('trabIndex')">
+                {{ __('Trabajos') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('pagoIndex')" :active="request()->routeIs('pagoIndex')">
+                {{ __('Pagos por los servicios') }}
             </x-responsive-nav-link>
         </div>
 

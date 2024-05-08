@@ -12,15 +12,17 @@ class OrdenpagoController extends Controller
      */
     public function index()
     {
-        //
+        return view('ordenpago.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $ordenes = Ordenpago::where('trabajo_id',$id)->get();
+        
+        return view('ordenpago.pago', compact('ordenes'));
     }
 
     /**

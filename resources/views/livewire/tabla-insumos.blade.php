@@ -23,10 +23,8 @@
                                     <th>Insumos</th>
                                     <th>Detalle</th>
                                     <th>Costo</th>
-
                                     <th>Modificación</th>
                                     <th>Eliminar</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,13 +62,10 @@
                                 <tr>
                                     <th>Balance</th>
                                     <td class="filas-tabla" colspan="1"></td>
-
                                     <td class="filas-tabla" colspan="1"> {{ $total }}</td>
                                     <td class="filas-tabla"></td>
                                     <td class="filas-tabla"></td>
-
                                 </tr>
-
                             </tfoot>
                         </table>
                         {{ $insumos->links() }}
@@ -92,7 +87,7 @@
 
                                 <div class="datos">
                                     <label for="insumo">Nombre insumo/servicio: </label>
-                                    <input type="text" required id="insumo" name="insumo">
+                                    <input type="text" required id="insumo" name="insumo" autofocus>
                                 </div>
 
                                 <div class="datos">

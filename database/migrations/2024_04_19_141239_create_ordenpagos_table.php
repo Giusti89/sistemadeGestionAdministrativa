@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('trabajo_id')->references('id')->on('trabajos');
             $table->date('fechpago');
 
-            $table->unsignedBigInteger('estadopago_id')->default(1);
+            $table->unsignedBigInteger('estadopago_id')->default(2);
             $table->foreign('estadopago_id')->references('id')->on('estadopagos');
 
             $table->timestamps();

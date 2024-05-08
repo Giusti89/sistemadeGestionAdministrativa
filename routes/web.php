@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\InsumoController;
+use App\Http\Controllers\OrdenpagoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrabajoController;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,16 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
         Route::put('/insumos.update/{id}', 'update')->name('updateInsumo');
         Route::delete('/insumos/{id}', 'destroy')->name('eliInsumo');
         Route::post('/insumos', 'terminar')->name('terminarInsumo');
+    });
+
+    Route::controller(OrdenpagoController::class)->group(function () {
+        Route::get('ordenpago.index', 'index')->name('pagoIndex');
+        Route::get('/ordenpago.pago/{id}', 'create')->name('pagoCreate');
+
+        // Route::get('/insumos.edit/{id}', 'edit')->name('editInsumo');
+        // Route::put('/insumos.update/{id}', 'update')->name('updateInsumo');
+        // Route::delete('/insumos/{id}', 'destroy')->name('eliInsumo');
+        // Route::post('/insumos', 'terminar')->name('terminarInsumo');
     });
 });
 
