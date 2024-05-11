@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('fecha')->nullable();
 
             $table->unsignedBigInteger('trabajo_id')->nullable();
-            $table->foreign('trabajo_id')->references('id')->on('trabajos');
+            $table->foreign('trabajo_id')->references('id')->on('trabajos')->onDelete('cascade');
 
             $table->unsignedBigInteger('gasto_id')->nullable();
             $table->foreign('gasto_id')->references('id')->on('gastos');

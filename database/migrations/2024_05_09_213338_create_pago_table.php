@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('insumos', function (Blueprint $table) {
+        Schema::create('pago', function (Blueprint $table) {
             $table->id();
-            $table->text('nombre');
-            $table->text('detalle')->nullable();
-            $table->decimal('costo', 10, 2)->default(0.00);         
+            $table->date('fecha');
+            $table->decimal('pago', 10, 2)->default(0.00)->nullable();
 
-            $table->unsignedBigInteger('trabajo_id');
-            $table->foreign('trabajo_id')->references('id')->on('trabajos')->onDelete('cascade');
+            $table->unsignedBigInteger('ordenpago_id')->nullable();
+            $table->foreign('ordenpago_id')->references('id')->on('ordenpagos')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('insumos');
+        Schema::dropIfExists('pago');
     }
 };

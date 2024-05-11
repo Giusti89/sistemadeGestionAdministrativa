@@ -2,33 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ordenpago;
-use App\Models\Trabajo;
+use App\Models\pago;
 use Illuminate\Http\Request;
 
-class OrdenpagoController extends Controller
+class PagoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('ordenpago.index');
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create()
     {
-        $trabajo = Trabajo::findOrFail($id);
-        $trab=Trabajo::find($id);
-
-        $this->authorize('trabajoID', $trab);
-
-        $ordenes = Ordenpago::where('trabajo_id', $id)->get();
-        
-        return view('ordenpago.pago', compact('ordenes', 'trabajo'));
+        //
     }
 
     /**
@@ -36,13 +28,15 @@ class OrdenpagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pago=new pago();
+        $pago->nombre = $request->insumo;
+        return view('clientes.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ordenpago $ordenpago)
+    public function show(pago $pago)
     {
         //
     }
@@ -50,7 +44,7 @@ class OrdenpagoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ordenpago $ordenpago)
+    public function edit(pago $pago)
     {
         //
     }
@@ -58,7 +52,7 @@ class OrdenpagoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ordenpago $ordenpago)
+    public function update(Request $request, pago $pago)
     {
         //
     }
@@ -66,7 +60,7 @@ class OrdenpagoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ordenpago $ordenpago)
+    public function destroy(pago $pago)
     {
         //
     }

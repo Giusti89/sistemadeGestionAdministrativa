@@ -11,8 +11,7 @@ class InsumoPolicy
     use HandlesAuthorization;
 
     public function view(User $user, Insumo $insumo)
-    {
-        
+    {        
         return $user->id === $insumo->trabajo->cliente->usuario_id;
     }
 }

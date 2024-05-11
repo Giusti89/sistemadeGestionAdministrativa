@@ -15,6 +15,9 @@ class InsumoController extends Controller
      */
     public function index($identificador)
     {
+        $trabajo = Trabajo::find($identificador);
+        $this->authorize('trabajoID', $trabajo);
+        
         return view('insumos.index', compact('identificador'));
     }
 
@@ -95,16 +98,13 @@ class InsumoController extends Controller
             return redirect()->route('insumoIndex', ['id' => $cot->trabajo_id])->with(['msj' => 'prohibido']);
         }
     }
+    
     public function terminar(Request $request)
     {
         $actualizar = Trabajo::findOrFail($request->id);
         $ordendopago =new ordenpago();
-        $ordendopago->trabajo_id=$request->id; 
-
-        $ordendopago->fechpago= now();         
-        
-
-
+        $ordendopago->trabajo_id=$request->id;   
+ 
         $costoProduccion = $request->total;
         $actualizar->Costoproduccion= $costoProduccion;
         $porcentaje = $actualizar->ganancia / 100;

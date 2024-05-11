@@ -158,8 +158,8 @@
                 e.preventDefault()
 
                 Swal.fire({
-                    title: "¿Estas seguro de terminar la cotizacion?",
-                    text: "¡No podrás revertir esto!",
+                    title: "¿Tu cotizacion ya fue aceptada por el cliente?",
+                    text: "¡No podrás modificar los datos de la cotización!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",

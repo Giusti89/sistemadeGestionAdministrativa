@@ -16,14 +16,14 @@ return new class extends Migration
             $table->decimal('total', 10, 2)->default(0.00);
             $table->decimal('cuenta', 10, 2)->default(0.00)->nullable();
             $table->decimal('saldo', 10, 2)->default(0.00)->nullable();
-            $table->decimal('pago', 10, 2)->default(0.00)->nullable();
+           
 
             $table->unsignedBigInteger('trabajo_id');
             $table->foreign('trabajo_id')->references('id')->on('trabajos');
-            $table->date('fechpago');
+            
 
             $table->unsignedBigInteger('estadopago_id')->default(2);
-            $table->foreign('estadopago_id')->references('id')->on('estadopagos');
+            $table->foreign('estadopago_id')->references('id')->on('estadopagos')->onDelete('cascade');
 
             $table->timestamps();
         });

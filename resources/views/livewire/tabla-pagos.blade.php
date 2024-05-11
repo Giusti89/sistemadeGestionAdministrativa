@@ -22,13 +22,9 @@
                     <th>Cliente</th>
                     <th>Trabajo</th>
                     <th>Descripcion</th>
-
-
-
                     <th>Total</th>
                     <th>Saldo</th>
-
-                    <th></th>
+                    <th>Pagos</th>
 
 
                 </tr>
@@ -58,11 +54,9 @@
                         </td>
                         <td>
                             <div>
-
-                                <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $insumos->trabajo->id }}"
+                                <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $insumos->id }}"
                                     nombre="Realizar pago">
                                 </x-layouts.btnenviodat>
-
                             </div>
                         </td>
 

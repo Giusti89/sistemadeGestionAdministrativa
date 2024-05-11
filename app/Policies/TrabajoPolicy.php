@@ -9,10 +9,6 @@ class TrabajoPolicy
 {
     public function trabajoID(User $user, Trabajo $trabajo)
     {
-        $cliente = Cliente::find($trabajo->cliente_id);
-        if ($cliente && $user->id === $cliente->usuario_id) {
-            return true;
-        }
-        return false;
+        return $user->id === $trabajo->cliente->usuario_id;
     }
 }

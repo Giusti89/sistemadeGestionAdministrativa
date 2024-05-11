@@ -19,4 +19,8 @@ class ordenpago extends Model
     {
         return $this->belongsTo(Trabajo::class);
     }
+    public function pago()
+    {
+        return $this->hasMany(Pago::class, 'ordenpago_id');
+    }
 }
