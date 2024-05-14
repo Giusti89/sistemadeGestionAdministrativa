@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ordenpago;
+use App\Models\pago;
 use App\Models\Trabajo;
 use Illuminate\Http\Request;
 
@@ -21,14 +22,19 @@ class OrdenpagoController extends Controller
      */
     public function create($id)
     {
-        $trabajo = Trabajo::findOrFail($id);
-        $trab=Trabajo::find($id);
+        $ordenpago = ordenpago::findOrFail($id);
+        
+        $idtrabajo=$ordenpago->trabajo_id;
+        
+        $pago = Pago::where('ordenpago_id', $ordenpago->id)->get();
+
+        $trab=Trabajo::findOrFail($idtrabajo);
 
         $this->authorize('trabajoID', $trab);
 
         $ordenes = Ordenpago::where('trabajo_id', $id)->get();
         
-        return view('ordenpago.pago', compact('ordenes', 'trabajo'));
+        return view('ordenpago.pago', compact('ordenpago', 'trab','pago'));
     }
 
     /**

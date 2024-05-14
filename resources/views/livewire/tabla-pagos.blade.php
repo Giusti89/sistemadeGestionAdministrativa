@@ -18,10 +18,10 @@
         <table>
             <thead>
                 <tr>
-                    <th>Id</th>
+                    
                     <th>Cliente</th>
                     <th>Trabajo</th>
-                    <th>Descripcion</th>
+                    <th>Descripción</th>
                     <th>Total</th>
                     <th>Saldo</th>
                     <th>Pagos</th>
@@ -31,33 +31,40 @@
             </thead>
             <tbody>
 
-                @foreach ($data as $insumos)
+                @foreach ($data as $ordenpago)
                     <tr>
+                       
                         <td class="filas-tabla">
-                            {{ $insumos->trabajo->id }}
+                            {{ $ordenpago->trabajo->cliente->nombre }}
                         </td>
                         <td class="filas-tabla">
-                            {{ $insumos->trabajo->cliente->nombre }}
+                            {{ $ordenpago->trabajo->trabajo }}
                         </td>
                         <td class="filas-tabla">
-                            {{ $insumos->trabajo->trabajo }}
-                        </td>
-                        <td class="filas-tabla">
-                            {{ $insumos->trabajo->descripcion }}
+                            {{ $ordenpago->trabajo->descripcion }}
                         </td>
 
                         <td class="filas-tabla">
-                            {{ $insumos->total }}
+                            {{ $ordenpago->total }}
                         </td>
                         <td class="filas-tabla">
-                            {{ $insumos->saldo }}
+                            {{ $ordenpago->saldo }}
                         </td>
                         <td>
-                            <div>
-                                <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $insumos->id }}"
-                                    nombre="Realizar pago">
-                                </x-layouts.btnenviodat>
-                            </div>
+                            @if ($ordenpago->saldo == 0)
+                                <div>
+                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $ordenpago->id }}"
+                                        idtrab="{{ $ordenpago->trabajo->id }}" nombre="Pagos realizados">
+                                    </x-layouts.btnenviodat>
+                                </div>
+                            @else
+                                <div>
+                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $ordenpago->id }}"
+                                        idtrab="{{ $ordenpago->trabajo->id }}" nombre="Realizar pago">
+                                    </x-layouts.btnenviodat>
+                                </div>
+                            @endif
+
                         </td>
 
 

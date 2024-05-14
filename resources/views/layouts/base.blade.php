@@ -40,6 +40,16 @@
      </script>
  @endif
 
+ @if (session('msj') == 'error')
+     <script>
+         Swal.fire({
+             title: "OPERACION NO PERMITIDA",
+             text: "Su solicitud no puede ser ejecutada.",
+             icon: "warning"
+         });
+     </script>
+ @endif
+
  <!-- mensajes de confirmacion -->
     <x-app-layout>
         <x-slot name="header">

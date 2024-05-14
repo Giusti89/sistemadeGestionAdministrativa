@@ -1,10 +1,10 @@
 <x-layouts.nuevos titulo="Realizar pagos" css="../css/pagos.css">
     <section>
         <section>
-            <h1>Monto total adeudado</h1>
-            <h2> <b>{{ $trabajo->Costofinal }}</b></h2>
+            <h1>Monto adeudado</h1>
+            <h2> <b>TOTAL:{{ $trab->Costofinal }} / SALDO:{{ $ordenpago->saldo }}</b></h2>
         </section>
-        <section >
+        <section>
             <h1>Pagos realizados</h1>
             <table>
                 <thead>
@@ -14,20 +14,21 @@
                         <th>Fecha de pago</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    <tr>
-                        <td class="filas-tabla">
-                            <p></p>
-                        </td>
-                        <td class="filas-tabla">
-                            <p></p>
-                        </td>
-                        <td class="filas-tabla">
-                            <p></p>
-                        </td>
-                    </tr>
-
-
+                    @foreach ($pago as $item)
+                        <tr>
+                            <td class="filas-tabla">
+                                {{ $item->id }}
+                            </td>
+                            <td class="filas-tabla">
+                                {{ $item->pago }}
+                            </td>
+                            <td class="filas-tabla">
+                                {{ $item->fecha }}
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </section>
@@ -38,21 +39,32 @@
 
                 <div class="frm">
 
-                    <input  name="trabajo_id" value="{{ $trabajo->id }}">
+                    <input hidden name="trabajo_id" value="{{ $ordenpago->id }}">
 
                     <div class="datos">
-                        <label for="costo">Costo: </label>
-                        <input type="decimal" required id="costo" name="costo">
+                        <label for="pago">Importe: </label>
+                        <input type="decimal" required id="pago" name="pago">
                     </div>
 
-                    
-                </div>
+                    <div class="datos">
+                        <label for="fecha">Fecha: </label>
+                        <input type="date" required id="fecha" name="fecha">
+                    </div>
 
-                <button class="registrar">
-                    <p>Registrar</p>
-                </button>
+                </div>
+                @if ($ordenpago->saldo == 0)
+                    <button class="registrar" disabled>
+                        <p>Registrar</p>
+                    </button>
+                    @else
+                    <button class="registrar">
+                        <p>Registrar</p>
+                    </button>
+                @endif
 
                
+
+
             </form>
         </section>
         <div class="forget">

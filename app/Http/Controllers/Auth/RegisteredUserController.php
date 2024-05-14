@@ -70,7 +70,7 @@ class RegisteredUserController extends Controller
 
         // Auth::login($user);
 
-        return redirect()->route('adminIndex');
+        return redirect()->route('pagoIndex');
     }
     public function isAdmin(User $user)
     {
