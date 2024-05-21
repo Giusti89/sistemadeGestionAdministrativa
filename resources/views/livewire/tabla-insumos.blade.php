@@ -60,7 +60,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Balance</th>
+                                    <th>Costo</th>
                                     <td class="filas-tabla" colspan="1"></td>
                                     <td class="filas-tabla" colspan="1"> {{ $total }}</td>
                                     <td class="filas-tabla"></td>
@@ -87,17 +87,26 @@
 
                                 <div class="datos">
                                     <label for="insumo">Nombre insumo/servicio: </label>
-                                    <input type="text" required id="insumo" name="insumo" autofocus>
+                                    <input type="text" required id="insumo" name="insumo" autofocus value="{{old("insumo",)}}">
+                                    @error('insumo')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="datos">
                                     <label for="costo">Costo: </label>
-                                    <input type="decimal" required id="costo" name="costo">
+                                    <input type="decimal" required id="costo" name="costo" value="{{old("costo",)}}">
+                                    @error('costo')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="datos">
                                     <label for="detalle">Detalles: </label>
-                                    <textarea cols="15" rows="5" required id="detalle" name="detalle"></textarea>
+                                    <textarea cols="15" rows="5" required id="detalle" name="detalle">{{old("detalle")}}</textarea>
+                                    @error('detalle')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -109,20 +118,20 @@
                                 <a href="{{ route('trabIndex') }}">Regresar</a>
                             </div>
                         </form>
-                        
+
                     </section>
                 </div>
             </div>
             <div class="terminar">
-                
+
                 <form class="confirm" method="POST" action="{{ route('terminarInsumo') }}">
                     @csrf
-                    <input hidden id="id" name="id" type="text" value="{{ $trabajoid}}" >
-                    <input hidden id="total" name="total" type="text" value="{{ $total}}" >
+                    <input hidden id="id" name="id" type="text" value="{{ $trabajoid }}">
+                    <input hidden id="total" name="total" type="text" value="{{ $total }}">
                     <button class="registrar">
                         <p>Terminarr</p>
                     </button>
-                    
+
                 </form>
             </div>
 

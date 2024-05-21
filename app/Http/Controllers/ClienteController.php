@@ -32,12 +32,34 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => ['required', 'string', 'max:255'],
-            'apellido' => ['nullable', 'string', 'max:255'],
-            'contacto' => ['required', 'numeric'],
-            'nit' => ['required', 'numeric'],
-            'email' => ['required', 'email', 'max:255'],
+            'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'apellido' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'contacto' => 'required|numeric',
+            'nit' => 'required|max:255',
+            'email' => 'required|email|max:255',
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser una cadena de texto.',
+            'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
+            'nombre.regex' => 'El nombre solo puede contener letras y espacios.',
+    
+            'apellido.string' => 'El apellido debe ser una cadena de texto.',
+            'apellido.max' => 'El apellido no debe exceder los 255 caracteres.',
+            'apellido.regex' => 'El apellido solo puede contener letras y espacios.',
+    
+            'contacto.required' => 'El contacto es obligatorio.',
+            'contacto.numeric' => 'El contacto debe ser un número.',
+            'contacto.max' => 'El contacto no debe exceder los 255 caracteres.',
+    
+            'nit.required' => 'El NIT es obligatorio.',
+            'nit.max' => 'El NIT no debe exceder los 255 caracteres.',
+    
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser una dirección válida.',
+            'email.max' => 'El correo electrónico no debe exceder los 255 caracteres.',
         ]);
+
+
 
         $cliente = new Cliente();
 

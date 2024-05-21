@@ -23,7 +23,7 @@
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
                 <input type="number" required id="contacto" name="contacto" :value="old('contacto')" required autofocus autocomplete="contacto">
-                <label for="">Contacto</label>
+                <label for="">Celular</label>
                 <x-input-error :messages="$errors->get('contacto')" class="mt-2" />
             </div>
 

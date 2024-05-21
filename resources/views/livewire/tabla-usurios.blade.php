@@ -15,7 +15,7 @@
                         </div>
                         <div>
                             <label for="filtro">Paginas: </label>
-                            <input type="text" wire:model.live="paginate">
+                            <input type="number" wire:model.live="paginate">
                         </div>
 
                     </div>

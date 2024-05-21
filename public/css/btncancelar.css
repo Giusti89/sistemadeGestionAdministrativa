@@ -2,19 +2,35 @@
     color: aliceblue;
     font-size: 1.2em;
     font-weight: bold;
-    background-color: #df0909;
+    background-color: #DF017A;
     border-radius: 10%;
     padding: 1vw;
     width: 10vw;
     border-color: transparent;
     cursor: pointer;
-    font-size: 1.5rem;
+    
 }
 
 #cancelar:hover {
-    background-color: rgb(214, 35, 35);
+    background-color: #DB6CA7;
 }
 
 #cancelar:active {
     background-color: red;
+}
+
+@media (max-width: 768px) {
+    #cancelar {
+        color: aliceblue;
+        font-size: 1em;
+        font-weight: bold;
+        background-color: #DF017A;
+        border-radius: 10%;
+        padding: 1vw;
+        width: 100%;
+        border-color: transparent;
+        cursor: pointer;
+        
+    }
+    
 }

@@ -17,7 +17,7 @@ class InsumoController extends Controller
     {
         $trabajo = Trabajo::find($identificador);
         $this->authorize('trabajoID', $trabajo);
-        
+
         return view('insumos.index', compact('identificador'));
     }
 
@@ -34,6 +34,16 @@ class InsumoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'insumo' => 'required|string|max:255',
+            'costo' => 'required|numeric|between:0,999999.99',
+            'detalle' => 'nullable|string|max:255',
+        ], [
+            'insumo.required' => 'El nombre del insumo es obligatorio.',
+            'costo.required' => 'El costo es obligatorio.',
+            'costo.numeric' => 'El costo debe ser un número.',
+            'costo.between' => 'El costo debe estar entre 0 y 999999.99.',
+        ]);
         $item = new Insumo();
 
         $item->nombre = $request->insumo;
@@ -69,10 +79,14 @@ class InsumoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255',
+            'insumo' => 'string|max:255',
+            'costo' => 'numeric|between:0,999999.99',
             'detalle' => 'nullable|string|max:255',
-            'costo' => 'required|string|max:255',
-
+        ], [
+            'insumo.required' => 'El nombre del insumo es obligatorio.',
+            'costo.required' => 'El costo es obligatorio.',
+            'costo.numeric' => 'El costo debe ser un número.',
+            'costo.between' => 'El costo debe estar entre 0 y 999999.99.',
         ]);
 
         $insumo = Insumo::find($id);
@@ -82,7 +96,7 @@ class InsumoController extends Controller
         $insumo->costo = $request->costo;
 
 
-        $insumo->update();
+        $insumo->save();
         return redirect()->route('insumoIndex', ['id' => $insumo->trabajo_id])->with('msj', 'ok');
     }
 
@@ -98,15 +112,15 @@ class InsumoController extends Controller
             return redirect()->route('insumoIndex', ['id' => $cot->trabajo_id])->with(['msj' => 'prohibido']);
         }
     }
-    
+
     public function terminar(Request $request)
     {
         $actualizar = Trabajo::findOrFail($request->id);
-        $ordendopago =new ordenpago();
-        $ordendopago->trabajo_id=$request->id;   
- 
+        $ordendopago = new ordenpago();
+        $ordendopago->trabajo_id = $request->id;
+
         $costoProduccion = $request->total;
-        $actualizar->Costoproduccion= $costoProduccion;
+        $actualizar->Costoproduccion = $costoProduccion;
         $porcentaje = $actualizar->ganancia / 100;
         $total = $costoProduccion + ($costoProduccion * $porcentaje);
         $ganefec = ($total - $costoProduccion);
@@ -120,8 +134,8 @@ class InsumoController extends Controller
             $actualizar->Costoproduccion = $request->total;
             $actualizar->Costofinal = $total;
 
-            $ordendopago->total=$total;
-            $ordendopago->saldo=$total;
+            $ordendopago->total = $total;
+            $ordendopago->saldo = $total;
 
 
             $ordendopago->save();
@@ -132,15 +146,14 @@ class InsumoController extends Controller
             $impuesto = $actualizar->iva / 100;
             $Costofac = $total + ($total * $impuesto);
             $actualizar->Costofinal = $Costofac;
-            $actualizar->ivaefectivo=($Costofac-$total );
+            $actualizar->ivaefectivo = ($Costofac - $total);
 
-            $ordendopago->total=$Costofac;
-            $ordendopago->saldo=$Costofac;
-            
+            $ordendopago->total = $Costofac;
+            $ordendopago->saldo = $Costofac;
+
             $ordendopago->save();
             $actualizar->update();
             return redirect()->route('trabIndex')->with('chk', 'realizado');
         }
-       
     }
 }

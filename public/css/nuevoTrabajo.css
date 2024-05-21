@@ -136,3 +136,16 @@ button:hover {
 .register p a:hover {
     text-decoration: underline;
 }
+@media (max-width: 768px) {
+    textarea{
+        margin-top: 3vh;
+        width: 70vw;
+        font-size: 1.2rem;
+    }
+    .inputbox {
+        position: relative;
+        margin: 30px 0;
+        width: 70vw;
+        border-bottom: 2px solid #fff;
+    }
+}

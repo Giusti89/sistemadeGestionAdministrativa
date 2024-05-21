@@ -1,5 +1,5 @@
 #myBtn2 {
-    background-color: green;
+    background-color: #9F00D8;
     color: aliceblue;
     font-size: 1.2em;
     font-weight: bold;
@@ -8,14 +8,14 @@
     width: 10vw;
     border-color: transparent;
     cursor: pointer;
-    font-size: 1rem;
+   
 }
 
 #myBtn2 {
     color: aliceblue;
     font-size: 1.2em;
     font-weight: bold;
-    background-color: #4CAF50;
+    background-color: #9F00D8;
     border-radius: 10%;
     padding: 1vw;
     width: 10vw;
@@ -25,9 +25,25 @@
 }
 
 #myBtn2:hover {
-    background-color: #28bb2d;
+    background-color: #B760D5;
 }
 
 #myBtn2:active {
-    background-color: #02ff0a;
+    background-color: #9F00D8;
+}
+@media (max-width: 768px) {
+    #myBtn2 {
+        background-color: #9F00D8;
+        
+        color: aliceblue;
+        font-size: 1.2em;
+        font-weight: bold;
+        border-radius: 10%;
+        padding: 1vw;
+        width: 50%;
+        border-color: transparent;
+        cursor: pointer;
+        
+    }
+    
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\GastoController;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\OrdenpagoController;
 use App\Http\Controllers\PagoController;
@@ -70,6 +71,12 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
 
     Route::controller(PagoController::class)->group(function () {
         Route::post('/ordenpago.pago', 'store')->name('pagoStore');        
+    });
+
+    Route::controller(GastoController::class)->group(function () {
+        Route::get('/gastos.index', 'index')->name('gastoIndex');
+        Route::get('/gastos.nuevo', 'create')->name('nuevoGasto'); 
+        Route::post('/gastos.store', 'store')->name('storeGasto');        
     });
 
 });

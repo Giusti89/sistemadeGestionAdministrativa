@@ -40,7 +40,25 @@ class TrabajoController extends Controller
             'cliente' => 'required|exists:clientes,id',
             'cantidades' => 'required|numeric',
             'ganancia' => 'required|numeric',
-            'iva' => 'numeric|nullable'
+            'iva' => 'numeric|nullable',
+        ], [
+            'trabajo.required' => 'El nombre del trabajo es obligatorio.',
+            'trabajo.string' => 'El nombre del trabajo debe ser una cadena de texto.',
+            'trabajo.max' => 'El nombre del trabajo no debe exceder los 255 caracteres.',
+    
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'descripcion.string' => 'La descripción debe ser una cadena de texto.',
+    
+            'cliente.required' => 'El cliente es obligatorio.',
+            'cliente.exists' => 'El cliente seleccionado no existe en la base de datos.',
+    
+            'cantidades.required' => 'La cantidad es obligatoria.',
+            'cantidades.numeric' => 'La cantidad debe ser un número.',
+    
+            'ganancia.required' => 'La ganancia es obligatoria.',
+            'ganancia.numeric' => 'La ganancia debe ser un número.',
+    
+            'iva.numeric' => 'El IVA debe ser un número.',
         ]);
 
         $trabajo = new Trabajo();

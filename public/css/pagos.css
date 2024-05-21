@@ -150,6 +150,10 @@ tr:nth-child(odd) {
     color:black;
     
 }
+tr:nth-child(even) {
+    background: rgb(184, 182, 182);
+    color:black; 
+}
 
 th {
     background: #b9a7fc;
@@ -174,7 +178,7 @@ table tr:hover {
     width: 100%;
     
 }
-
+/* ----------------botones---------- */
 .botones {
     display: flex;
     flex-direction: row;

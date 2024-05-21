@@ -17,6 +17,10 @@ return new class extends Migration
             $table->text('descripcion')->nullable();
             $table->decimal('costo', 10, 2)->default(0.00)->nullable();
             $table->date('fecha')->nullable();
+
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

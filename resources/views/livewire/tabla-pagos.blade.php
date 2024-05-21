@@ -17,16 +17,13 @@
     <div class="table-container">
         <table>
             <thead>
-                <tr>
-                    
+                <tr>                    
                     <th>Cliente</th>
                     <th>Trabajo</th>
                     <th>Descripción</th>
                     <th>Total</th>
                     <th>Saldo</th>
                     <th>Pagos</th>
-
-
                 </tr>
             </thead>
             <tbody>

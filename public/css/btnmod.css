@@ -1,5 +1,5 @@
 .btn-modificar {
-    background-color: #d8b844;
+    background-color: #997afe;
     padding: 10px 20px;
     color: white;
     border: none;
@@ -9,9 +9,21 @@
 }
 
 .btn-modificar:hover {
-    background-color: #b89c37;
+    background-color: #7145fc;
 }
 
 .btn-modificar:active {
-    background-color: #fcd031;
+    background-color: #FF6839;
+}
+
+@media (max-width: 768px) {
+    .btn-modificar {
+        background-color: #997afe;
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.8rem;
+    }
 }

@@ -43,13 +43,17 @@ class PagoController extends Controller
 
         $ordenpago=ordenpago::findOrFail( $request->trabajo_id);
 
+        if ($ordenpago->saldo==$request->pago) {
+            $ordenpago->estadopago_id=1;
+         }
+
         if ( $ordenpago->saldo >= $request->pago) {
             $ordenpago->cuenta = $ordenpago->cuenta + $request->pago;
             $ordenpago->saldo =$ordenpago->saldo - $request->pago;
-            // $saldo= $ordenpago->saldo;
              $pago->save();
              $ordenpago->update();
-    
+             
+            
              return redirect()->route('pagoCreate', ['id' => $request->trabajo_id])->with('msj', 'cambio');
         }
         return redirect()->route('pagoIndex')->with('msj', 'error');

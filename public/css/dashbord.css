@@ -14,8 +14,8 @@ tr {
 
 tr:nth-child(odd) {
     background: rgb(225, 225, 225);
-    color:black;
-    
+    color: black;
+
 }
 
 th {
@@ -39,7 +39,7 @@ table tr:hover {
     overflow: auto;
     overflow-y: auto;
     width: 100%;
-    
+
 }
 
 .botones {
@@ -47,7 +47,8 @@ table tr:hover {
     flex-direction: row;
     gap: 50px;
 }
-.anuncio{
+
+.anuncio {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,7 +58,8 @@ table tr:hover {
     background-color: rgb(218, 102, 102);
     display: block;
 }
-.anuncio h1{
+
+.anuncio h1 {
     color: aliceblue;
     text-align: center;
 }
@@ -80,3 +82,16 @@ table tr:hover {
     background-color: #3e8e41;
 }
 
+@media (max-width: 768px) {
+    .botones {
+        display: flex;
+        flex-direction: column;
+        width: 50vw;
+        gap: 50px;
+    }
+
+    .botones label {
+        width: 25vw;
+    }
+
+}

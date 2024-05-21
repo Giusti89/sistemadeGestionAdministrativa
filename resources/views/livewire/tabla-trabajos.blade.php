@@ -23,7 +23,6 @@
         <table>
             <thead>
                 <tr>
-                    <th>id</th>
                     <th>Cliente</th>
                     <th>Trabajo</th>
                     <th>Descripcion</th>
@@ -43,9 +42,6 @@
                 @foreach ($trab as $insumos)
                     <tr>
 
-                        <td class="filas-tabla">
-                            {{ $insumos->id }}
-                        </td>
                         <td class="filas-tabla">
                             {{ $insumos->cliente->nombre }}
                         </td>
