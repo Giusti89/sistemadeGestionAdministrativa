@@ -26,14 +26,12 @@
                     <th>Cliente</th>
                     <th>Trabajo</th>
                     <th>Descripcion</th>
-                    <th>Catidad</th>
                     <th>Costo Produccion</th>
-                    <th>ganancia Efectivo</th>
-                    <th>ivaefectivo</th>
                     <th>Costo Final</th>
-                    <th>Cotizar</th>
+                    <th>Acción</th>
                     <th>Modificación</th>
                     <th>Eliminar</th>
+
 
                 </tr>
             </thead>
@@ -51,22 +49,9 @@
                         <td class="filas-tabla">
                             {{ $insumos->descripcion }}
                         </td>
-                        <td class="filas-tabla">
-                            {{ $insumos->cantidad }}
-                        </td>
-                        {{-- prueba --}}
+
                         <td class="filas-tabla">
                             {{ $insumos->Costoproduccion }}
-                        </td>
-
-                        <td class="filas-tabla">
-                            {{ $insumos->gananciaefectivo }}
-                        </td>
-
-
-
-                        <td class="filas-tabla">
-                            {{ $insumos->ivaefectivo }}
                         </td>
 
 
@@ -79,12 +64,12 @@
                         <td>
                             <div>
                                 @if ($insumos->estado)
-                                    <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}"
-                                        nombre="Cotizar" estado="disabled">
+                                    <x-layouts.btnenviodat rutaEnvio="trabPdf" dato="{{ $insumos->id }}"
+                                        nombre="Ver PDF" >
                                     </x-layouts.btnenviodat>
                                 @else
                                     <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}"
-                                        nombre="Cotizar" >
+                                        nombre="Cotizar">
                                     </x-layouts.btnenviodat>
                                 @endif
 

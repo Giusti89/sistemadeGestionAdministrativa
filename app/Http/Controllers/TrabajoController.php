@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Trabajo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 
 
@@ -25,8 +26,18 @@ class TrabajoController extends Controller
     {
         $user = Auth::user();
         $cliente = $user->clientes->pluck('id', 'nombre');
-        
+
         return view('trabajos.nuevo', compact('cliente'));
+    }
+
+    public function pdf($id)
+    {
+        $trabajo = Trabajo::findOrFail($id);
+        $pdf = Pdf::loadView('trabajos.reporte', ['trabajo'=>$trabajo]);  
+        
+        return $pdf->stream();
+           
+        
     }
 
     /**
@@ -45,19 +56,19 @@ class TrabajoController extends Controller
             'trabajo.required' => 'El nombre del trabajo es obligatorio.',
             'trabajo.string' => 'El nombre del trabajo debe ser una cadena de texto.',
             'trabajo.max' => 'El nombre del trabajo no debe exceder los 255 caracteres.',
-    
+
             'descripcion.required' => 'La descripción es obligatoria.',
             'descripcion.string' => 'La descripción debe ser una cadena de texto.',
-    
+
             'cliente.required' => 'El cliente es obligatorio.',
             'cliente.exists' => 'El cliente seleccionado no existe en la base de datos.',
-    
+
             'cantidades.required' => 'La cantidad es obligatoria.',
             'cantidades.numeric' => 'La cantidad debe ser un número.',
-    
+
             'ganancia.required' => 'La ganancia es obligatoria.',
             'ganancia.numeric' => 'La ganancia debe ser un número.',
-    
+
             'iva.numeric' => 'El IVA debe ser un número.',
         ]);
 
@@ -71,7 +82,7 @@ class TrabajoController extends Controller
         $trabajo->cantidad = $request->cantidades;
 
         $trabajo->save();
-        
+
         return redirect()->route('trabIndex')->with('msj', 'cambio');
     }
 
@@ -89,8 +100,8 @@ class TrabajoController extends Controller
     public function edit($id)
     {
         $trab = Trabajo::find($id);
-                  
-        $this->authorize('trabajoID',$trab);
+
+        $this->authorize('trabajoID', $trab);
         return view('trabajos.edit', compact('trab'));
     }
 
@@ -101,14 +112,14 @@ class TrabajoController extends Controller
     {
         $request->validate([
             'trabajo' => 'required|string|max:255',
-            'descripcion' => 'required|string',            
+            'descripcion' => 'required|string',
             'cantidades' => 'required|numeric',
         ]);
-        $this->authorize('trabajoID',$id);  
+        $this->authorize('trabajoID', $id);
         $id->trabajo = $request->trabajo;
         $id->descripcion = $request->descripcion;
         $id->cantidad = $request->cantidades;
-    
+
         $id->update();
         return redirect()->route('trabIndex')->with('msj', 'cambio');
     }
@@ -120,9 +131,9 @@ class TrabajoController extends Controller
     {
         try {
             $this->authorize('trabajoID', $id);
-    
+
             $id->delete();
-    
+
             return redirect()->route('trabIndex')->with('msj', 'ok');
         } catch (Exception $e) {
             return redirect()->route('trabIndex')->with('msj', 'prohibido');

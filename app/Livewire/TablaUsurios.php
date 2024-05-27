@@ -21,7 +21,7 @@ class TablaUsurios extends Component
         ->paginate($this->paginate);
 
         foreach ($users as $usuario) {
-            $diferenciaDias = Carbon::parse($usuario->inicio)->diffInDays($usuario->final);
+            $diferenciaDias = Carbon::now()->diffInDays($usuario->final);
             $usuario->diferenciaDias = $diferenciaDias;
         }
         return view('livewire.tabla-usurios',compact('users'));

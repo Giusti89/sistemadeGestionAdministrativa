@@ -17,6 +17,11 @@ class OrdenpagoController extends Controller
         return view('ordenpago.index');
     }
 
+    public function pagados()
+    {
+        return view('ordenpago.pagados');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

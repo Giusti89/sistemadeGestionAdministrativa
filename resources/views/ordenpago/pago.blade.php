@@ -53,23 +53,23 @@
 
                 </div>
                 @if ($ordenpago->saldo == 0)
-                    <button class="registrar" disabled>
-                        <p>Registrar</p>
-                    </button>
-                    @else
+                    <div class="forget">
+                        <a href="{{ route('pagoIndex') }}">Regresar</a>
+                    </div>
+                @else
                     <button class="registrar">
                         <p>Registrar</p>
                     </button>
                 @endif
 
-               
-
-
             </form>
         </section>
-        <div class="forget">
-            <a href="{{ route('pagoIndex') }}">Regresar</a>
-        </div>
+        @if ($ordenpago->saldo != 0)
+            <div class="forget">
+                <a href="{{ route('pagoIndex') }}">Regresar</a>
+            </div>
+        @endif
+
 
     </section>
 

@@ -47,6 +47,9 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
 
     Route::controller(TrabajoController::class)->group(function () {
         Route::get('trabajos.index', 'index')->name('trabIndex');
+
+        Route::get('trabajos.reporte/{id}', 'pdf')->name('trabPdf');
+
         Route::get('/trabajos.nuevo', 'create')->name('nuevoTrab');        
         Route::post('/trabajos.store', 'store')->name('crearTrab');
         Route::get('/trabajos.edit/{id}', 'edit')->name('editTrab'); 
@@ -66,11 +69,12 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
 
     Route::controller(OrdenpagoController::class)->group(function () {
         Route::get('ordenpago.index', 'index')->name('pagoIndex');
+        Route::get('ordenpago.pago', 'pagados')->name('pagoPagados');
         Route::get('/ordenpago.pago/{id}', 'create')->name('pagoCreate');        
     });
 
     Route::controller(PagoController::class)->group(function () {
-        Route::post('/ordenpago.pago', 'store')->name('pagoStore');        
+        Route::post('/ordenpago.pago', 'store')->name('pagoStore');              
     });
 
     Route::controller(GastoController::class)->group(function () {
