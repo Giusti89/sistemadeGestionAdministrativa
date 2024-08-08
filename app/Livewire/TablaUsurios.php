@@ -15,14 +15,22 @@ class TablaUsurios extends Component
 
     public function render()
     {
-        
-        $users = User::where('name', 'like', '%' . $this->search . '%')
+
+        $users = User::withCount('clientes')
+        ->where('name', 'like', '%' . $this->search . '%')
         ->where('tipousuario_id', 2)
         ->paginate($this->paginate);
 
         foreach ($users as $usuario) {
-            $diferenciaDias = Carbon::now()->diffInDays($usuario->final);
-            $usuario->diferenciaDias = $diferenciaDias;
+           
+            $dif = Carbon::now()->diffInDays($usuario->final, false); 
+            $fechaExpiracion = Carbon::parse($usuario->final);
+                        
+            if ($dif <= 0) {
+                $usuario->mensaje = 'Suscripción expirada el ' . $fechaExpiracion->format('d/m/Y');
+            } else {
+                $usuario->mensaje = 'Expira en ' . $dif . ' días (el ' . $fechaExpiracion->format('d/m/Y') . ')';
+            }
         }
         return view('livewire.tabla-usurios',compact('users'));
     }

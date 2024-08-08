@@ -17,8 +17,6 @@
 
     </div>
 
-
-
     <div class="table-container">
         <table>
             <thead>
@@ -31,7 +29,6 @@
                     <th>Acción</th>
                     <th>Modificación</th>
                     <th>Eliminar</th>
-
 
                 </tr>
             </thead>
@@ -54,21 +51,21 @@
                             {{ $insumos->Costoproduccion }}
                         </td>
 
-
-
                         <td class="filas-tabla">
                             {{ $insumos->Costofinal }}
                         </td>
-                        {{-- prueba --}}
 
                         <td>
                             <div>
+                                @php
+                                    $encryptedId = Crypt::encrypt($insumos->id);
+                                @endphp
                                 @if ($insumos->estado)
-                                    <x-layouts.btnenviodat rutaEnvio="trabPdf" dato="{{ $insumos->id }}"
-                                        nombre="Ver PDF" >
+                                    <x-layouts.btnenviodat rutaEnvio="trabPdf" dato="{{ $insumos->id }} "
+                                        nombre="Ver PDF" estado="_blank">
                                     </x-layouts.btnenviodat>
                                 @else
-                                    <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $insumos->id }}"
+                                    <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $encryptedId }}"
                                         nombre="Cotizar">
                                     </x-layouts.btnenviodat>
                                 @endif
@@ -81,11 +78,11 @@
                                 @if ($insumos->estado)
                                     <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"
                                         nombre="Verificar" estado="disabled">
-                                        </x-layouts.btnenviodat>
-                                    @else
-                                        <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"
-                                            nombre="Verificar">
-                                            </x-layouts.btnenviodat>
+                                    </x-layouts.btnmodif>
+                                @else
+                                    <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"
+                                        nombre="Verificar">
+                                    </x-layouts.btnmodif>
                                 @endif
                             </div>
                         </td>

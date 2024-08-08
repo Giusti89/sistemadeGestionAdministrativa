@@ -12,6 +12,7 @@ class Insumo extends Model
         'detalle',
         'costo',
         'trabajo_id',
+        'cantidad',
     ];
 
     public function trabajo()

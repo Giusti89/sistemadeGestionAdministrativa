@@ -1,4 +1,4 @@
-<div>
+<div class="contenedor">
     <link rel="stylesheet" href="./css/dashbord.css">
     <div class="botones">
 
@@ -17,7 +17,7 @@
     <div class="table-container">
         <table>
             <thead>
-                <tr>                    
+                <tr>
                     <th>Cliente</th>
                     <th>Trabajo</th>
                     <th>Descripción</th>
@@ -30,7 +30,7 @@
 
                 @foreach ($data as $ordenpago)
                     <tr>
-                       
+
                         <td class="filas-tabla">
                             {{ $ordenpago->trabajo->cliente->nombre }}
                         </td>
@@ -48,15 +48,20 @@
                             {{ $ordenpago->saldo }}
                         </td>
                         <td>
+                            @php
+                                $encryptedId = Crypt::encrypt($ordenpago->id);
+                            @endphp
+
                             @if ($ordenpago->saldo == 0)
                                 <div>
-                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $ordenpago->id }}"
+
+                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $encryptedId}}"
                                         idtrab="{{ $ordenpago->trabajo->id }}" nombre="Pagos realizados">
                                     </x-layouts.btnenviodat>
                                 </div>
                             @else
                                 <div>
-                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $ordenpago->id }}"
+                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $encryptedId}}"
                                         idtrab="{{ $ordenpago->trabajo->id }}" nombre="Realizar pago">
                                     </x-layouts.btnenviodat>
                                 </div>

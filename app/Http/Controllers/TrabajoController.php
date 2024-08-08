@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Insumo;
 use App\Models\Trabajo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,12 @@ class TrabajoController extends Controller
      */
     public function index()
     {
-        return view('trabajos.index');
+        try {
+            return view ('trabajos.index');
+        } catch (\Throwable $th) {
+            return response()->view('errors.500', [], 500);
+        }
+       
     }
 
     /**
@@ -24,20 +30,23 @@ class TrabajoController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $cliente = $user->clientes->pluck('id', 'nombre');
-
-        return view('trabajos.nuevo', compact('cliente'));
+        try {
+            $user = Auth::user();
+            $cliente = $user->clientes->pluck('id', 'nombre');
+            return view('trabajos.nuevo', compact('cliente'));
+        } catch (\Throwable $th) {
+            return response()->view('errors.500', [], 500);
+        }       
     }
 
     public function pdf($id)
     {
         $trabajo = Trabajo::findOrFail($id);
-        $pdf = Pdf::loadView('trabajos.reporte', ['trabajo'=>$trabajo]);  
+        $items=Insumo::where('trabajo_id', $trabajo->id)->get();
+        $total = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');
+        $pdf = Pdf::loadView('trabajos.reporte', ['trabajo' => $trabajo, 'items' => $items,'total'=>$total]);
         
-        return $pdf->stream();
-           
-        
+        return $pdf->stream();          
     }
 
     /**
@@ -127,16 +136,21 @@ class TrabajoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Trabajo $id)
-    {
-        try {
-            $this->authorize('trabajoID', $id);
+    public function destroy(Trabajo $trabajo)
+{
+    try {
+        $this->authorize('trabajoID', $trabajo);
 
-            $id->delete();
-
-            return redirect()->route('trabIndex')->with('msj', 'ok');
-        } catch (Exception $e) {
-            return redirect()->route('trabIndex')->with('msj', 'prohibido');
+        // Verificar si existen insumos asociados al trabajo
+        if ($trabajo->insumos->count() > 0) {
+            return redirect()->route('trabIndex')->with('msj', 'No se puede eliminar. Existen insumos asociados al trabajo.');
         }
+
+        $trabajo->delete();
+
+        return redirect()->route('trabIndex')->with('msj', 'ok');
+    } catch (Exception $e) {
+        return redirect()->route('trabIndex')->with('msj', 'prohibido');
     }
+}
 }

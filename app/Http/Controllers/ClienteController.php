@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ClienteController extends Controller
@@ -14,8 +15,11 @@ class ClienteController extends Controller
      */
     public function index()
     {
-
-        return view('clientes.index');
+        try {
+            return view('clientes.index');
+        } catch (\Throwable $th) {
+            return response()->view('errors.500', [], 500);
+        }
     }
 
     /**
@@ -23,7 +27,11 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('clientes.nuevo');
+        try {
+            return view('clientes.nuevo');
+        } catch (\Throwable $th) {
+            return response()->view('errors.500', [], 500);
+        }
     }
 
     /**
@@ -42,38 +50,36 @@ class ClienteController extends Controller
             'nombre.string' => 'El nombre debe ser una cadena de texto.',
             'nombre.max' => 'El nombre no debe exceder los 255 caracteres.',
             'nombre.regex' => 'El nombre solo puede contener letras y espacios.',
-    
+
             'apellido.string' => 'El apellido debe ser una cadena de texto.',
             'apellido.max' => 'El apellido no debe exceder los 255 caracteres.',
             'apellido.regex' => 'El apellido solo puede contener letras y espacios.',
-    
+
             'contacto.required' => 'El contacto es obligatorio.',
             'contacto.numeric' => 'El contacto debe ser un número.',
             'contacto.max' => 'El contacto no debe exceder los 255 caracteres.',
-    
+
             'nit.required' => 'El NIT es obligatorio.',
             'nit.max' => 'El NIT no debe exceder los 255 caracteres.',
-    
+
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
             'email.max' => 'El correo electrónico no debe exceder los 255 caracteres.',
         ]);
+        try {
+            $cliente = new Cliente();
 
-
-
-        $cliente = new Cliente();
-
-        $cliente->nombre = $request->nombre;
-        $cliente->apellido = $request->apellido;
-        $cliente->contacto = $request->contacto;
-        $cliente->nit = $request->nit;
-        $cliente->email = $request->email;
-        $cliente->usuario_id = $request->usuario_id;
-
-        $cliente->save();
-
-
-        return redirect()->route('clientIndex')->with('success', 'ok');
+            $cliente->nombre = $request->nombre;
+            $cliente->apellido = $request->apellido;
+            $cliente->contacto = $request->contacto;
+            $cliente->nit = $request->nit;
+            $cliente->email = $request->email;
+            $cliente->usuario_id = $request->usuario_id;
+            $cliente->save();
+            return redirect()->route('clientIndex')->with('msj', 'cambio');
+        } catch (\Throwable $th) {
+            return view('clientes.index')->with('msj', 'error');
+        }
     }
 
     /**
@@ -87,11 +93,16 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $encryptedId)
     {
-        $clie = Cliente::find($id);
-        $this->authorize('autor', $clie);
-        return view('clientes.edit', compact('clie'));
+        try {
+            $id = Crypt::decrypt($encryptedId);
+            $clie = Cliente::find($id);
+            $this->authorize('autor', $clie);
+            return view('clientes.edit', compact('clie'));
+        } catch (\Throwable $th) {
+            return response()->view('errors.500', [], 500);
+        }
     }
 
     /**
@@ -99,7 +110,6 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validar los datos recibidos del formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'nullable|string|max:255',
@@ -108,22 +118,22 @@ class ClienteController extends Controller
             'email' => 'required|email|max:255',
         ]);
 
+        try {
+            $clie = Cliente::find($id);
+            $this->authorize('autor', $clie);    
+    
+            $clie->nombre = $request->nombre;
+            $clie->apellido = $request->apellido;
+            $clie->contacto = $request->contacto;
+            $clie->nit = $request->nit;
+            $clie->email = $request->email;   
 
-        $clie = Cliente::find($id);
-        $this->authorize('autor', $clie);
-
-
-        $clie->nombre = $request->nombre;
-        $clie->apellido = $request->apellido;
-        $clie->contacto = $request->contacto;
-        $clie->nit = $request->nit;
-        $clie->email = $request->email;
-
-        // Guardar los cambios en la base de datos
-        $clie->save();
-
-        // Redirigir a la ruta 'dashboard'
-        return redirect()->route('clientIndex')->with('msj', 'cambio');
+            $clie->save();     
+                      
+            return redirect()->route('clientIndex')->with('msj', 'cambio');
+        } catch (\Throwable $th) {
+            return redirect()->route('clientIndex')->with('msj', 'error');
+        }      
     }
 
     /**
@@ -134,7 +144,7 @@ class ClienteController extends Controller
         try {
             $cliente = Cliente::findOrFail($id);
             $this->authorize('autor', $cliente);
-            $cliente->delete(); 
+            $cliente->delete();
             return redirect()->route('clientIndex')->with('msj', 'ok');
         } catch (Exception $e) {
             return redirect()->route('clientIndex')->with(['msj' => 'prohibido']);

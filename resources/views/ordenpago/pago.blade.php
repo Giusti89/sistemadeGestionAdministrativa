@@ -1,26 +1,24 @@
 <x-layouts.nuevos titulo="Realizar pagos" css="../css/pagos.css">
     <section>
         <section>
-            <h1>Monto adeudado</h1>
-            <h2> <b>TOTAL:{{ $trab->Costofinal }} / SALDO:{{ $ordenpago->saldo }}</b></h2>
+            <h1>Monto de la Deuda</h1>
+            <h2> <b> TOTAL:{{ $trab->Costofinal }}</b> / <b style="color: red">  SALDO:{{ $ordenpago->saldo }}</b></h2>
         </section>
         <section>
             <h1>Pagos realizados</h1>
             <table>
                 <thead>
                     <tr>
-                        <th>id</th>
+                        
                         <th>Pago</th>
-                        <th>Fecha de pago</th>
+                        <th>Fecha de pagos</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($pago as $item)
                         <tr>
-                            <td class="filas-tabla">
-                                {{ $item->id }}
-                            </td>
+                           
                             <td class="filas-tabla">
                                 {{ $item->pago }}
                             </td>

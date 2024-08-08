@@ -19,12 +19,13 @@
                         </div>
 
                     </div>
-                    
+
                     <div class="table-container">
                         <table>
                             <thead>
                                 <tr>
                                     <th>Nombres</th>
+                                    <th>Numero de clientes</th>
                                     <th>Apellidos</th>
                                     <th>Email</th>
                                     <th>Inicio Suscripción</th>
@@ -41,6 +42,11 @@
                                         <td class="filas-tabla">
                                             {{ $usuario->name }}
                                         </td>
+
+                                        <td class="filas-tabla">
+                                            {{ $usuario->clientes_count }}
+                                        </td>
+
                                         <td class="filas-tabla">
                                             {{ $usuario->lastname }}
                                         </td>
@@ -48,20 +54,31 @@
                                             {{ $usuario->email }}
                                         </td>
                                         <td class="filas-tabla">
-                                            {{ $usuario->inicio }}
+                                            {{ \Carbon\Carbon::parse($usuario->inicio)->format('d/m/Y') }}
                                         </td>
                                         <td class="filas-tabla">
-                                            {{ $usuario->final }}
+                                            {{ \Carbon\Carbon::parse($usuario->final)->format('d/m/Y') }}
                                         </td>
                                         <td class="filas-tabla">
-                                            {{ $usuario->diferenciaDias . ' días' }}
+                                            {{ $usuario->mensaje }}
                                         </td>
                                         <td class="filas-tabla">
-                                            <div>
-                                                <x-layouts.btnmodif rutaEnvio="editusu" dato="{{ $usuario->id }}"
-                                                    nombre="Verificar">
-                                                    </x-layouts.btnenviodat>
-                                            </div>
+                                            @php
+                                                $encryptedId = Crypt::encrypt($usuario->id);
+                                            @endphp
+
+                                            @if (now()->diffInDays($usuario->final, false) <= 0)
+                                                <x-layouts.btnmodif rutaEnvio="adminRenovar" dato="{{ $encryptedId }}"
+                                                    nombre="Renovar" color="red">
+                                                </x-layouts.btnmodif>
+                                            @else
+                                                <div>
+                                                    <x-layouts.btnmodif rutaEnvio="editusu" dato="{{ $encryptedId}}"
+                                                        nombre="Ver Datos">
+                                                    </x-layouts.btnmodif>
+                                                </div>
+                                            @endif
+
                                         </td>
                                         <td class="filas-tabla">
                                             <div>
@@ -85,25 +102,25 @@
         </div>
     </div>
     @section('js')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $('.eli').submit(function(e) {
-            e.preventDefault()
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $('.eli').submit(function(e) {
+                e.preventDefault()
 
-            Swal.fire({
-                title: "¿Estas seguro de eliminar este cliente?",
-                text: "¡No podrás revertir esto!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Si, eliminar"
-            }).then((result) => {
-                if (result.value) {
-                    this.submit();
-                }
+                Swal.fire({
+                    title: "¿Estas seguro de eliminar este cliente?",
+                    text: "¡No podrás revertir esto!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si, eliminar"
+                }).then((result) => {
+                    if (result.value) {
+                        this.submit();
+                    }
+                });
             });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
 </div>

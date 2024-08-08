@@ -12,14 +12,16 @@
             </section>
 
         </div>
+
         <div class="principal">
             <section class="seccion1">
                 <div class="tabla tabla1">
+                    <h1>Insumos</h1>
                     <div class="table-container">
-                        <h1>Insumos</h1>
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Cantidad</th>
                                     <th>Insumos</th>
                                     <th>Detalle</th>
                                     <th>Costo</th>
@@ -31,6 +33,9 @@
                                 @foreach ($insumos as $trab)
                                     <tr>
                                         <td class="filas-tabla">
+                                            {{ $trab->cantidad }}
+                                        </td>
+                                        <td class="filas-tabla">
                                             {{ $trab->nombre }}
                                         </td>
                                         <td class="filas-tabla">
@@ -40,9 +45,12 @@
                                             {{ $trab->costo }}
                                         </td>
                                         <td class="filas-tabla">
-                                            <x-layouts.btnmodif class="modificar" rutaEnvio="editInsumo"
-                                                dato="{{ $trab->id }}" nombre="Modificar">
-                                                </x-layouts.btnenviodat>
+                                            @php
+                                                $encryptedId = Crypt::encrypt($trab->id);
+                                            @endphp
+                                            <x-layouts.btnenviodat class="modificar" rutaEnvio="editInsumo"
+                                                dato="{{ $encryptedId }}" nombre="Modificar">
+                                            </x-layouts.btnenviodat>
                                         </td>
                                         <td class="filas-tabla">
                                             <div>
@@ -62,6 +70,7 @@
                                 <tr>
                                     <th>Costo</th>
                                     <td class="filas-tabla" colspan="1"></td>
+                                    <td class="filas-tabla" colspan="1"></td>
                                     <td class="filas-tabla" colspan="1"> {{ $total }}</td>
                                     <td class="filas-tabla"></td>
                                     <td class="filas-tabla"></td>
@@ -70,8 +79,23 @@
                         </table>
                         {{ $insumos->links() }}
                     </div>
+                    <div class="terminar">
+                        <form class="confirm" method="POST" action="{{ route('terminarInsumo') }}">
+                            @csrf
+                            <input hidden id="id" name="id" type="text" value="{{ $trabajoid }}">
+                            <input hidden id="total" name="total" type="text" value="{{ $total }}">
+
+                            <div class="terminar">
+                                <button class="registrar">
+                                    <p>Terminar</p>
+                                </button>
+                            </div>
+                            
+                        </form>
+                    </div>
                 </div>
             </section>
+
             <div class="enviodatos">
                 <div class="formulario">
                     <section>
@@ -83,19 +107,30 @@
                             <div class="frm">
 
 
-                                <input type="hidden" name="trabajo_id" value="{{ $identificador }}">
+                                <input type="hidden" name="trabajo_id" value="{{ Crypt::encrypt($identificador) }}">
 
                                 <div class="datos">
                                     <label for="insumo">Nombre insumo/servicio: </label>
-                                    <input type="text" required id="insumo" name="insumo" autofocus value="{{old("insumo",)}}">
+                                    <input type="text" required id="insumo" name="insumo" autofocus
+                                        value="{{ old('insumo') }}">
                                     @error('insumo')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="datos">
+                                    <label for="cantidad">Cantidad del Insumo: </label>
+                                    <input type="number" required id="cantidad" name="cantidad" autofocus
+                                        value="{{ old('cantidad') }}">
+                                    @error('cantidad')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="datos">
                                     <label for="costo">Costo: </label>
-                                    <input type="decimal" required id="costo" name="costo" value="{{old("costo",)}}">
+                                    <input type="number" required id="costo" name="costo"
+                                        value="{{ old('costo') }}" step="0.01">
                                     @error('costo')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
@@ -103,7 +138,7 @@
 
                                 <div class="datos">
                                     <label for="detalle">Detalles: </label>
-                                    <textarea cols="15" rows="5" required id="detalle" name="detalle">{{old("detalle")}}</textarea>
+                                    <textarea cols="15" rows="5" required id="detalle" name="detalle">{{ old('detalle') }}</textarea>
                                     @error('detalle')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
@@ -122,18 +157,7 @@
                     </section>
                 </div>
             </div>
-            <div class="terminar">
 
-                <form class="confirm" method="POST" action="{{ route('terminarInsumo') }}">
-                    @csrf
-                    <input hidden id="id" name="id" type="text" value="{{ $trabajoid }}">
-                    <input hidden id="total" name="total" type="text" value="{{ $total }}">
-                    <button class="registrar">
-                        <p>Terminarr</p>
-                    </button>
-
-                </form>
-            </div>
 
 
         </div>

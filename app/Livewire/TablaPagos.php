@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\ordenpago;
-use App\Models\Trabajo;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
@@ -12,7 +11,7 @@ class TablaPagos extends Component
 {
     use WithPagination;
     public $user;
-    public $paginate = 4;
+    public $paginate = 5;
     public $search;
 
     public function render()

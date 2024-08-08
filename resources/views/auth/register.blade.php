@@ -85,8 +85,6 @@
                     href="{{ route('adminIndex') }}">
                     {{ __('Regresar') }}
                 </a>
-
-
             </div>
         </form>
     </section>

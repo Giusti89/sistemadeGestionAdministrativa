@@ -27,7 +27,7 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('trabIndex')" :active="request()->routeIs('trabIndex')">
-                        {{ __('Cotizar trabajos') }}
+                        {{ __('Trabajos') }}
                     </x-nav-link>
                 </div>
 
@@ -130,7 +130,7 @@
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('trabIndex')" :active="request()->routeIs('trabIndex')">
-                {{ __('Cotizar trabajos') }}
+                {{ __('Trabajos') }}
             </x-responsive-nav-link>
         </div>
 
@@ -161,7 +161,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Perfil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -171,7 +171,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Cerrar sesión') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

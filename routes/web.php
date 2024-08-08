@@ -25,14 +25,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth', 'CheckAdmin'])->group(function () {
-    Route::controller(AdminController::class)->group(function () {
-        Route::get('administracion.index', 'index')->name('adminIndex');
-        Route::get('administracion.edit/{id}', 'edit')->name('editusu');
-        Route::delete('administracion/{id}', 'destroy')->name('eliadmin');
-        Route::put('/administracion/{id}', 'update')->name('adminUpdate');
-    });
-});
+
 
 Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function () {
     Route::controller(ClienteController::class)->group(function () {
@@ -69,22 +62,39 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
 
     Route::controller(OrdenpagoController::class)->group(function () {
         Route::get('ordenpago.index', 'index')->name('pagoIndex');
-        Route::get('ordenpago.pago', 'pagados')->name('pagoPagados');
-        Route::get('/ordenpago.pago/{id}', 'create')->name('pagoCreate');        
+        
+        Route::get('/ordenpago.pago/{id}', 'create')->name('pagoCreate'); 
+
+        Route::get('ordenpago.cuentapagada/{ordenpago}', 'show')->name('showPagada');
     });
 
     Route::controller(PagoController::class)->group(function () {
+        Route::get('ordenpago.pagados', 'index')->name('pagoPagados');
         Route::post('/ordenpago.pago', 'store')->name('pagoStore');              
     });
 
     Route::controller(GastoController::class)->group(function () {
         Route::get('/gastos.index', 'index')->name('gastoIndex');
         Route::get('/gastos.nuevo', 'create')->name('nuevoGasto'); 
-        Route::post('/gastos.store', 'store')->name('storeGasto');        
+        Route::post('/gastos.store', 'store')->name('storeGasto');
+        Route::get('/gastos.edit/{id}', 'edit')->name('editGasto'); 
+        Route::put('/gastos.update/{id}', 'update')->name('updateGasto');  
+        Route::delete('/gastos.destroy/{id}', 'destroy')->name('gasto.destroy');     
     });
 
 });
 
+Route::middleware(['auth', 'CheckAdmin'])->group(function () {
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('administracion.index', 'index')->name('adminIndex');
+        Route::get('administracion.edit/{id}', 'edit')->name('editusu');
+        Route::delete('administracion/{id}', 'destroy')->name('eliadmin');
+        Route::put('/administracion/{id}', 'update')->name('adminUpdate');
+
+        Route::get('administracion.caducado/{id}', 'renovar')->name('adminRenovar');
+        Route::put('/administracion.caducado/{id}', 'renovacion')->name('adminRenovacion');
+    });
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

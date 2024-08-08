@@ -11,8 +11,9 @@ class TablaPagados extends Component
 {
     use WithPagination;
     public $user;
-    public $paginate = 4;
+    public $paginate = 5;
     public $search;
+    
     public function render()
     {
         $user = Auth::user();

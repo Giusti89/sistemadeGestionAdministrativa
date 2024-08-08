@@ -17,12 +17,11 @@
     <div class="table-container">
         <table>
             <thead>
-                <tr>                    
+                <tr>
                     <th>Cliente</th>
                     <th>Trabajo</th>
                     <th>Descripción</th>
                     <th>Total</th>
-                    <th>Saldo</th>
                     <th>Pagos</th>
                 </tr>
             </thead>
@@ -30,7 +29,7 @@
 
                 @foreach ($data as $ordenpago)
                     <tr>
-                       
+
                         <td class="filas-tabla">
                             {{ $ordenpago->trabajo->cliente->nombre }}
                         </td>
@@ -44,27 +43,18 @@
                         <td class="filas-tabla">
                             {{ $ordenpago->total }}
                         </td>
-                        <td class="filas-tabla">
-                            {{ $ordenpago->saldo }}
-                        </td>
+
                         <td>
-                            @if ($ordenpago->saldo == 0)
-                                <div>
-                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $ordenpago->id }}"
-                                        idtrab="{{ $ordenpago->trabajo->id }}" nombre="Pagos realizados">
-                                    </x-layouts.btnenviodat>
-                                </div>
-                            @else
-                                <div>
-                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $ordenpago->id }}"
-                                        idtrab="{{ $ordenpago->trabajo->id }}" nombre="Realizar pago">
-                                    </x-layouts.btnenviodat>
-                                </div>
-                            @endif
+                            @php
+                                $encryptedId = Crypt::encrypt($ordenpago->id);
+                            @endphp
 
+                            <a href="{{ route('showPagada', $encryptedId ) }}" >
+                                <button type="button" class="modificar">
+                                    Ver pagos realizados
+                                </button>
+                            </a>                                
                         </td>
-
-
                     </tr>
                 @endforeach
             </tbody>

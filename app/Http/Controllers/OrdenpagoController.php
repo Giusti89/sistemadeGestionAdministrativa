@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Insumo;
 use App\Models\ordenpago;
 use App\Models\pago;
 use App\Models\Trabajo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Redirect;
 
 class OrdenpagoController extends Controller
 {
@@ -17,29 +20,30 @@ class OrdenpagoController extends Controller
         return view('ordenpago.index');
     }
 
-    public function pagados()
-    {
-        return view('ordenpago.pagados');
-    }
-
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create($encryptedId)
     {
-        $ordenpago = ordenpago::findOrFail($id);
-        
-        $idtrabajo=$ordenpago->trabajo_id;
-        
-        $pago = Pago::where('ordenpago_id', $ordenpago->id)->get();
+        try {
+            $id = Crypt::decrypt($encryptedId);
 
-        $trab=Trabajo::findOrFail($idtrabajo);
+            $ordenpago = ordenpago::findOrFail($id);
 
-        $this->authorize('trabajoID', $trab);
+            $idtrabajo = $ordenpago->trabajo_id;
 
-        $ordenes = Ordenpago::where('trabajo_id', $id)->get();
-        
-        return view('ordenpago.pago', compact('ordenpago', 'trab','pago'));
+            $pago = Pago::where('ordenpago_id', $ordenpago->id)->get();
+
+            $trab = Trabajo::findOrFail($idtrabajo);
+
+            $this->authorize('trabajoID', $trab);
+
+            $ordenes = Ordenpago::where('trabajo_id', $id)->get();
+
+            return view('ordenpago.pago', compact('ordenpago', 'trab', 'pago'));
+        } catch (\Throwable $th) {
+            return Redirect::route('pagoIndex')->with('msj', 'error');
+        }
     }
 
     /**
@@ -53,9 +57,17 @@ class OrdenpagoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ordenpago $ordenpago)
+    public function show($encryptedId)
     {
-        //
+        try {
+            $id = Crypt::decrypt($encryptedId);
+            $ordenpago = Ordenpago::findOrFail($id);
+            $pago = Pago::where('ordenpago_id', $ordenpago->id)->get();
+
+            return view('ordenpago.cuentapagada', compact('pago', 'ordenpago'));
+        } catch (\Throwable $th) {
+            return Redirect::route('pagoPagados')->with('msj', 'error');
+        }
     }
 
     /**

@@ -17,7 +17,7 @@
 
         @if ($diferenciaDias <= 5)
             <div id="anuncio" class="anuncio">
-                <h1>Le quedan {{ $diferenciaDias }} dias de suscripcion</h1>                
+                <h1>Le quedan {{ $diferenciaDias }} dias de suscripcion</h1>
             </div>
         @endif
 
@@ -56,10 +56,14 @@
                             {{ $cli->email }}
                         </td>
                         <td class="filas-tabla">
+                            @php
+                                $encryptedId = Crypt::encrypt($cli->id);
+                            @endphp
                             <div>
-                                <x-layouts.btnmodif rutaEnvio="editCliente" dato="{{ $cli->id }}"
-                                    nombre="Modificar">
-                                    </x-layouts.btnenviodat>
+
+                                <x-layouts.btnmodif rutaEnvio="editCliente" dato="{{ $encryptedId }}"
+                                    nombre="Modificarr">
+                                </x-layouts.btnmodif>
                             </div>
                         </td>
                         <td class="filas-tabla">

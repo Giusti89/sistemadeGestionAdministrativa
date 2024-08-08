@@ -7,18 +7,24 @@ use App\Models\ordenpago;
 use App\Models\Trabajo;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Crypt;
 
 class InsumoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($identificador)
+    public function index($encryptedId)
     {
-        $trabajo = Trabajo::find($identificador);
-        $this->authorize('trabajoID', $trabajo);
+        try {
+            $identificador = Crypt::decrypt($encryptedId);
+            $trabajo = Trabajo::find($identificador);
+            $this->authorize('trabajoID', $trabajo);
 
-        return view('insumos.index', compact('identificador'));
+            return view('insumos.index', compact('identificador'));
+        } catch (\Throwable $th) {
+            return response()->view('errors.500', [], 500);
+        }
     }
 
     /**
@@ -35,6 +41,7 @@ class InsumoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'cantidad' => 'required',
             'insumo' => 'required|string|max:255',
             'costo' => 'required|numeric|between:0,999999.99',
             'detalle' => 'nullable|string|max:255',
@@ -44,15 +51,21 @@ class InsumoController extends Controller
             'costo.numeric' => 'El costo debe ser un número.',
             'costo.between' => 'El costo debe estar entre 0 y 999999.99.',
         ]);
-        $item = new Insumo();
+        try {
+            $identificador = Crypt::decrypt($request->trabajo_id);
+            $item = new Insumo();
 
-        $item->nombre = $request->insumo;
-        $item->detalle = $request->detalle;
-        $item->costo = $request->costo;
-        $item->trabajo_id = $request->trabajo_id;
-        $item->save();
+            $item->nombre = $request->insumo;
+            $item->cantidad = $request->cantidad;
+            $item->detalle = $request->detalle;
+            $item->costo = $request->costo;
+            $item->trabajo_id = $identificador;
+            $item->save();
 
-        return redirect()->route('insumoIndex', ['id' => $request->trabajo_id])->with('msj', 'cambio');
+            return redirect()->route('insumoIndex', ['id' => $request->trabajo_id])->with('msj', 'cambio');
+        } catch (\Throwable $th) {
+            return redirect()->route('insumoIndex', ['encryptedId' => $request->trabajo_id])->withErrors('Identificador inválido.');
+        }
     }
 
     /**
@@ -66,11 +79,16 @@ class InsumoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit($encryptedId)
     {
-        $coti = Insumo::find($id);
-        $this->authorize('view', $coti);
-        return view('insumos.edit', compact('coti'));
+        try {
+            $id = Crypt::decrypt($encryptedId);
+            $coti = Insumo::find($id);
+            $this->authorize('view', $coti);
+            return view('insumos.edit', compact('coti'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -79,6 +97,7 @@ class InsumoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'cantidad' => 'required',
             'insumo' => 'string|max:255',
             'costo' => 'numeric|between:0,999999.99',
             'detalle' => 'nullable|string|max:255',
@@ -89,71 +108,77 @@ class InsumoController extends Controller
             'costo.between' => 'El costo debe estar entre 0 y 999999.99.',
         ]);
 
-        $insumo = Insumo::find($id);
-        $this->authorize('view', $insumo);
-        $insumo->nombre = $request->nombre;
-        $insumo->detalle = $request->detalle;
-        $insumo->costo = $request->costo;
-
-
-        $insumo->save();
-        return redirect()->route('insumoIndex', ['id' => $insumo->trabajo_id])->with('msj', 'ok');
+        try {
+            $insumo = Insumo::find($id);
+            $this->authorize('view', $insumo);
+            $insumo->cantidad = $request->cantidad;
+            $insumo->nombre = $request->nombre;
+            $insumo->detalle = $request->detalle;
+            $insumo->costo = $request->costo;
+    
+            $encryptedId = Crypt::encrypt($insumo->trabajo_id);
+            $insumo->save();
+            return redirect()->route('insumoIndex', ['id' => $encryptedId])->with('chk', 'realizado');
+        } catch (\Throwable $th) {
+            return redirect()->route('insumoIndex', ['encryptedId' => $request->trabajo_id])->withErrors('Identificador inválido.');
+        }
+       
+       
     }
 
 
     public function destroy(Request $request, $id)
     {
         try {
+
             $cot = Insumo::findOrFail($id);
             $this->authorize('view', $cot);
             $cot->delete();
-            return redirect()->route('insumoIndex', ['id' => $cot->trabajo_id])->with('chk', 'realizado');
+
+            $encryptedId = Crypt::encrypt($cot->trabajo_id);
+
+            return redirect()->route('insumoIndex', ['id' => $encryptedId])->with('chk', 'realizado');
         } catch (Exception $e) {
-            return redirect()->route('insumoIndex', ['id' => $cot->trabajo_id])->with(['msj' => 'prohibido']);
+            return redirect()->route('insumoIndex')->with(['msj' => 'prohibido']);
         }
     }
 
     public function terminar(Request $request)
     {
-        $actualizar = Trabajo::findOrFail($request->id);
-        $ordendopago = new ordenpago();
-        $ordendopago->trabajo_id = $request->id;
+        try {
+            $actualizar = Trabajo::findOrFail($request->id);
+            $ordendopago = new OrdenPago();
+            $ordendopago->trabajo_id = $request->id;
 
-        $costoProduccion = $request->total;
-        $actualizar->Costoproduccion = $costoProduccion;
-        $porcentaje = $actualizar->ganancia / 100;
-        $total = $costoProduccion + ($costoProduccion * $porcentaje);
-        $ganefec = ($total - $costoProduccion);
-        $actualizar->gananciaefectivo = $ganefec;
-        $actualizar->estado = true;
+            $costoProduccion = $request->total;
+            $actualizar->Costoproduccion = $costoProduccion;
 
+            $porcentajeGanancia = $actualizar->ganancia / 100;
+            $gananciaEfectivo = $costoProduccion * $porcentajeGanancia;
+            $totalConGanancia = $costoProduccion + $gananciaEfectivo;
 
-        if ($actualizar->iva <= 0) {
+            if ($actualizar->iva > 0) {
+                $porcentajeIva = $actualizar->iva / 100;
+                $montoIva = $totalConGanancia * $porcentajeIva;
+                $totalFinal = $totalConGanancia + $montoIva;
+                $actualizar->ivaefectivo = $montoIva;
+            } else {
+                $totalFinal = $totalConGanancia;
+            }
 
+            $actualizar->gananciaefectivo = $gananciaEfectivo;
+            $actualizar->Costofinal = $totalFinal;
             $actualizar->estado = true;
-            $actualizar->Costoproduccion = $request->total;
-            $actualizar->Costofinal = $total;
 
-            $ordendopago->total = $total;
-            $ordendopago->saldo = $total;
-
+            $ordendopago->total = $totalFinal;
+            $ordendopago->saldo = $totalFinal;
 
             $ordendopago->save();
             $actualizar->update();
+
             return redirect()->route('trabIndex')->with('chk', 'realizado');
-        } else {
-
-            $impuesto = $actualizar->iva / 100;
-            $Costofac = $total + ($total * $impuesto);
-            $actualizar->Costofinal = $Costofac;
-            $actualizar->ivaefectivo = ($Costofac - $total);
-
-            $ordendopago->total = $Costofac;
-            $ordendopago->saldo = $Costofac;
-
-            $ordendopago->save();
-            $actualizar->update();
-            return redirect()->route('trabIndex')->with('chk', 'realizado');
+        } catch (Exception $e) {
+            return redirect()->route('trabIndex')->with('error', 'Ocurrió un error al procesar el trabajo.');
         }
     }
 }

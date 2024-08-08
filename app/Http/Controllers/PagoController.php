@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ordenpago;
 use App\Models\pago;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class PagoController extends Controller
 {
@@ -13,7 +14,7 @@ class PagoController extends Controller
      */
     public function index()
     {
-        //
+        return view('ordenpago.pagados');
     }
 
     /**
@@ -51,10 +52,10 @@ class PagoController extends Controller
             $ordenpago->cuenta = $ordenpago->cuenta + $request->pago;
             $ordenpago->saldo =$ordenpago->saldo - $request->pago;
              $pago->save();
-             $ordenpago->update();
-             
+             $ordenpago->update();             
             
-             return redirect()->route('pagoCreate', ['id' => $request->trabajo_id])->with('msj', 'cambio');
+            //  return redirect()->route('pagoCreate', ['id' => $request->trabajo_id])->with('msj', 'cambio');
+             return redirect()->route('pagoCreate', Crypt::encrypt($request->trabajo_id))->with('msj', 'ok');
         }
         return redirect()->route('pagoIndex')->with('msj', 'error');
     }

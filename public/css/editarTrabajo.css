@@ -4,6 +4,9 @@
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
 }
+.contenedor{
+    margin: 15px;
+}
 body {
     background-image: url('../img/backgrounds/fondoSpacio.jpg');
     background-repeat: no-repeat;
@@ -22,7 +25,7 @@ h1{
 }
 .seccion1{
     position: relative;
-    max-width: 90vw;
+    max-width: 70vw;
     background-color: transparent;
     border: 2px solid rgba(255, 255, 2, 0.5);
     border-radius: 20px;
@@ -33,18 +36,18 @@ h1{
     padding: 2rem 3rem;
 }
 .datos textarea{
-    width: 75vw;
+    width: 50vw;
     font-size:1.5rem ;
     padding: 9px;
 }
 .datos input{
-    width: 75vw;
-    font-size:1.5rem ;
+    width:50vw;
+    font-size:1.2rem ;
 }
 .datos{
     display:flex ;
     flex-direction: column;    
-    margin: 15px;
+    margin: 10px;
 }
 .datos label{
     height: 4vh;

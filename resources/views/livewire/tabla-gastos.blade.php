@@ -29,7 +29,8 @@
                     <th>Descripcion</th>
                     <th>Costo</th>
                     <th>Fecha</th>
-
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,20 @@
                         <td>{{ $gasto->descripcion }}</td>
                         <td>{{ $gasto->costo }}</td>
                         <td>{{ $gasto->fecha }}</td>
+                        <td>
+                            @php
+                                $encryptedId = Crypt::encrypt($gasto->id);
+                            @endphp
+                            <x-layouts.btnenviodat class="modificar" rutaEnvio="editGasto" dato="{{ $encryptedId }}"
+                                nombre="Modificar">
+                            </x-layouts.btnenviodat>
+                        </td>
+                        <td>
+                            <div class="max-w-xl">
+                                @include('profile.partials.eliminarcontenido-form', ['gastoId' => $gasto->id])
+                            </div>
+                        </td>
+
                     </tr>
                 @endforeach
             </tbody>
