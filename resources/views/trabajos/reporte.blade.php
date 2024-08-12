@@ -13,24 +13,18 @@
     <div class="contenedor">
         <div class="lienzo">
             <div class="encabezado">
-                <div class="direccion">
-                    <p>GOBIERNO AUTOMO DEPARTAMENTAL DE LA PAZ
-                        DIRECCION DEPARTAMENTAL DE EDUCACION LA PAZ
-                        UNIDAD DE ADMINISTRACION DE RECURSOS
+                {{-- <div class="direccion">
+                    <p>
                     </p>
 
-                </div>
+                </div> --}}
                 {{-- <div class="logo">
                     <img src="../img/logoayacucho.jpg">
                 </div> --}}
             </div>
             <div class="cuerpo">
                 <h1>Cotización</h1>
-                <p>Presupuesto vigente aprobado, del Instituto Tecnológico "Ayacucho".
-                    Debido a que todo el proceso e adquisicion se inicia con la certificación presupuestaria del saldo
-                    en la
-                    partida correspondiente;
-                    El responsable de Bienes y servicios debe ajustarse a los términos de la presente Certificación
+                <p>descripcion del trabajo a realizar
                 </p>
                 <table>
                     <thead>

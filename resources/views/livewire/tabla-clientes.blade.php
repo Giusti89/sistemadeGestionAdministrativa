@@ -62,7 +62,7 @@
                             <div>
 
                                 <x-layouts.btnmodif rutaEnvio="editCliente" dato="{{ $encryptedId }}"
-                                    nombre="Modificarr">
+                                    nombre="Modificar">
                                 </x-layouts.btnmodif>
                             </div>
                         </td>
