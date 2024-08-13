@@ -16,7 +16,7 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="text" required id="apellido" name="apellido" :value="old('apellido')" required autofocus autocomplete="apellido">
+                <input type="text" required id="apellido" name="apellido" :value="old('apellido')" autofocus autocomplete="apellido">
                 <label for="">Apellido</label>
                 <x-input-error :messages="$errors->get('apellido')" class="mt-2" />
             </div>

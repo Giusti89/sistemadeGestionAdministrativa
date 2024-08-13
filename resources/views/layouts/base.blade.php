@@ -68,14 +68,21 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 @yield('nombre')
             </h2>
+            @if (\Carbon\Carbon::now()->diffInDays(Auth::user()->final) <= 5)
+                <div class="contadorDias">
+                    <p style="color: red; margin-top:8px;" >
+                        Le quedan {{ \Carbon\Carbon::now()->diffInDays(Auth::user()->final) }} dia de suscripcion
+                        contactese con el proveedor del servicio
+                    </p>
+                </div>
+            @endif
+
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-
                         @yield('contenido')
-
                     </div>
                 </div>
             </div>
