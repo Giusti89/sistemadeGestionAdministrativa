@@ -6,6 +6,7 @@ use App\Models\ordenpago;
 use App\Models\pago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class PagoController extends Controller
 {
@@ -30,34 +31,42 @@ class PagoController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'pago' => 'required|numeric|min:0',
             'fecha' => 'required|date',
-            'trabajo_id' => 'required|exists:ordenpagos,id',          
+            'trabajo_id' => 'required|exists:ordenpagos,id',
         ]);
 
-        $pago=new pago();
-        $pago->pago = $request->pago;
-        $pago->fecha = $request->fecha;
-        $pago->ordenpago_id = $request->trabajo_id;
+        $existingPago = pago::where('ordenpago_id', $request->trabajo_id)
+            ->where('fecha', $request->fecha)
+            ->where('pago', $request->pago)
+            ->first();
 
-        $ordenpago=ordenpago::findOrFail( $request->trabajo_id);
-
-        if ($ordenpago->saldo==$request->pago) {
-            $ordenpago->estadopago_id=1;
-         }
-
-        if ( $ordenpago->saldo >= $request->pago) {
-            $ordenpago->cuenta = $ordenpago->cuenta + $request->pago;
-            $ordenpago->saldo =$ordenpago->saldo - $request->pago;
-             $pago->save();
-             $ordenpago->update();             
-            
-            //  return redirect()->route('pagoCreate', ['id' => $request->trabajo_id])->with('msj', 'cambio');
-             return redirect()->route('pagoCreate', Crypt::encrypt($request->trabajo_id))->with('msj', 'ok');
+        if ($existingPago) {
+            return redirect()->route('pagoCreate', Crypt::encrypt($request->trabajo_id))->with('msj', 'duplicado');
         }
-        return redirect()->route('pagoIndex')->with('msj', 'error');
+
+        DB::transaction(function () use ($request) {
+            $pago = new pago();
+            $pago->pago = $request->pago;
+            $pago->fecha = $request->fecha;
+            $pago->ordenpago_id = $request->trabajo_id;
+
+            $ordenpago = ordenpago::findOrFail($request->trabajo_id);
+
+            if ($ordenpago->saldo == $request->pago) {
+                $ordenpago->estadopago_id = 1;
+            }
+
+            if ($ordenpago->saldo >= $request->pago) {
+                $ordenpago->cuenta = $ordenpago->cuenta + $request->pago;
+                $ordenpago->saldo = $ordenpago->saldo - $request->pago;
+                $pago->save();
+                $ordenpago->update();
+            }
+        });
+
+        return redirect()->route('pagoCreate', Crypt::encrypt($request->trabajo_id))->with('msj', 'ok');
     }
 
     /**

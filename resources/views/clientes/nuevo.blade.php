@@ -13,10 +13,11 @@
                 <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
             </div>
 
+
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="text" id="apellido" name="apellido" :value="old('apellido')"  autofocus autocomplete="nombre">
-                <label for="">Apellidos</label>
+                <input type="text" required id="apellido" name="apellido" :value="old('apellido')" required autofocus autocomplete="apellido">
+                <label for="">Apellido</label>
                 <x-input-error :messages="$errors->get('apellido')" class="mt-2" />
             </div>
 

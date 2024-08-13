@@ -1,13 +1,11 @@
 #cancelar {
-    color: aliceblue;
-    font-size: 1.2em;
-    font-weight: bold;
     background-color: #DF017A;
-    border-radius: 10%;
-    padding: 1vw;
-    width: 10vw;
-    border-color: transparent;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 1rem;
     
 }
 
@@ -21,10 +19,11 @@
 
 @media (max-width: 768px) {
     #cancelar {
+        background-color: #DF017A;
         color: aliceblue;
         font-size: 1em;
         font-weight: bold;
-        background-color: #DF017A;
+      
         border-radius: 10%;
         padding: 1vw;
         width: 100%;

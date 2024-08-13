@@ -16,14 +16,13 @@
 
                 <tbody>
                     @foreach ($pago as $item)
-                        <tr>
-                            <td class="filas-tabla">
-                                {{ $item->fecha }}
-                            </td>
-                            
+                        <tr>                            
                             <td class="filas-tabla">
                                 {{ $item->pago }}
-                            </td>                            
+                            </td>   
+                            <td class="filas-tabla">                                
+                                {{ \Carbon\Carbon::parse($item->fecha)->format('d/m/Y') }}
+                            </td>                         
                         </tr>
                     @endforeach
                 </tbody>

@@ -32,17 +32,19 @@ h1{
     backdrop-filter: blur(55px);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     padding: 2rem 3rem;
 }
 .datos textarea{
-    width: 50vw;
-    font-size:1.5rem ;
+    width: 25vw;
+    font-size:1.2rem ;
     padding: 9px;
 }
 .datos input{
-    width:50vw;
+    width:25vw;
+    height: 35px;
     font-size:1.2rem ;
+    padding: 5px;
 }
 .datos{
     display:flex ;
@@ -72,7 +74,7 @@ h1{
 .forget a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .forget a:hover {
