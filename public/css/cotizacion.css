@@ -4,6 +4,16 @@
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
 }
+.paginacion{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 35px;
+}
+.paginacion label{
+    color: white;
+}
 
 body {
     background-image: url('../img/backgrounds/fondoSpacio.jpg');

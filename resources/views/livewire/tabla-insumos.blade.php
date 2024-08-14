@@ -15,6 +15,10 @@
 
         <div class="principal">
             <section class="seccion1">
+                <div class="paginacion">
+                    <label for="paginate">Mostrar numero de registros:</label>
+                    <input type="number" wire:model.live="paginate">
+                </div>
                 <div class="tabla tabla1">
                     <h1>Insumos</h1>
                     <div class="table-container">

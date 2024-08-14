@@ -26,7 +26,7 @@
 
                 <div class="mt-4">
                     <x-input-label for="descripcion" :value="__('Descripcion')" style="color: white;font-size:1.5rem" /> <br>
-                    <textarea name="descripcion" id="descripcion" cols="20" rows="10" style="padding:9px;"></textarea>
+                    <textarea placeholder="ingresar la descripción del trabajo a realizar" name="descripcion" id="descripcion" cols="20" rows="10" style="padding:9px;"></textarea>
                 </div>
 
                 <div class="inputbox">
@@ -41,7 +41,7 @@
                     <ion-icon name="mail-outline"></ion-icon>
                     <input type="decimal" required id="ganancia" name="ganancia" :value="old('ganancia')" autofocus
                         autocomplete="ganancia">
-                    <label for="">Ganancia en porcentaje</label>
+                    <label for="">Ganancia del trabajo (solo numeral)</label>
                     <x-input-error :messages="$errors->get('ganancia')" class="mt-2" />
                 </div>
 

@@ -25,6 +25,7 @@
                     <th>Trabajo</th>
                     <th>Descripcion</th>
                     <th>Costo Produccion</th>
+                    <th>Ganancia</th>
                     <th>Costo Final</th>
                     <th>Acción</th>
                     <th>Modificación</th>
@@ -49,6 +50,10 @@
 
                         <td class="filas-tabla">
                             {{ $insumos->Costoproduccion }}
+                        </td>
+
+                        <td class="filas-tabla">
+                            {{$insumos->ganancia}}
                         </td>
 
                         <td class="filas-tabla">
