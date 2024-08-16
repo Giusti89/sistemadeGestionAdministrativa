@@ -21,6 +21,13 @@
                 <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
             </div>
 
+            <div>
+                <label for="name">Celular:</label>
+                <x-text-input id="telefono" class="block mt-1 w-full" type="number" name="telefono" :value="old('telefono')"
+                    required autofocus autocomplete="telefono" />
+                <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
+            </div>
+
             <div class="mt-4">
                 <label for="TipoUsuario">Tipo usuario</label>
                 <select id="tipousuario" name="tipousuario" class="selector w-full" required autofocus

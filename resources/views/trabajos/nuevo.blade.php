@@ -53,7 +53,13 @@
                     <x-input-error :messages="$errors->get('iva')" class="mt-2" />
                 </div>
 
-               
+                <div class="inputbox">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="decimal" required id="manobra" name="manobra" :value="old('manobra')" autofocus
+                        autocomplete="manobra">
+                    <label for="">Mano de obra</label>
+                    <x-input-error :messages="$errors->get('manobra')" class="mt-2" />
+                </div>
 
                 <button>
                     <p>Registrar</p>

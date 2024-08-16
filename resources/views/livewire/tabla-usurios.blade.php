@@ -25,8 +25,9 @@
                             <thead>
                                 <tr>
                                     <th>Nombres</th>
-                                    <th>Numero de clientes</th>
                                     <th>Apellidos</th>
+                                    <th>Numero de clientes</th>
+                                    <th>Celular</th>
                                     <th>Email</th>
                                     <th>Inicio Suscripción</th>
                                     <th>Final de la suscripcion</th>
@@ -41,14 +42,16 @@
 
                                         <td class="filas-tabla">
                                             {{ $usuario->name }}
-                                        </td>
-
-                                        <td class="filas-tabla">
-                                            {{ $usuario->clientes_count }}
-                                        </td>
+                                        </td>                                       
 
                                         <td class="filas-tabla">
                                             {{ $usuario->lastname }}
+                                        </td>
+                                        <td class="filas-tabla">
+                                            {{ $usuario->clientes_count }}
+                                        </td>
+                                        <td class="filas-tabla">
+                                            {{ $usuario->telefono }}
                                         </td>
                                         <td class="filas-tabla">
                                             {{ $usuario->email }}

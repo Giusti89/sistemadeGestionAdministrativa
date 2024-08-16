@@ -16,7 +16,7 @@
                     autocomplete="name">
                 <label style="color: red;font-size:1.5rem" for="">Nombre</label>
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            </div>
+            </div>           
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
@@ -28,9 +28,17 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
+                <input type="number" id="telefono" name="telefono" value="{{ $usucli->telefono }}" required autofocus
+                    autocomplete="telefono">
+                <label style="color: red;font-size:1.5rem" for="">Contacto</label>
+                <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
+            </div>
+
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
                 <input type="email" id="email" name="email" value="{{ $usucli->email }}" required autofocus
                     autocomplete="contacto">
-                <label for="">Email</label>
+                <label style="color: red;font-size:1.5rem" for="">Email</label>
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 

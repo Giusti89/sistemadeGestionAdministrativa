@@ -60,6 +60,7 @@ class TrabajoController extends Controller
             'cliente' => 'required|exists:clientes,id',
             'cantidades' => 'required|numeric',
             'ganancia' => 'required|numeric',
+            'manobra'=> 'required|numeric',
             'iva' => 'numeric|nullable',
         ], [
             'trabajo.required' => 'El nombre del trabajo es obligatorio.',
@@ -78,6 +79,9 @@ class TrabajoController extends Controller
             'ganancia.required' => 'La ganancia es obligatoria.',
             'ganancia.numeric' => 'La ganancia debe ser un número.',
 
+            'manobra.numeric' => 'La mano de obra debe ser un número.',
+            'manobra.required' => 'La mano de obra es obligatoria.',
+
             'iva.numeric' => 'El IVA debe ser un número.',
         ]);
 
@@ -89,6 +93,7 @@ class TrabajoController extends Controller
         $trabajo->descripcion = $request->descripcion;
         $trabajo->cliente_id = $request->cliente;
         $trabajo->cantidad = $request->cantidades;
+        $trabajo->manobra = $request->manobra;
 
         $trabajo->save();
 
@@ -123,11 +128,13 @@ class TrabajoController extends Controller
             'trabajo' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'cantidades' => 'required|numeric',
+            'manobra'=> 'required|numeric',
         ]);
         $this->authorize('trabajoID', $id);
         $id->trabajo = $request->trabajo;
         $id->descripcion = $request->descripcion;
         $id->cantidad = $request->cantidades;
+        $id->manobra = $request->manobra;
 
         $id->update();
         return redirect()->route('trabIndex')->with('msj', 'cambio');

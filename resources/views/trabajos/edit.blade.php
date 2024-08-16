@@ -37,6 +37,14 @@
                 <x-input-error :messages="$errors->get('ganancia')" class="mt-2" />
             </div>
 
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="number"  id="manobra" name="manobra" value="{{$trab->manobra}}"  autofocus
+                    autocomplete="manobra">
+                <label for="">Mano de obra</label>
+                <x-input-error :messages="$errors->get('manobra')" class="mt-2" />
+            </div>
+
             <button>
                 <p>Registrar</p>
             </button>

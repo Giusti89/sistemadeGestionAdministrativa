@@ -115,6 +115,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
+            'telefono'=>'required',
             'email' => 'required|string|email|max:255',
             'password' => 'nullable|string|min:8',
             'mensual' => 'nullable|integer|min:1',
@@ -150,6 +151,7 @@ class AdminController extends Controller
                 'lastname' => $request->lastname,
                 'email' => $request->email,
                 'final' => $usucli->final,
+                'telefono' => $request->telefono
             ]);
 
             return redirect()->route('adminIndex')->with('msj', 'cambio');

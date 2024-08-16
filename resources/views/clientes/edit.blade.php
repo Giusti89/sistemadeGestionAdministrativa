@@ -33,7 +33,7 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="number" required id="nit" name="nit" value="{{$clie->nit}}" required autofocus autocomplete="nit">
+                <input type="number"  id="nit" name="nit" value="{{$clie->nit}}"  autofocus autocomplete="nit">
                 <label for="">Nit</label>
                 <x-input-error :messages="$errors->get('nit')" class="mt-2" />
             </div>

@@ -43,7 +43,7 @@ class ClienteController extends Controller
             'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'apellido' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'contacto' => 'required|numeric',
-            'nit' => 'required|max:255',
+            'nit' => 'max:255|nullable',
             'email' => 'required|email|max:255',
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
@@ -57,9 +57,8 @@ class ClienteController extends Controller
 
             'contacto.required' => 'El contacto es obligatorio.',
             'contacto.numeric' => 'El contacto debe ser un número.',
-            'contacto.max' => 'El contacto no debe exceder los 255 caracteres.',
+            
 
-            'nit.required' => 'El NIT es obligatorio.',
             'nit.max' => 'El NIT no debe exceder los 255 caracteres.',
 
             'email.required' => 'El correo electrónico es obligatorio.',
@@ -114,7 +113,7 @@ class ClienteController extends Controller
             'nombre' => 'required|string|max:255',
             'apellido' => 'nullable|string|max:255',
             'contacto' => 'required|string|max:255',
-            'nit' => 'required|string|max:255',
+            'nit' => 'nullable|max:255',
             'email' => 'required|email|max:255',
         ]);
 

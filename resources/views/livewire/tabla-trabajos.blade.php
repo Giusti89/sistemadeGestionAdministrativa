@@ -53,7 +53,7 @@
                         </td>
 
                         <td class="filas-tabla">
-                            {{$insumos->ganancia}}
+                            {{$insumos->gananciaefectivo}}
                         </td>
 
                         <td class="filas-tabla">
