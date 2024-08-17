@@ -1,5 +1,6 @@
 <div>
     <link rel="stylesheet" href="./css/dashbord.css">
+
     <div class="botones">
         <div>
             <x-layouts.btnconfirmar contenido="Nuevo Trabajo" enlace="trabajos.nuevo">
@@ -7,12 +8,18 @@
         </div>
         <div>
             <label for="paginate">Filtrar por cliente</label>
-            <input type="text" wire:model.live="search">
+            <input type="text" wire:model.live="search"> 
+        </div>
+        
+        <div>
+            <label for="filtro">Filtrar por mes: </label>
+            <input type="month" wire:model="searchMonth">
         </div>
 
         <div>
             <label for="paginate">Mostrar numero de registros:</label>
             <input type="number" wire:model.live="paginate">
+
         </div>
 
     </div>
@@ -25,9 +32,10 @@
                     <th>Trabajo</th>
                     <th>Descripcion</th>
                     <th>Costo Produccion</th>
-                    <th>Ganancia</th>
+                    <th>Ganancia efectiva</th>
                     <th>Costo Final</th>
                     <th>Acción</th>
+                    <th>Fecha de creación</th>
                     <th>Modificación</th>
                     <th>Eliminar</th>
 
@@ -53,11 +61,15 @@
                         </td>
 
                         <td class="filas-tabla">
-                            {{$insumos->gananciaefectivo}}
+                            {{ $insumos->gananciaefectivo }}
                         </td>
 
                         <td class="filas-tabla">
                             {{ $insumos->Costofinal }}
+                        </td>
+
+                        <td class="filas-tabla">
+                            {{ \Carbon\Carbon::parse($insumos->created_at)->format('d/m/Y') }}
                         </td>
 
                         <td>

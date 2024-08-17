@@ -11,7 +11,7 @@ class TablaInsumos extends Component
 {
     use WithPagination;
     public $identificador;
-    public $paginate = 4;
+    public $paginate = 5;
     
 
 
@@ -25,7 +25,7 @@ class TablaInsumos extends Component
         
         $trabajo = Trabajo::where('id', $this->identificador)->value('trabajo');
         $trabajoid = Trabajo::where('id', $this->identificador)->value('id');
-
+        $manobra = Trabajo::where('id', $this->identificador)->value('manobra');
 
         $insumos = Insumo::where('trabajo_id', $this->identificador)->paginate($this->paginate);
 
@@ -36,6 +36,6 @@ class TablaInsumos extends Component
             $this->authorize('view', $cotizacion);
         }
     
-        return view('livewire.tabla-insumos', compact('insumos','total','trabajo','trabajoid'));
+        return view('livewire.tabla-insumos', compact('insumos','total','trabajo','trabajoid','manobra'));
     }
 }

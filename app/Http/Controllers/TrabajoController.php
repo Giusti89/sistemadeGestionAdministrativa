@@ -18,11 +18,10 @@ class TrabajoController extends Controller
     public function index()
     {
         try {
-            return view ('trabajos.index');
+            return view('trabajos.index');
         } catch (\Throwable $th) {
-            return response()->view('errors.500', [], 500);
+            return redirect()->route('trabIndex')->with(['msj' => 'prohibido']);
         }
-       
     }
 
     /**
@@ -35,18 +34,18 @@ class TrabajoController extends Controller
             $cliente = $user->clientes->pluck('id', 'nombre');
             return view('trabajos.nuevo', compact('cliente'));
         } catch (\Throwable $th) {
-            return response()->view('errors.500', [], 500);
-        }       
+            return redirect()->route('trabIndex')->with(['msj' => 'prohibido']);
+        }
     }
 
     public function pdf($id)
     {
         $trabajo = Trabajo::findOrFail($id);
-        $items=Insumo::where('trabajo_id', $trabajo->id)->get();
+        $items = Insumo::where('trabajo_id', $trabajo->id)->get();
         $total = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');
-        $pdf = Pdf::loadView('trabajos.reporte', ['trabajo' => $trabajo, 'items' => $items,'total'=>$total]);
-        
-        return $pdf->stream();          
+        $pdf = Pdf::loadView('trabajos.reporte', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total]);
+
+        return $pdf->stream();
     }
 
     /**
@@ -60,7 +59,7 @@ class TrabajoController extends Controller
             'cliente' => 'required|exists:clientes,id',
             'cantidades' => 'required|numeric',
             'ganancia' => 'required|numeric',
-            'manobra'=> 'required|numeric',
+            'manobra' => 'required|numeric',
             'iva' => 'numeric|nullable',
         ], [
             'trabajo.required' => 'El nombre del trabajo es obligatorio.',
@@ -128,7 +127,7 @@ class TrabajoController extends Controller
             'trabajo' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'cantidades' => 'required|numeric',
-            'manobra'=> 'required|numeric',
+            'manobra' => 'required|numeric',
         ]);
         $this->authorize('trabajoID', $id);
         $id->trabajo = $request->trabajo;
@@ -143,21 +142,20 @@ class TrabajoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Trabajo $trabajo)
-{
-    try {
-        $this->authorize('trabajoID', $trabajo);
+    public function destroy($id)
+    {
+        try {
+            $trabajo = Trabajo::with('insumos')->findOrFail($id);
 
-        // Verificar si existen insumos asociados al trabajo
-        if ($trabajo->insumos->count() > 0) {
-            return redirect()->route('trabIndex')->with('msj', 'No se puede eliminar. Existen insumos asociados al trabajo.');
+
+            if ($trabajo->insumos->isNotEmpty()) {
+                return redirect()->route('trabIndex')->with('msj', 'prohibido');
+            }
+            $this->authorize('trabajoID', $trabajo);
+            $trabajo->delete();
+            return redirect()->route('trabIndex')->with('msj', 'ok');
+        } catch (Exception $e) {
+            return redirect()->route('trabIndex')->with(['msj' => 'prohibido']);
         }
-
-        $trabajo->delete();
-
-        return redirect()->route('trabIndex')->with('msj', 'ok');
-    } catch (Exception $e) {
-        return redirect()->route('trabIndex')->with('msj', 'prohibido');
     }
-}
 }

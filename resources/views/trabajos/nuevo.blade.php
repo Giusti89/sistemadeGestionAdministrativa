@@ -47,18 +47,18 @@
 
                 <div class="inputbox">
                     <ion-icon name="mail-outline"></ion-icon>
-                    <input type="decimal" required id="iva" name="iva" :value="old('iva')" autofocus
-                        autocomplete="iva">
-                    <label for="">IVA</label>
-                    <x-input-error :messages="$errors->get('iva')" class="mt-2" />
-                </div>
-
-                <div class="inputbox">
-                    <ion-icon name="mail-outline"></ion-icon>
                     <input type="decimal" required id="manobra" name="manobra" :value="old('manobra')" autofocus
                         autocomplete="manobra">
                     <label for="">Mano de obra</label>
                     <x-input-error :messages="$errors->get('manobra')" class="mt-2" />
+                </div>
+
+                <div class="inputbox">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="number"  id="iva" name="iva" value="0" autofocus
+                        autocomplete="iva">
+                    <label for="">IVA</label>
+                    <x-input-error :messages="$errors->get('iva')" class="mt-2" />
                 </div>
 
                 <button>

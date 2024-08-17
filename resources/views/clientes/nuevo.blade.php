@@ -8,7 +8,7 @@
             
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="text" required id="nombre" name="nombre" :value="old('nombre')" required autofocus autocomplete="nombre">
+                <input type="text"  id="nombre" name="nombre" :value="old('nombre')"  autofocus autocomplete="nombre">
                 <label for="">Nombre</label>
                 <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
             </div>
@@ -16,7 +16,7 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="text" required id="apellido" name="apellido" :value="old('apellido')" autofocus autocomplete="apellido">
+                <input type="text"  id="apellido" name="apellido" :value="old('apellido')" autofocus autocomplete="apellido">
                 <label for="">Apellido</label>
                 <x-input-error :messages="$errors->get('apellido')" class="mt-2" />
             </div>
@@ -30,17 +30,21 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="number"  id="nit" name="nit" :value="old('nit')"  autofocus autocomplete="nit">
-                <label for="">Nit</label>
-                <x-input-error :messages="$errors->get('nit')" class="mt-2" />
-            </div>
-
-            <div class="inputbox">
-                <ion-icon name="mail-outline"></ion-icon>
                 <input type="email" required id="email" name="email" :value="old('email')" required autofocus autocomplete="username">
                 <label for="">Email</label>
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
+
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="number"  id="nit" name="nit" :value="old('nit')" autofocus
+                    autocomplete="nit">
+                <label for="">Nit</label>
+                <x-input-error :messages="$errors->get('iva')" class="mt-2" />
+            </div>
+
+           
+            
     
             <button> <p>Registrar</p> </button>
 

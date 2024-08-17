@@ -23,7 +23,7 @@ class InsumoController extends Controller
 
             return view('insumos.index', compact('identificador'));
         } catch (\Throwable $th) {
-            return response()->view('errors.500', [], 500);
+            return redirect()->route('trabIndex')->with(['msj' => 'prohibido']);
         }
     }
 

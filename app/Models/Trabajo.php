@@ -16,6 +16,7 @@ class Trabajo extends Model
         'ganancia',
         'gananciaefectivo',
         'iva',
+        'manobra',
         'ivaefectivo',
         'Costofactura',
         'Costoproduccion',
@@ -26,5 +27,10 @@ class Trabajo extends Model
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);
+    }
+    
+    public function Insumos()
+    {
+        return $this->hasMany(Insumo::class);
     }
 }

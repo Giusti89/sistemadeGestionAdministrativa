@@ -15,10 +15,18 @@
 
         <div class="principal">
             <section class="seccion1">
-                <div class="paginacion">
-                    <label for="paginate">Mostrar numero de registros:</label>
-                    <input type="number" wire:model.live="paginate">
+                <div class="buscador">
+                    <div>
+                        <x-layouts.btnenviodat class="modificar" rutaEnvio="editInsumo" dato="{{$trabajoid}}"
+                            nombre="generar PDF">
+                        </x-layouts.btnenviodat>
+                    </div>
+                    <div class="paginacion">
+                        <label for="paginate">Mostrar numero de insumos:</label>
+                        <input type="number" wire:model.live="paginate">
+                    </div>                    
                 </div>
+
                 <div class="tabla tabla1">
                     <h1>Insumos</h1>
                     <div class="table-container">
@@ -75,7 +83,7 @@
                                     <th>Costo</th>
                                     <td class="filas-tabla" colspan="1"></td>
                                     <td class="filas-tabla" colspan="1"></td>
-                                    <td class="filas-tabla" colspan="1"> {{ $total }}</td>
+                                    <td class="filas-tabla" colspan="1"> {{ $total + $manobra }}</td>
                                     <td class="filas-tabla"></td>
                                     <td class="filas-tabla"></td>
                                 </tr>
@@ -94,7 +102,7 @@
                                     <p>Terminar</p>
                                 </button>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
