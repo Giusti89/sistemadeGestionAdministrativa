@@ -77,8 +77,9 @@ class InsumoController extends Controller
         //
     }
 
-    public function pdf($id)
+    public function pdf($encryptedId)
     {
+        $id = Crypt::decrypt($encryptedId);
         $trabajo = Trabajo::findOrFail($id);
         $items = Insumo::where('trabajo_id', $trabajo->id)->get();
         $total = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');

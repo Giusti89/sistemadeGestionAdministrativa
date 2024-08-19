@@ -17,14 +17,17 @@
             <section class="seccion1">
                 <div class="buscador">
                     <div>
-                        <x-layouts.btnenviodat class="modificar" rutaEnvio="cotiPdf" dato="{{$trabajoid}}"
+                        @php
+                            $encryptedId = Crypt::encrypt($trabajoid);
+                        @endphp
+                        <x-layouts.btnenviodat class="modificar" rutaEnvio="cotiPdf" dato="{{ $encryptedId }}"
                             nombre="generar PDF" estado="_blank">
                         </x-layouts.btnenviodat>
                     </div>
                     <div class="paginacion">
                         <label for="paginate">Mostrar numero de insumos:</label>
                         <input type="number" wire:model.live="paginate">
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="tabla tabla1">
