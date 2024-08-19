@@ -7,6 +7,7 @@ use App\Models\ordenpago;
 use App\Models\Trabajo;
 use Illuminate\Http\Request;
 use Exception;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Crypt;
 
 class InsumoController extends Controller
@@ -76,6 +77,17 @@ class InsumoController extends Controller
         //
     }
 
+    public function pdf($id)
+    {
+        $trabajo = Trabajo::findOrFail($id);
+        $items = Insumo::where('trabajo_id', $trabajo->id)->get();
+        $total = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');
+        $total=$total + $trabajo->manobra;
+        $pdf = Pdf::loadView('insumos.pdfcoti', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total]);
+
+        return $pdf->stream();
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -115,15 +127,13 @@ class InsumoController extends Controller
             $insumo->nombre = $request->nombre;
             $insumo->detalle = $request->detalle;
             $insumo->costo = $request->costo;
-    
+
             $encryptedId = Crypt::encrypt($insumo->trabajo_id);
             $insumo->save();
             return redirect()->route('insumoIndex', ['id' => $encryptedId])->with('chk', 'realizado');
         } catch (\Throwable $th) {
             return redirect()->route('insumoIndex', ['encryptedId' => $request->trabajo_id])->withErrors('Identificador inválido.');
         }
-       
-       
     }
 
 

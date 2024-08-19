@@ -17,8 +17,8 @@
             <section class="seccion1">
                 <div class="buscador">
                     <div>
-                        <x-layouts.btnenviodat class="modificar" rutaEnvio="editInsumo" dato="{{$trabajoid}}"
-                            nombre="generar PDF">
+                        <x-layouts.btnenviodat class="modificar" rutaEnvio="cotiPdf" dato="{{$trabajoid}}"
+                            nombre="generar PDF" estado="_blank">
                         </x-layouts.btnenviodat>
                     </div>
                     <div class="paginacion">
@@ -83,7 +83,7 @@
                                     <th>Costo</th>
                                     <td class="filas-tabla" colspan="1"></td>
                                     <td class="filas-tabla" colspan="1"></td>
-                                    <td class="filas-tabla" colspan="1"> {{ $total + $manobra }}</td>
+                                    <td class="filas-tabla" colspan="1"> {{ $total + $manobra }} Bs.</td>
                                     <td class="filas-tabla"></td>
                                     <td class="filas-tabla"></td>
                                 </tr>

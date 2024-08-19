@@ -58,6 +58,8 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
         Route::put('/insumos.update/{id}', 'update')->name('updateInsumo');
         Route::delete('/insumos/{id}', 'destroy')->name('eliInsumo');
         Route::post('/insumos', 'terminar')->name('terminarInsumo');
+
+        Route::get('insumos.reporte/{id}', 'pdf')->name('cotiPdf');
     });
 
     Route::controller(OrdenpagoController::class)->group(function () {
