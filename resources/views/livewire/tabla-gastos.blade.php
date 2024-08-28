@@ -17,7 +17,7 @@
 
 
         <div>
-            <label for="paginate">Numero de registros de la tabla</label>
+            <label for="paginate">Numero de registros de la tabla:</label>
             <input type="number" wire:model.live="paginate">
         </div>
     </div>

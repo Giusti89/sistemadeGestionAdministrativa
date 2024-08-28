@@ -7,7 +7,7 @@
             </x-layouts.btnconfirmar>
         </div>
         <div>
-            <label for="paginate">Filtrar por cliente</label>
+            <label for="paginate">Filtrar por cliente:</label>
             <input type="text" wire:model.live="search"> 
         </div>
         
