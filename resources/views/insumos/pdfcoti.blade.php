@@ -30,7 +30,7 @@
                         <tr>
                             <th>Cantidad</th>
                             <th>Concepto</th>
-                            <th>Total</th>
+                            <th>Totall</th>
 
                         </tr>
                     </thead>

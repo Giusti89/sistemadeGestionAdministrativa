@@ -60,7 +60,7 @@
                             <th>Costo</th>
                             <td class="filas-tabla" colspan="1"></td>
                             <td class="filas-tabla" colspan="1"></td>
-                            <td class="filas-tabla" colspan="1"> {{ $total }}</td>
+                            <td class="filas-tabla" colspan="1"> {{ $total }} Bs.</td>
                            
                         </tr>
                     </tfoot>

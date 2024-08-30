@@ -13,7 +13,7 @@
 
                 <!-- Navigation Links -->
                 @if (Auth::user()->tipousuario_id == 1)
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-lg sm:text-xl" >
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-lg sm:text-xl">
                         <x-nav-link :href="route('adminIndex')" :active="request()->routeIs('adminIndex')">
                             {{ __('Administración') }}
                         </x-nav-link>
@@ -36,7 +36,7 @@
                     <x-nav-link :href="route('pagoIndex')" :active="request()->routeIs('pagoIndex')">
                         {{ __('Cuentas por Cobrar') }}
                     </x-nav-link>
-                </div>                
+                </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('pagoPagados')" :active="request()->routeIs('pagoPagados')">
@@ -49,8 +49,12 @@
                         {{ __('Gastos') }}
                     </x-nav-link>
                 </div>
-
-
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('ReporteIndex')" :active="request()->routeIs('ReporteIndex')">
+                        {{ __('Estadisticas') }}
+                    </x-nav-link>
+                </div>
 
             </div>
 
@@ -150,6 +154,12 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('gastoIndex')" :active="request()->routeIs('gastoIndex')">
                 {{ __('Gastos') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('ReporteIndex')" :active="request()->routeIs('ReporteIndex')">
+                {{ __('Estadisticas') }}
             </x-responsive-nav-link>
         </div>
 

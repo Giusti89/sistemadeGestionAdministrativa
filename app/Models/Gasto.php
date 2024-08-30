@@ -17,10 +17,7 @@ class Gasto extends Model
         'user_id',
     ];
 
-    public function balances()
-    {
-        return $this->hasMany(Balance::class, 'gasto_id');
-    }
+   
     public function user()
     {
         return $this->belongsTo(User::class);

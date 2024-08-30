@@ -28,9 +28,14 @@ class Trabajo extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
-    
+
     public function Insumos()
     {
         return $this->hasMany(Insumo::class);
+    }
+    
+    public function ordenpagos()
+    {
+        return $this->hasMany(Ordenpago::class);
     }
 }

@@ -83,7 +83,14 @@ class InsumoController extends Controller
         $trabajo = Trabajo::findOrFail($id);
         $items = Insumo::where('trabajo_id', $trabajo->id)->get();
         $total = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');
-        $total=$total + $trabajo->manobra;
+        $total = $total + $trabajo->manobra;
+        $ganancia = $total * $trabajo->ganancia / 100;
+        if ($trabajo->iva > 0) {
+            $iva = $total * $trabajo->iva / 100;
+            $total = $total  + $ganancia + $iva;
+        } else {
+            $total = $total + $ganancia;
+        }
         $pdf = Pdf::loadView('insumos.pdfcoti', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total]);
 
         return $pdf->stream();
@@ -164,17 +171,20 @@ class InsumoController extends Controller
             $costoProduccion = $request->total;
             $actualizar->Costoproduccion = $costoProduccion;
 
-            $porcentajeGanancia = $actualizar->ganancia / 100;
-            $gananciaEfectivo = $costoProduccion * $porcentajeGanancia;
-            $totalConGanancia = $costoProduccion + $gananciaEfectivo;
+            $totalparcial = $request->total + $actualizar->manobra;
+            $porcentajeGanancia = $totalparcial*$actualizar->ganancia/100;
+            $totalfinal= $totalparcial+$porcentajeGanancia;
+
+            $gananciaEfectivo =  $porcentajeGanancia+$actualizar->manobra ;
+           
 
             if ($actualizar->iva > 0) {
                 $porcentajeIva = $actualizar->iva / 100;
-                $montoIva = $totalConGanancia * $porcentajeIva;
-                $totalFinal = $totalConGanancia + $montoIva;
+                $montoIva = $totalfinal * $porcentajeIva;
+                $totalFinal = $totalfinal + $montoIva;
                 $actualizar->ivaefectivo = $montoIva;
             } else {
-                $totalFinal = $totalConGanancia;
+                $totalFinal = $totalfinal;
             }
 
             $actualizar->gananciaefectivo = $gananciaEfectivo;

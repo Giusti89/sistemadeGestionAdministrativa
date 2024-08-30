@@ -21,4 +21,12 @@ class Cliente extends Model
     {
         return $this->belongsTo(User::class, 'usuario_id');
     }
+    public function trabajos()
+    {
+        return $this->hasMany(Trabajo::class, 'cliente_id');
+    }
+    public function gastos()
+    {
+        return $this->hasMany(Gasto::class);
+    }
 }

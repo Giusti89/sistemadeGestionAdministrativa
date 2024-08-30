@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\GastoController;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\OrdenpagoController;
@@ -82,6 +83,11 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
         Route::get('/gastos.edit/{id}', 'edit')->name('editGasto'); 
         Route::put('/gastos.update/{id}', 'update')->name('updateGasto');  
         Route::delete('/gastos.destroy/{id}', 'destroy')->name('gasto.destroy');     
+    });
+
+    Route::controller(EstadisticasController::class)->group(function () {
+        Route::get('/reports.index', 'index')->name('ReporteIndex');
+        
     });
 
 });

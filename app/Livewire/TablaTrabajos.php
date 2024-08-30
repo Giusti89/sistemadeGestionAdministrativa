@@ -46,6 +46,7 @@ class TablaTrabajos extends Component
         ->whereMonth('created_at', $month)
         ->whereYear('created_at', $year)
         ->with('cliente')
+        ->orderBy('estado', 'asc')
         ->paginate($this->paginate);
     
         return view('livewire.tabla-trabajos', compact('trab'));

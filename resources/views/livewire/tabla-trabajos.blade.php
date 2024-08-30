@@ -30,7 +30,7 @@
                 <tr>
                     <th>Cliente</th>
                     <th>Trabajo</th>
-                    <th>Descripcion</th>
+                    <th>Descripción</th>
                     <th>Costo Produccion</th>
                     <th>Ganancia efectiva</th>
                     <th>Costo Final</th>
