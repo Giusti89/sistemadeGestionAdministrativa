@@ -33,7 +33,7 @@ class TablaDatos extends Component
 
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
-        
+
         $user = User::withCount('clientes')->find($userId);
         $clientCount = $user->clientes_count;
 
@@ -42,25 +42,36 @@ class TablaDatos extends Component
             ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
             ->count();
 
+        //trabajos
         $jobCount = Trabajo::whereHas('cliente', function ($query) use ($userId) {
             $query->where('usuario_id', $userId);
             $query->where('estado', 1);
         })->count();
 
-        $newJobCount = Trabajo::whereHas('cliente', function($query) use ($userId) {
+        $newJobCount = Trabajo::whereHas('cliente', function ($query) use ($userId) {
             $query->where('usuario_id', $userId);
             $query->where('estado', 1);
         })->whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
-            
+
+        //gastos    
         $totalGastos = Gasto::where('usuario_id', $userId)->sum('costo');
 
         $GastosMes = Gasto::where('usuario_id', $userId)
-        ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-        ->sum('costo');
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->sum('costo');
 
+        //ganancias
+        $ganancias = Trabajo::whereHas('cliente', function ($query) use ($userId) {
+            $query->where('usuario_id', $userId);
+            $query->where('estado', 1);
+        })->sum('gananciaefectivo');
+        //perdidas
 
+        $perdidas = Trabajo::whereHas('cliente', function ($query) use ($userId) {
+            $query->where('usuario_id', $userId);
+            $query->where('estado', 1);
+        })->sum('ivaefectivo');
 
-        
-        return view('livewire.tabla-datos', compact('newClientsCount', 'clientCount','jobCount','newJobCount','totalGastos','GastosMes'));
+        return view('livewire.tabla-datos', compact('newClientsCount', 'clientCount', 'jobCount', 'newJobCount', 'totalGastos', 'GastosMes', 'ganancias','perdidas'));
     }
 }

@@ -15,20 +15,22 @@
             </div>
         </div>
 
-        <div class="cuadro">
-            <p>Gasto total: <b>{{ $totalGastos }} Bs.</b> </p>
+        <div class="cuadroG">
+            <p>{{$ganancias}}</p>
+            <p>Ganancias totales</p>
         </div>
-        <div class="cuadro">
-            <p>Gasto por mes: <b>{{ $GastosMes }} Bs.</b> </p>
+        <div class="cuadroP">
+          <p>{{$perdidas+$totalGastos}}</p>
+          <p>Total Gastos</p>
         </div>
 
         <div class="lateral">
             <div class="bloque">
-                <p><b>{{ $jobCount }} </b> </p>
+                <p><b>{{ $jobCount}} </b> </p>
                 <p>Total de Trabajos </p>
             </div>
             <div class="bloque">
-                <p><b>{{ $newJobCount }} </b> </p>
+                <p><b>{{ $newJobCount}} </b> </p>
                 <p>Nuevos Trabajos</b> </p>
             </div>
         </div>
@@ -37,10 +39,12 @@
     <div class="contenedor">
         <div class="lateral">
             <div class="bloque">
-                <p>datos estadisticos 5</p>
+                <p><b>{{ $totalGastos }} Bs.</b> </p>
+                <p>Gasto total </p>
             </div>
             <div class="bloque">
-               <p>datos estadisticos 6</p>
+                <p><b>{{ $GastosMes}} Bs.</b></p>
+                <p>Gastos mensuales</p>
             </div>
         </div>
 

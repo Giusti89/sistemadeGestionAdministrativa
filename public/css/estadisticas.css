@@ -32,7 +32,6 @@ h2 {
     width: 20%;
     gap: 15px;
     height: 440px;
-   
     padding: 15px;
     justify-content: center;
     align-items: center;
@@ -58,6 +57,27 @@ h2 {
     justify-content: center;
     align-items: center;
 }
+.cuadroG {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 15px;
+    height: 400px;
+    background-color: #a0f584;
+    justify-content: center;
+    align-items: center;
+}
+.cuadroP {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 15px;
+    height: 400px;
+    background-color: #f68f7a;
+    justify-content: center;
+    align-items: center;
+}
+
 .cuadrom {
     display: flex;
     flex-direction: column;
@@ -67,4 +87,66 @@ h2 {
     background-color: #e3ddef;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .contenedor {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        padding: 15px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .lateral {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 15px;
+        height: 200px;
+        padding: 15px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bloque {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        height: 150px;
+        background-color: aliceblue;
+        justify-content: center;
+        align-items: center;
+    }
+    .bloque p{
+        font-size: 0.8rem;
+    }
+    .bloque b{
+        font-size: 1.5rem;
+    }
+
+    .cuadro {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 15px;
+        height: 200px;
+        background-color: #e3ddef;
+        justify-content: center;
+        align-items: center;
+    }
+  
+
+    .cuadrom {
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+        gap: 15px;
+        height: 400px;
+        background-color: #e3ddef;
+        justify-content: center;
+        align-items: center;
+    }
 }
