@@ -49,7 +49,7 @@
         </div>
 
         <div class="cuadro">
-            <p>datos estadisticos 7</p>
+            <p>datos estadisticos 17</p>
         </div>
         <div class="cuadrom">
            <p>datos estadisticos 8</p>
