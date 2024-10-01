@@ -21,7 +21,10 @@
                     <label for="">Contraseña</label>
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>             
-                <button> <p>Iniciar</p> </button>                             
+                <button> <p>Iniciar</p> </button> 
+                <div class="forget">
+                    <a href="{{ route('password.request') }}">Olvide la contraseña</a>
+                </div>                            
             </form>
         </section>
     

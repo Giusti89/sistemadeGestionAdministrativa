@@ -11,8 +11,13 @@ class TablaPagos extends Component
 {
     use WithPagination;
     public $user;
-    public $paginate = 5;
+    public $paginate;
     public $search;
+
+    public function mount()
+    {
+        $this->paginate = 5;
+    }
 
     public function render()
     {
@@ -33,7 +38,7 @@ class TablaPagos extends Component
             });
         }
     
-        $data = $query->paginate($this->paginate);
+        $data = $query->paginate($this->paginate > 0 ? $this->paginate :10);
     
         return view('livewire.tabla-pagos', compact('data'));
     }

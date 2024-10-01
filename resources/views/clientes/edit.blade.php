@@ -26,14 +26,14 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="number" required id="contacto" name="contacto" value="{{$clie->contacto}}" required autofocus autocomplete="contacto">
-                <label for="">Contacto</label>
+                <input type="number"  id="contacto" name="contacto" value="{{$clie->contacto}}" autocomplete="contacto">
+                <label for="">Nit</label>
                 <x-input-error :messages="$errors->get('contacto')" class="mt-2" />
             </div>
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="number"  id="nit" name="nit" value="{{$clie->nit}}"  autofocus autocomplete="nit">
+                <input type="number"  id="nit" name="nit" value="{{$clie->nit}}" autocomplete="nit">
                 <label for="">Nit</label>
                 <x-input-error :messages="$errors->get('nit')" class="mt-2" />
             </div>

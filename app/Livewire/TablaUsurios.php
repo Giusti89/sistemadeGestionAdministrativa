@@ -11,27 +11,31 @@ class TablaUsurios extends Component
 {
     use WithPagination;
     public $search;
-    public $paginate = 5;
+    public $paginate;
+
+    public function mount()
+    {
+        $this->paginate = 10;
+    }
 
     public function render()
     {
-
         $users = User::withCount('clientes')
-        ->where('name', 'like', '%' . $this->search . '%')
-        ->where('tipousuario_id', 2)
-        ->paginate($this->paginate);
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('tipousuario_id', 2)
+            ->paginate($this->paginate > 0 ? $this->paginate : 10);
 
         foreach ($users as $usuario) {
-           
-            $dif = Carbon::now()->diffInDays($usuario->final, false); 
+
+            $dif = Carbon::now()->diffInDays($usuario->final, false);
             $fechaExpiracion = Carbon::parse($usuario->final);
-                        
+
             if ($dif <= 0) {
                 $usuario->mensaje = 'Suscripción expirada el ' . $fechaExpiracion->format('d/m/Y');
             } else {
                 $usuario->mensaje = 'Expira en ' . $dif . ' días (el ' . $fechaExpiracion->format('d/m/Y') . ')';
             }
         }
-        return view('livewire.tabla-usurios',compact('users'));
+        return view('livewire.tabla-usurios', compact('users'));
     }
 }

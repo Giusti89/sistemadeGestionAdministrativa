@@ -12,7 +12,7 @@
         </div>
         <div>
             <label for="paginate">Mostrar numero de registros</label>
-            <input type="number" wire:model.live="paginate">
+            <input type="number" wire:model.live="paginate" min="1">
         </div>
 
         @if ($diferenciaDias <= 5)

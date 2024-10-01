@@ -5,7 +5,7 @@
 
             @csrf
             @method('PUT')
-            <h1>Nuevo Trabajo</h1>
+            <h1>Editar los datos del trabajo</h1>
            
 
             <div class="inputbox">
@@ -43,6 +43,14 @@
                     autocomplete="manobra">
                 <label for="">Mano de obra</label>
                 <x-input-error :messages="$errors->get('manobra')" class="mt-2" />
+            </div>
+
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input type="number"  id="iva" name="iva" value="{{$trab->iva}}"  autofocus
+                    autocomplete="iva">
+                <label for="">Iva</label>
+                <x-input-error :messages="$errors->get('iva')" class="mt-2" />
             </div>
 
             <button>

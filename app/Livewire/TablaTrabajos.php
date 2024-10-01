@@ -27,6 +27,16 @@ class TablaTrabajos extends Component
     {
         $this->resetPage();
     }
+    
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPaginate()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
@@ -34,21 +44,21 @@ class TablaTrabajos extends Component
         $monthYear = explode('-', $this->searchMonth);
         $month = $monthYear[1] ?? Carbon::now()->month;
         $year = $monthYear[0] ?? Carbon::now()->year;
-    
+
         $trab = Trabajo::whereIn('cliente_id', function ($query) use ($user) {
             $query->select('id')
                 ->from('clientes')
                 ->where('usuario_id', $user->id);
         })
-        ->whereHas('cliente', function ($query)  {
-            $query->where('nombre', 'like', '%' . $this->search . '%');
-        })
-        ->whereMonth('created_at', $month)
-        ->whereYear('created_at', $year)
-        ->with('cliente')
-        ->orderBy('estado', 'asc')
-        ->paginate($this->paginate);
-    
+            ->whereHas('cliente', function ($query) {
+                $query->where('nombre', 'like', '%' . $this->search . '%');
+            })
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->with('cliente')
+            ->orderBy('estado', 'asc')
+            ->paginate($this->paginate > 0 ? $this->paginate : 10);
+
         return view('livewire.tabla-trabajos', compact('trab'));
     }
 }

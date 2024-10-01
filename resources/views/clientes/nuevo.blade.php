@@ -4,7 +4,7 @@
             @csrf
             <h1>Nuevo Cliente</h1>
 
-            <input type="hidden" name="usuario_id" value="{{ Auth::id() }}">
+           
             
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
@@ -23,7 +23,7 @@
 
             <div class="inputbox">
                 <ion-icon name="mail-outline"></ion-icon>
-                <input type="number" required id="contacto" name="contacto" :value="old('contacto')" required autofocus autocomplete="contacto">
+                <input type="number" required id="contacto" name="contacto" :value="old('contacto')" required autofocus autocomplete="contacto" maxlength="12">
                 <label for="">Celular</label>
                 <x-input-error :messages="$errors->get('contacto')" class="mt-2" />
             </div>
@@ -40,11 +40,8 @@
                 <input type="number"  id="nit" name="nit" :value="old('nit')" autofocus
                     autocomplete="nit">
                 <label for="">Nit</label>
-                <x-input-error :messages="$errors->get('iva')" class="mt-2" />
-            </div>
-
-           
-            
+                <x-input-error :messages="$errors->get('nit')" class="mt-2" />
+            </div>       
     
             <button> <p>Registrar</p> </button>
 

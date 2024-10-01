@@ -13,7 +13,7 @@
         
         <div>
             <label for="filtro">Filtrar por mes: </label>
-            <input type="month" wire:model="searchMonth">
+            <input type="month" min="2018-03" wire:model="searchMonth">
         </div>
 
         <div>
