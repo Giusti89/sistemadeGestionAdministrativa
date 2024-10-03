@@ -18,9 +18,9 @@
                     </p>
 
                 </div> --}}
-                {{-- <div class="logo">
-                    <img src="../img/logoayacucho.jpg">
-                </div> --}}
+                <div class="logo">
+                    <img src="{{ public_path('img/boton.png') }}" alt="Logo">
+                </div>
             </div>
             <div class="cuerpo">
                 <h1>Cotización</h1>

@@ -1,5 +1,4 @@
 <div>
-
     <link rel="stylesheet" href="../css/cotizacion.css">
     <section>
         <div>

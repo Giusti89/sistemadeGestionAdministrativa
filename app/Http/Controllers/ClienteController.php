@@ -22,7 +22,7 @@ class ClienteController extends Controller
             return response()->view('errors.500', [], 500);
         }
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -43,8 +43,8 @@ class ClienteController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'apellido' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'contacto' => 'required|numeric|max_digits:12|min:1',  
-            'nit' => 'nullable|numeric|min_digits:1|max_digits:15',  
+            'contacto' => 'required|numeric|max_digits:12|min:1',
+            'nit' => 'nullable|numeric|min_digits:1|max_digits:15',
             'email' => 'required|email|max:255',
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
@@ -64,7 +64,7 @@ class ClienteController extends Controller
 
             'nit.numeric' => 'El NIT debe ser numérico.',
             'nit.max_digits' => 'El NIT no debe exceder los 12 dígitos.',
-            'nit.min_digits' => 'El NIT debe ser un número positivo.', 
+            'nit.min_digits' => 'El NIT debe ser un número positivo.',
 
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
@@ -83,7 +83,7 @@ class ClienteController extends Controller
             $cliente->save();
 
             return redirect()->route('clientIndex')->with('msj', 'cambio');
-        } catch (\Throwable $th) {  
+        } catch (\Throwable $th) {
             return redirect()->route('clientIndex')->with('msj', 'fallo');
         }
     }
@@ -119,8 +119,8 @@ class ClienteController extends Controller
         $request->validate([
             'nombre' => 'string|max:255|regex:/^[a-zA-Z\s]+$/',
             'apellido' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'contacto' => 'numeric|max_digits:12|min:1',  
-            'nit' => 'nullable|numeric|min_digits:1|max_digits:15',  
+            'contacto' => 'numeric|max_digits:12|min:1',
+            'nit' => 'nullable|numeric|min_digits:1|max_digits:15',
             'email' => 'email|max:255',
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
@@ -140,7 +140,7 @@ class ClienteController extends Controller
 
             'nit.numeric' => 'El NIT debe ser numérico.',
             'nit.max_digits' => 'El NIT no debe exceder los 12 dígitos.',
-            'nit.min_digits' => 'El NIT debe ser un número positivo.', 
+            'nit.min_digits' => 'El NIT debe ser un número positivo.',
 
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',

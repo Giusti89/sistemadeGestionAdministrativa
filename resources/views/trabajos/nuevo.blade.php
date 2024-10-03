@@ -7,7 +7,7 @@
 
                 <div class="mt-4">
                     <x-input-label for="Cliente" :value="__('Cliente ')" style="color: white;font-size:1.5rem" />
-                    <select id="cliente" name="cliente" class="selector" required autofocus autocomplete="cliente">
+                    <select id="cliente" name="cliente" class="selector" required  autocomplete="cliente">
                         <option value=""></option>
                         @foreach ($cliente as $nombre => $id)
                             <option value="{{ $id }}">{{ $nombre }}</option>
