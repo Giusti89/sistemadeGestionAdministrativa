@@ -19,7 +19,7 @@
 
                 </div> --}}
                 <div class="logo">
-                    <img src="{{ public_path('img/boton.png') }}" alt="Logo">
+                    <img src="{{ public_path('storage/' . $user->logo) }}" alt="Logo">
                 </div>
             </div>
             <div class="cuerpo">

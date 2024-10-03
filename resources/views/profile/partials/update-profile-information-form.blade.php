@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -45,6 +45,12 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <img src="/storage/{{ $user->logo }}" alt="logo" width="100">
+            <x-input-label for="logo" :value="__('Logo')" />
+            <input id="logo" type="file" name="logo" accept="image/jpeg, image/png, image/webp, image/svg">
         </div>
 
         <div class="flex items-center gap-4">

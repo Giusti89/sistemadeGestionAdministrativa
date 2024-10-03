@@ -20,6 +20,7 @@ class User extends Authenticatable
         'password',
         'tipousuario_id',
         'inicio',
+        'logo',
         'final',
         'suscripcion'
     ];

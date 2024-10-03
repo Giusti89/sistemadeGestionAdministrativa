@@ -42,8 +42,10 @@ class TrabajoController extends Controller
     {
         $trabajo = Trabajo::findOrFail($id);
         $items = Insumo::where('trabajo_id', $trabajo->id)->get();
+        $user = Auth::user();
         $total = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');
-        $pdf = Pdf::loadView('trabajos.reporte', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total]);
+
+        $pdf = Pdf::loadView('trabajos.reporte', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total,'user' => $user,]);
 
         return $pdf->stream();
     }

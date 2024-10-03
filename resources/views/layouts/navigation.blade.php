@@ -6,8 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('clientIndex') }}">
-                        <img src="./img/backgrounds/blue-calculator.webp" alt="" style="width: 50px">
-                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
+                        <img src="/storage/{{ Auth::user()->logo }}" alt="logo" style="width: 50px">
                     </a>
                 </div>
 
