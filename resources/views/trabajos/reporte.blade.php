@@ -24,13 +24,12 @@
             </div>
             <div class="cuerpo">
                 <h1>Cotización</h1>
-                <p>descripcion del trabajo a realizar
-                </p>
+                <p>{{$trabajo->trabajo}}</p>
                 <table>
                     <thead>
                         <tr>
                             <th>Cantidad</th>
-                            <th>Nombre</th>
+                        
                             <th>Detalle</th>
                             <th>Total</th>
 
@@ -38,28 +37,26 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($items as $item)
+                        
                             <tr>
                                 <td class="filas-tabla">
-                                    {{ $item->cantidad }}
+                                    {{ $trabajo->cantidad }}
                                 </td>
+                                
                                 <td class="filas-tabla">
-                                    {{ $item->nombre }}
-                                </td>
-                                <td class="filas-tabla">
-                                    {{ $item->detalle }}
+                                    {{ $trabajo->descripcion }}
                                 </td>
                                 <td class="filas-tabla">
 
                                 </td>
                             </tr>
-                        @endforeach
+                        
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>Costo</th>
                             <td class="filas-tabla" colspan="1"></td>
-                            <td class="filas-tabla" colspan="1"></td>
+                           
                             <td class="filas-tabla" colspan="1"> {{ $total }} Bs.</td>
                            
                         </tr>

@@ -8,6 +8,7 @@ use App\Models\Trabajo;
 use Illuminate\Http\Request;
 use Exception;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class InsumoController extends Controller
@@ -84,6 +85,8 @@ class InsumoController extends Controller
         $items = Insumo::where('trabajo_id', $trabajo->id)->get();
         $total = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');
         $total = $total + $trabajo->manobra;
+        $user = Auth::user();
+
         $ganancia = $total * $trabajo->ganancia / 100;
         if ($trabajo->iva > 0) {
             $iva = $total * $trabajo->iva / 100;
@@ -91,7 +94,7 @@ class InsumoController extends Controller
         } else {
             $total = $total + $ganancia;
         }
-        $pdf = Pdf::loadView('insumos.pdfcoti', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total]);
+        $pdf = Pdf::loadView('insumos.pdfcoti', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total,'user' => $user,]);
 
         return $pdf->stream();
     }
