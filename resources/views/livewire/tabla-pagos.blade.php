@@ -23,6 +23,7 @@
                     <th>Descripción</th>
                     <th>Total</th>
                     <th>Saldo</th>
+                    <th>Fecha de emisión</th>
                     <th>Pagos</th>
                 </tr>
             </thead>
@@ -47,6 +48,10 @@
                         <td class="filas-tabla">
                             {{ $ordenpago->saldo }}
                         </td>
+                        <td class="filas-tabla">
+                            {{ \Carbon\Carbon::parse($ordenpago->created_at)->format('d/m/Y') }}
+                        </td>
+
                         <td>
                             @php
                                 $encryptedId = Crypt::encrypt($ordenpago->id);
@@ -55,13 +60,13 @@
                             @if ($ordenpago->saldo == 0)
                                 <div>
 
-                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $encryptedId}}"
+                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $encryptedId }}"
                                         idtrab="{{ $ordenpago->trabajo->id }}" nombre="Pagos realizados">
                                     </x-layouts.btnenviodat>
                                 </div>
                             @else
                                 <div>
-                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $encryptedId}}"
+                                    <x-layouts.btnenviodat rutaEnvio="pagoCreate" dato="{{ $encryptedId }}"
                                         idtrab="{{ $ordenpago->trabajo->id }}" nombre="Realizar pago">
                                     </x-layouts.btnenviodat>
                                 </div>

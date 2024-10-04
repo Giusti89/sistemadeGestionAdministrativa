@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Gasto;
+use App\Models\ordenpago;
 use App\Models\Trabajo;
 use App\Models\User;
 use Carbon\Carbon;
@@ -72,6 +73,14 @@ class TablaDatos extends Component
             $query->where('estado', 1);
         })->sum('ivaefectivo');
 
-        return view('livewire.tabla-datos', compact('newClientsCount', 'clientCount', 'jobCount', 'newJobCount', 'totalGastos', 'GastosMes', 'ganancias','perdidas'));
+        $porpagar = OrdenPago::whereHas('trabajo.cliente', function ($query) use ($userId) {
+            $query->where('usuario_id', $userId);
+        })->where('estadopago_id', 2)->count();
+
+        $pagados = OrdenPago::whereHas('trabajo.cliente', function ($query) use ($userId) {
+            $query->where('usuario_id', $userId);
+        })->where('estadopago_id', 1)->count();
+
+        return view('livewire.tabla-datos', compact('newClientsCount', 'clientCount', 'jobCount', 'newJobCount', 'totalGastos', 'GastosMes', 'ganancias','perdidas','porpagar','pagados'));
     }
 }

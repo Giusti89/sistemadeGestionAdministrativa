@@ -49,10 +49,13 @@
         </div>
 
         <div class="cuadro">
-            <p>datos estadisticos 17</p>
+            <p>{{$porpagar}}</p>
+            <p>Cuentas por cobrar</p>            
+            <a href="{{ route('pagoIndex') }}">Ir a la  pagina</a>
         </div>
         <div class="cuadrom">
-           <p>datos estadisticos 8</p>
+            <p>{{$pagados}}</p>
+            <p>Cuentas pagadas</p>
         </div>
         <div class="cuadro">
             <p>datos estadisticos 9</p>
