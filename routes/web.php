@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CuentaController;
 use App\Http\Controllers\EstadisticasController;
 use App\Http\Controllers\GastoController;
 use App\Http\Controllers\InsumoController;
@@ -88,6 +89,12 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
     Route::controller(EstadisticasController::class)->group(function () {
         Route::get('/reports.index', 'index')->name('ReporteIndex');
         
+    });
+
+    Route::controller(CuentaController::class)->group(function () {
+        Route::get('cuentas.index', 'index')->name('cuentaIndex');
+        
+       
     });
 
 });

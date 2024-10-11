@@ -18,6 +18,12 @@
                         </x-nav-link>
                     </div>
                 @endif
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('cuentaIndex')" :active="request()->routeIs('cuentaIndex')">
+                        {{ __('Cuentas') }}
+                    </x-nav-link>
+                </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('clientIndex')" :active="request()->routeIs('clientIndex')">
@@ -32,18 +38,6 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('pagoIndex')" :active="request()->routeIs('pagoIndex')">
-                        {{ __('Cuentas por Cobrar') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('pagoPagados')" :active="request()->routeIs('pagoPagados')">
-                        {{ __('Cuentas Pagadas') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('gastoIndex')" :active="request()->routeIs('gastoIndex')">
                         {{ __('Gastos') }}
                     </x-nav-link>
@@ -54,6 +48,8 @@
                         {{ __('Estadisticas') }}
                     </x-nav-link>
                 </div>
+
+                
 
             </div>
 
