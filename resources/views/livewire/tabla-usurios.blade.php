@@ -28,6 +28,7 @@
                                     <th>Apellidos</th>
                                     <th>Numero de clientes</th>
                                     <th>Celular</th>
+                                    <th>Verificacion email</th>
                                     <th>Email</th>
                                     <th>Inicio Suscripción</th>
                                     <th>Final de la suscripcion</th>
@@ -52,6 +53,13 @@
                                         </td>
                                         <td class="filas-tabla">
                                             {{ $usuario->telefono }}
+                                        </td>
+                                        <td class="filas-tabla">
+                                            @if ( $usuario->email_verified_at )
+                                                Verificado
+                                                @else
+                                                NO verificado
+                                            @endif
                                         </td>
                                         <td class="filas-tabla">
                                             {{ $usuario->email }}

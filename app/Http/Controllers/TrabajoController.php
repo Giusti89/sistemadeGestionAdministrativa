@@ -56,18 +56,18 @@ class TrabajoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'trabajo' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'trabajo' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'cliente' => 'required|exists:clientes,id',
             'cantidades' => 'required|numeric|max_digits:10|min:1',
-            'ganancia' => 'required|numeric|max_digits:10|min:1',
+            'ganancia' => 'required|numeric|max_digits:10|min:0',
             'manobra' => 'required|numeric|max_digits:10|min:1',
             'iva' => 'numeric|nullable|max_digits:3|min:0',
         ], [
             'trabajo.required' => 'El nombre del trabajo es obligatorio.',
             'trabajo.string' => 'El nombre del trabajo debe ser una cadena de texto.',
             'trabajo.max' => 'El nombre del trabajo no debe exceder los 255 caracteres.',
-            'trabajo.regex' => 'El trabajo solo puede contener letras y espacios.',
+            
 
             'descripcion.required' => 'La descripción es obligatoria.',
             'descripcion.string' => 'La descripción debe ser una cadena de texto.',
