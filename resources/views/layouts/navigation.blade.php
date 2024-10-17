@@ -18,16 +18,16 @@
                         </x-nav-link>
                     </div>
                 @endif
-                
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('cuentaIndex')" :active="request()->routeIs('cuentaIndex')">
-                        {{ __('Cuentas') }}
-                    </x-nav-link>
-                </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('clientIndex')" :active="request()->routeIs('clientIndex')">
                         {{ __('Clientes') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('cuentaIndex')" :active="request()->routeIs('cuentaIndex')">
+                        {{ __('Cuentas') }}
                     </x-nav-link>
                 </div>
 
@@ -42,14 +42,12 @@
                         {{ __('Gastos') }}
                     </x-nav-link>
                 </div>
-                
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('ReporteIndex')" :active="request()->routeIs('ReporteIndex')">
                         {{ __('Estadisticas') }}
                     </x-nav-link>
                 </div>
-
-                
 
             </div>
 

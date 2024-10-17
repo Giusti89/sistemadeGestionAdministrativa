@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 
 
-Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function () {
+Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group(function () {
     Route::controller(ClienteController::class)->group(function () {
         Route::get('clientes.index', 'index')->name('clientIndex');
         Route::get('/clientes.nuevo', 'create')->name('nuevoCliente');
@@ -78,7 +78,7 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
     });
 
     Route::controller(GastoController::class)->group(function () {
-        Route::get('/gastos.index', 'index')->name('gastoIndex');
+        Route::get('.gastos', 'index')->name('gastoIndex');
         Route::get('/gastos.nuevo', 'create')->name('nuevoGasto'); 
         Route::post('/gastos.store', 'store')->name('storeGasto');
         Route::get('/gastos.edit/{id}', 'edit')->name('editGasto'); 
@@ -87,12 +87,12 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription'])->group(function (
     });
 
     Route::controller(EstadisticasController::class)->group(function () {
-        Route::get('/reports.index', 'index')->name('ReporteIndex');
+        Route::get('.reports', 'index')->name('ReporteIndex');
         
     });
 
     Route::controller(CuentaController::class)->group(function () {
-        Route::get('cuentas.index', 'index')->name('cuentaIndex');
+        Route::get('.cuentas', 'index')->name('cuentaIndex');
         
        
     });

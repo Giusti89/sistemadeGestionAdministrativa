@@ -5,15 +5,15 @@
             <div class="flex">               
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex" >
                     <x-nav-link :href="route('pagoIndex')" :active="request()->routeIs('pagoIndex')">
-                        {{ __('Cuentas por Cobrar') }}
+                       <h2 style="color: red"> Cuentas por cobrar</h2>
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('pagoPagados')" :active="request()->routeIs('pagoPagados')">
-                        {{ __('Cuentas Pagadas') }}
+                        <h2 style="color: red"> Cuentas Pagadas</h2>
                     </x-nav-link>
                 </div>           
             </div>
@@ -37,8 +37,12 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">    
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('ReporteIndex')" :active="request()->routeIs('ReporteIndex')">
-                {{ __('Estadisticas') }}
+            <x-responsive-nav-link :href="route('pagoIndex')" :active="request()->routeIs('pagoIndex')">
+                {{ __('Cuentas por Cobrar') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('pagoPagados')" :active="request()->routeIs('pagoPagados')">
+                {{ __('Cuentas Pagadas') }}
             </x-responsive-nav-link>
         </div>
     </div>
