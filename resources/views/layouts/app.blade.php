@@ -37,4 +37,7 @@
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     </body>
+    <footer>
+        <p>Copyright © 2024 Glifoo. Todos los derechos reservados.</p>
+    </footer>
 </html>

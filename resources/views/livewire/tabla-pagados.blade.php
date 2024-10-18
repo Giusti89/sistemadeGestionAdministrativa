@@ -24,6 +24,7 @@
                         <th>Descripción</th>
                         <th>Total</th>
                         <th>Pagos</th>
+                        <th>PDF</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,11 @@
                                         Ver pagos realizados
                                     </button>
                                 </a>
+                            </td>
+                            <td class="filas-tabla">
+                                <x-layouts.btnenviodat rutaEnvio="pagosPdf" dato="{{ $encryptedId }}"
+                                    nombre="Pdf" estado="_blank">
+                                </x-layouts.btnenviodat>                               
                             </td>
                         </tr>
                     @endforeach

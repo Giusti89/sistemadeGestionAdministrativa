@@ -74,7 +74,9 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group
 
     Route::controller(PagoController::class)->group(function () {
         Route::get('ordenpago.pagados', 'index')->name('pagoPagados');
-        Route::post('/ordenpago.pago', 'store')->name('pagoStore');              
+        Route::post('/ordenpago.pago', 'store')->name('pagoStore');
+        Route::get('/ordenpago.totalpdf/{id}', 'pdf')->name('pagosPdf');
+        Route::get('/ordenpago.sueltopdf/{id}', 'pdfsuelto')->name('sueltoPdf');
     });
 
     Route::controller(GastoController::class)->group(function () {

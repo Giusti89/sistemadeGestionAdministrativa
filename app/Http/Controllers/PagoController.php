@@ -7,6 +7,8 @@ use App\Models\pago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class PagoController extends Controller
 {
@@ -67,6 +69,34 @@ class PagoController extends Controller
         });
 
         return redirect()->route('pagoCreate', Crypt::encrypt($request->trabajo_id))->with('msj', 'ok');
+    }
+
+    public function pdf($encryptedId)
+    {
+        $id = Crypt::decrypt($encryptedId);
+        $ordenpago = Ordenpago::findOrFail($id);
+        $pagos = Pago::where('ordenpago_id', $ordenpago->id)->get();
+        $total = pago::where('ordenpago_id',  $ordenpago->id)->sum('pago');
+
+        $user = Auth::user();
+
+
+        $pdf = Pdf::loadView('ordenpago.totalpdf', ['user' => $user, 'pagos' => $pagos,'total'=>$total]);
+
+        return $pdf->stream();
+    }
+
+    public function pdfsuelto($encryptedId)
+    {
+        $id = Crypt::decrypt($encryptedId);
+
+        $pago = pago::findOrFail($id);
+        
+        $user = Auth::user();
+
+        $pdf = Pdf::loadView('ordenpago.sueltopdf', ['user' => $user,'pago'=>$pago ]);
+
+        return $pdf->stream();
     }
 
     /**

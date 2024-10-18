@@ -9,20 +9,30 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Fecha de pago</th>                       
+                        <th>Fecha de pago</th>
                         <th>Pago</th>
+                        <th>PDF</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($pago as $item)
-                        <tr>                            
+                        <tr>
                             <td class="filas-tabla">
                                 {{ $item->pago }}
-                            </td>   
-                            <td class="filas-tabla">                                
+                            </td>
+                            <td class="filas-tabla">
                                 {{ \Carbon\Carbon::parse($item->fecha)->format('d/m/Y') }}
-                            </td>                         
+                            </td>
+                            <td class="filas-tabla">
+                                @php
+                                    $encryptedId = Crypt::encrypt($item->id);
+                                @endphp
+                            
+                                <x-layouts.btnenviodat rutaEnvio="sueltoPdf" dato="{{ $encryptedId }}" nombre="Pdf"
+                                    estado="_blank">
+                                </x-layouts.btnenviodat>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
