@@ -24,6 +24,7 @@
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Logo</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
                                     <th>Numero de clientes</th>
@@ -40,6 +41,9 @@
                             <tbody>
                                 @foreach ($users as $usuario)
                                     <tr>
+                                        <td class="filas-tabla">
+                                            <img src="/storage/{{ $usuario->logo }}" alt="logo" style="width: 50px">                                            
+                                        </td>
 
                                         <td class="filas-tabla">
                                             {{ $usuario->name }}
