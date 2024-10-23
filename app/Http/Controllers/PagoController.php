@@ -97,6 +97,7 @@ class PagoController extends Controller
         $pdf = Pdf::loadView('ordenpago.sueltopdf', ['user' => $user,'pago'=>$pago ]);
 
         return $pdf->stream();
+        
     }
 
     /**

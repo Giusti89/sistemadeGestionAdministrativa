@@ -3,7 +3,7 @@
 }
 
 .contenedor {
-    display: flex;
+    display: gr;
     flex-direction: column;
     width: 100%;
     justify-content: center;
@@ -93,4 +93,7 @@ table tr:hover {
     overflow: auto;
     overflow-y: auto;
     width: 100%;
+}
+.firma{
+    margin-top: 200px;
 }
