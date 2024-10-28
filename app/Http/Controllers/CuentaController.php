@@ -56,7 +56,7 @@ class CuentaController extends Controller
 
 
 
-            return view('cuentas.prueba', compact('clientCount', 'newClientsCount', 'porpagar', 'pagados', 'ordenesPorMes'));
+            return view('cuentas.estadistica', compact('clientCount', 'newClientsCount', 'porpagar', 'pagados', 'ordenesPorMes'));
         } catch (\Exception $e) {
             // Captura y muestra el error
             return view('errors.500', compact('errorMessage'));

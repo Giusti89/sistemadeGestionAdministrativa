@@ -78,7 +78,7 @@
         </div>
     </section>
     <div>
-        <h1>chart</h1>
+        <h1>Trabajos cobrados.</h1>
         <canvas id="myChart"></canvas>
     </div>
 
