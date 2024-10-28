@@ -43,9 +43,11 @@
                     </x-nav-link>
                 </div>
 
+               
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('ReporteIndex')" :active="request()->routeIs('ReporteIndex')">
-                        {{ __('Estadisticas') }}
+                    <x-nav-link :href="route('cuentaPrueba')" :active="request()->routeIs('cuentaPrueba')">
+                        {{ __('Estadísticas') }}
                     </x-nav-link>
                 </div>
 

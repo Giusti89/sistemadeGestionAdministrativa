@@ -87,7 +87,7 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group
         Route::put('/gastos.update/{id}', 'update')->name('updateGasto');  
         Route::delete('/gastos.destroy/{id}', 'destroy')->name('gasto.destroy');     
     });
-
+    
     Route::controller(EstadisticasController::class)->group(function () {
         Route::get('.reports', 'index')->name('ReporteIndex');
         
@@ -95,6 +95,7 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group
 
     Route::controller(CuentaController::class)->group(function () {
         Route::get('.cuentas', 'index')->name('cuentaIndex');
+        Route::get('.cuentas.prueba', 'prueba')->name('cuentaPrueba');
         
        
     });
