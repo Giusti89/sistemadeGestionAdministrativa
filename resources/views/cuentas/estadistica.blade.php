@@ -30,7 +30,7 @@
                         <div class="inner">
                             <h3>{{ $newClientsCount }}</h3>
 
-                            <p>Clientes nuevos en el mes</p>
+                            <p>Clientes nuevos</p>
                         </div>
                         <div class="icon">
                             <i class="bi bi-person-circle" style="font-size: 3.0rem; color: black;"></i>
@@ -89,18 +89,28 @@
         document.addEventListener('DOMContentLoaded', function () {
             const ctx = document.getElementById('myChart').getContext('2d');
             const ordenesPorMes = @json(array_values($ordenesPorMes));
+            const trabajosPorMes = @json(array_values($trabajosPorMes));
             const myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                     datasets: [{
-                        label: 'Órdenes de Pago',
+                        label: 'Trabajos cobrados',
                         data: ordenesPorMes,
                         borderWidth: 1,
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
-                    }]
+                    },
+                    {
+                        label: 'Trabajos por mes',
+                        data: trabajosPorMes,
+                        borderWidth: 1,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                    }]                   
                 },
+              
+                
                 options: {
                     scales: {
                         y: {

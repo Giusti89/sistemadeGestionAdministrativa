@@ -153,7 +153,7 @@
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('ReporteIndex')" :active="request()->routeIs('ReporteIndex')">
+            <x-responsive-nav-link :href="route('cuentaPrueba')" :active="request()->routeIs('cuentaPrueba')">
                 {{ __('Estadisticas') }}
             </x-responsive-nav-link>
         </div>
