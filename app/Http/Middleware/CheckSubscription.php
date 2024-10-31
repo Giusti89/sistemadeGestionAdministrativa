@@ -37,7 +37,9 @@ class CheckSubscription
     
             $request->session()->regenerateToken();
     
-            return redirect('/');
+            return redirect('/')->withErrors([
+                'subscription' => 'Tu suscripción ha vencido. Por favor, comunicate con el administrador del servicio.',
+            ]);
         }
             
     }

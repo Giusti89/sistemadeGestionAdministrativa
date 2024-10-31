@@ -68,7 +68,7 @@
                         <div class="icon">
                             <i class="bi bi-coin" style="font-size: 3.0rem; color: black;"></i>
                         </div>
-                        <a href="{{ route('pagoPagados') }}" class="small-box-footer">More info <i
+                        <a href="{{ route('pagoPagados') }}" class="small-box-footer">Mas información <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
