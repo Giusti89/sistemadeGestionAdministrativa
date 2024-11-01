@@ -51,6 +51,7 @@
             <img src="/storage/{{ $user->logo }}" alt="logo" width="100">
             <x-input-label for="logo" :value="__('Logo')" />
             <input id="logo" type="file" name="logo" accept="image/jpeg, image/png, image/webp, image/svg">
+            <x-input-error class="mt-2" :messages="$errors->get('logo')" />
         </div>
 
         <div class="flex items-center gap-4">
