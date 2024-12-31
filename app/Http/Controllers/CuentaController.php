@@ -69,8 +69,6 @@ class CuentaController extends Controller
 
             return view('cuentas.estadistica', compact('clientCount', 'newClientsCount', 'porpagar', 'pagados', 'ordenesPorMes', 'trabajosPorMes'));
 
-
-            return view('cuentas.estadistica', compact('clientCount', 'newClientsCount', 'porpagar', 'pagados', 'ordenesPorMes', 'trabajosPorMes'));
         } catch (\Exception $e) {
             // Captura y muestra el error
 
@@ -82,10 +80,7 @@ class CuentaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.

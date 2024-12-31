@@ -95,9 +95,7 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group
 
     Route::controller(CuentaController::class)->group(function () {
         Route::get('.cuentas', 'index')->name('cuentaIndex');
-        Route::get('.cuentas.estadistica', 'prueba')->name('cuentaPrueba');
-        
-       
+        Route::get('.cuentas.estadistica', 'prueba')->name('cuentaPrueba');  
     });
 
 });

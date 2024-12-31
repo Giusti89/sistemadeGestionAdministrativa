@@ -23,17 +23,17 @@
                     <x-nav-link :href="route('clientIndex')" :active="request()->routeIs('clientIndex')">
                         {{ __('Clientes') }}
                     </x-nav-link>
+                </div>               
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('trabIndex')" :active="request()->routeIs('trabIndex')">
+                        {{ __('Trabajos') }}
+                    </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('cuentaIndex')" :active="request()->routeIs('cuentaIndex')">
                         {{ __('Cuentas') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('trabIndex')" :active="request()->routeIs('trabIndex')">
-                        {{ __('Trabajos') }}
                     </x-nav-link>
                 </div>
 
@@ -50,6 +50,9 @@
                         {{ __('Estadísticas') }}
                     </x-nav-link>
                 </div>
+
+                
+                
 
             </div>
 

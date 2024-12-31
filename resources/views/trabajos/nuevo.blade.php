@@ -41,7 +41,7 @@
                     <ion-icon name="mail-outline"></ion-icon>
                     <input type="decimal" required id="ganancia" name="ganancia" :value="old('ganancia')" autofocus
                         autocomplete="ganancia">
-                    <label for="">Ganancia del trabajo (solo numeral)</label>
+                    <label for="">Ganancia sobre el costo de producción (0-100)</label>
                     <x-input-error :messages="$errors->get('ganancia')" class="mt-2" />
                 </div>
 

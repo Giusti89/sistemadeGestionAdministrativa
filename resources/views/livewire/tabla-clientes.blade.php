@@ -32,7 +32,7 @@
                     <th>Apellidos</th>
                     <th>Contacto</th>
                     <th>Nit</th>
-                    <th>Email</th>
+                    <th>Fercha de registro</th>
                     <th>Modificación</th>
                     <th>Eliminar</th>
                 </tr>
@@ -53,7 +53,7 @@
                             {{ $cli->nit }}
                         </td>
                         <td class="filas-tabla">
-                            {{ $cli->email }}
+                            {{ \Carbon\Carbon::parse($cli->created_at)->format('d/m/Y') }}
                         </td>
                         <td class="filas-tabla">
                             @php
