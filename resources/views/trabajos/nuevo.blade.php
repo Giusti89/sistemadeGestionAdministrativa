@@ -1,27 +1,90 @@
-<x-layouts.nuevos titulo="Nuevos Clientes" css="./css/nuevoTrabajo.css">
+<x-layouts.nuevos titulo="Nuevo Trabajo" css="./css/nuevoTrabajo.css">
+    <h1 class="titulo">Nuevo Trabajo</h1>
     <div class="contenedor">
-        <section>
-            <form method="POST" action="{{ route('crearTrab') }}">
-                @csrf
-                <h1>Nuevo Trabajo</h1>
+
+        <form method="POST" action="{{ route('crearTrab') }}">
+            @csrf
+            <div class="formulario">
 
                 <div class="mt-4">
-                    <x-input-label for="Cliente" :value="__('Cliente ')" style="color: white;font-size:1.5rem" />
-                    <select id="cliente" name="cliente" class="selector" required  autocomplete="cliente">
-                        <option value=""></option>
-                        @foreach ($cliente as $nombre => $id)
-                            <option value="{{ $id }}">{{ $nombre }}</option>
-                        @endforeach
-                    </select>
-                    <x-input-error :messages="$errors->get('cliente')" class="mt-2" />
+                    <div class="contenido">
+                        <x-input-label for="Cliente" :value="__('Cliente: ')" style="color: white;font-size:1.5rem" />
+                        <select id="cliente" name="cliente" class="selector" required autocomplete="cliente">
+                            <option value=""></option>
+                            @foreach ($cliente as $nombre => $id)
+                                <option value="{{ $id }}" style="font-size: 1.7rem">{{ $nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="tooltip">?
+                            <span class="tooltiptext">Seleccione un cliente de la lista</span>
+                        </div>
+                        <x-input-error :messages="$errors->get('cliente')" class="mt-2" />
+                    </div>
                 </div>
 
-                <div class="inputbox">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <input type="text" required id="trabajo" name="trabajo" :value="old('trabajo')" autofocus
-                        autocomplete="trabajo">
-                    <label for="">Trabajo/Servicio</label>
-                    <x-input-error :messages="$errors->get('trabajo')" class="mt-2" />
+                <div class="mt-4">
+                    <div class="contenido">
+                        <x-input-label for="Cliente" :value="__('Trabajo/Servicio: ')" style="color: white;font-size:1.3rem" />
+                        <x-input-error :messages="$errors->get('trabajo')" class="mt-2" />
+                        <input class="datos" type="text" required id="trabajo" name="trabajo"
+                            :value="old('trabajo')" autofocus autocomplete="trabajo" />
+                        <div class="tooltip">?
+                            <span class="tooltiptext">Nombre del trabajo o servicio que se va realizar</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cortos">
+                    <div class="mt-4">
+                        <div class="contenido">
+                            <x-input-label for="manobra" :value="__('Mano de obra: ')" style="color: white;font-size:1.3rem" />
+                            <x-input-error :messages="$errors->get('manobra')" class="mt-2" />
+                            <input class="datos" type="decimal" required id="manobra" name="manobra"
+                                :value="old('manobra')" autofocus autocomplete="manobra">
+                            <div class="tooltip">?
+                                <span class="tooltiptext">Ingresar el costo de su mano de obra</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="contenido">
+                            <x-input-label for="ganancia" :value="__('Costo producción: ')" style="color: white;font-size:1.3rem" />
+                            <x-input-error :messages="$errors->get('ganancia')" class="mt-2" />
+                            <input class="datos" type="decimal" required id="ganancia" name="ganancia"
+                                :value="old('ganancia')" autofocus autocomplete="ganancia">
+                            <div class="tooltip">?
+                                <span class="tooltiptext">Ingresar el porcentaje de ganancia a ganar sobre los insumos a ser empleados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+                <div class="cortos">
+                    <div class="mt-4">
+                        <div class="contenido">
+                            <x-input-label for="cantidades" :value="__('Cantidad: ')" style="color: white;font-size:1.3rem;" />
+                            <x-input-error :messages="$errors->get('cantidades')" class="mt-2" />
+                            <input class="datos" type="number"  id="cantidades" name="cantidades"
+                                :value="old('cantidades')" autofocus autocomplete="cantidades">
+                            <div class="tooltip">?
+                                <span class="tooltiptext">Cantidad del trabajo a realizar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="contenido">
+                            <x-input-label for="iva" :value="__('Factura: ')" style="color: white;font-size:1.3rem" />
+                            <x-input-error :messages="$errors->get('iva')" class="mt-2" />
+                            <input class="datos" type="decimal"  id="iva" name="iva"
+                                :value="old('iva')" autofocus autocomplete="iva">
+                            <div class="tooltip">?
+                                <span class="tooltiptext">Porcentaje a pagar de la factura (16)</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mt-4">
@@ -29,48 +92,19 @@
                     <textarea placeholder="ingresar la descripción del trabajo a realizar" name="descripcion" id="descripcion" cols="20" rows="10" style="padding:9px;"></textarea>
                 </div>
 
-                <div class="inputbox">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <input type="number" required id="cantidades" name="cantidades" :value="old('cantidades')"
-                        autofocus autocomplete="cantidades">
-                    <label for="">Cantidad</label>
-                    <x-input-error :messages="$errors->get('cantidades')" class="mt-2" />
-                </div>
-
-                <div class="inputbox">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <input type="decimal" required id="ganancia" name="ganancia" :value="old('ganancia')" autofocus
-                        autocomplete="ganancia">
-                    <label for="">Ganancia sobre el costo de producción (0-100)</label>
-                    <x-input-error :messages="$errors->get('ganancia')" class="mt-2" />
-                </div>
-
-                <div class="inputbox">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <input type="decimal" required id="manobra" name="manobra" :value="old('manobra')" autofocus
-                        autocomplete="manobra">
-                    <label for="">Mano de obra</label>
-                    <x-input-error :messages="$errors->get('manobra')" class="mt-2" />
-                </div>
-
-                <div class="inputbox">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <input type="number"  id="iva" name="iva" value="0" autofocus
-                        autocomplete="iva">
-                    <label for="">IVA</label>
-                    <x-input-error :messages="$errors->get('iva')" class="mt-2" />
-                </div>
-
                 <button>
                     <p>Registrar</p>
                 </button>
-
                 <div class="forget">
                     <a href="{{ route('trabIndex') }}">Regresar</a>
                 </div>
-            </form>
-        </section>
+            </div>
+
     </div>
+    </form>
+
+    </div>
+
 
 
 </x-layouts.nuevos>

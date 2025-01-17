@@ -121,7 +121,7 @@
                             <div class="frm">
 
 
-                                <input type="hidden" name="trabajo_id" value="{{ Crypt::encrypt($identificador) }}">
+                                <input type="hidden" name="trabajo_id" value="{{ Crypt::encrypt($identificador) }}" readonly>
 
                                 <div class="datos">
                                     <label for="insumo">Nombre insumo/servicio: </label>

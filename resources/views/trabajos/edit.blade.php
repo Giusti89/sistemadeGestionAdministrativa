@@ -1,4 +1,4 @@
-<x-layouts.nuevos titulo="Nuevos Clientes" css="../css/nuevoTrabajo.css">
+<x-layouts.nuevos titulo="Nuevos Clientes" css="../css/editTrabajo.css">
     
     <section>
         <form method="POST" action="{{ route('updateTrab', $trab->id) }}">
