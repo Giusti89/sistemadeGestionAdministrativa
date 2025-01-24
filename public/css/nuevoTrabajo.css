@@ -13,13 +13,16 @@ body {
 
 .contenido {
     display: flex;
-    gap: 5px;
-    margin-bottom: 25px;
-    justify-content: center;
     align-items: center;
 }
 
-.contenedor{
+.subtitulo {
+    color: white;
+    font-size: 1.0rem;
+    width: 150px;
+}
+
+.contenedor {
     position: relative;
     width: 70vw;
     background-color: transparent;
@@ -36,18 +39,20 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%;
+
 }
 
 .selector {
     color: black;
     background-color: white;
-    width: 30vw;
+    width: 25vw;
+    height: 35px;
     font-size: 1.2rem;
 }
 
 .datos {
     border-color: 2px solid rgba(255, 255, 2, 0.5);
-    width: 60%;
     height: 35px;
     border: none;
     outline: none;
@@ -57,7 +62,8 @@ body {
 
 .cortos {
     display: flex;
-    gap: 10px;
+    gap: 20px;
+
 }
 
 .tooltip {
@@ -67,6 +73,7 @@ body {
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    margin-left: 6px;
 }
 
 .tooltiptext {
@@ -92,13 +99,14 @@ body {
     visibility: visible;
     opacity: 100;
 }
+
 .forget {
-    margin: 35px 0;
+
     font-size: 1.5rem;
     color: #fff;
     display: flex;
-    justify-content: space-between;
 }
+
 .forget label {
     display: flex;
     align-items: center;
@@ -119,7 +127,7 @@ body {
 }
 
 button {
-    width: 30%;
+    width: 40%;
     height: 40px;
     border-radius: 40px;
     background-color: #008f39;
@@ -127,9 +135,8 @@ button {
     outline: none;
     cursor: pointer;
     font-size: 1rem;
-    font-weight: 600;
     transition: all 0.4s ease;
-    margin-top: 5vh;
+
 }
 
 button p {
@@ -159,7 +166,7 @@ button:hover {
 
 textarea {
     margin-top: 3vh;
-    width: 60vw;
+    width: 100%;
     font-size: 1.2rem;
 }
 
@@ -173,13 +180,38 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+.botns {
+    display: flex;
+    width: 30%;
+
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
 @media (max-width: 768px) {
     body {
         padding: 0 10px;
     }
+
     .cortos {
         display: flex;
         flex-direction: column;
         gap: 10px;
+    }
+
+    .contenedor {
+        position: relative;
+        width: 70vw;
+        background-color: transparent;
+        border: 2px solid rgba(255, 255, 2, 0.5);
+        border-radius: 20px;
+        backdrop-filter: blur(55px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 3rem;
     }
 }
