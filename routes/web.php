@@ -79,14 +79,14 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group
         Route::get('/ordenpago.sueltopdf/{id}', 'pdfsuelto')->name('sueltoPdf');
     });
 
-    Route::controller(GastoController::class)->group(function () {
-        Route::get('.gastos', 'index')->name('gastoIndex');
-        Route::get('/gastos.nuevo', 'create')->name('nuevoGasto'); 
-        Route::post('/gastos.store', 'store')->name('storeGasto');
-        Route::get('/gastos.edit/{id}', 'edit')->name('editGasto'); 
-        Route::put('/gastos.update/{id}', 'update')->name('updateGasto');  
-        Route::delete('/gastos.destroy/{id}', 'destroy')->name('gasto.destroy');     
-    });
+    // Route::controller(GastoController::class)->group(function () {
+    //     Route::get('.gastos', 'index')->name('gastoIndex');
+    //     Route::get('/gastos.nuevo', 'create')->name('nuevoGasto'); 
+    //     Route::post('/gastos.store', 'store')->name('storeGasto');
+    //     Route::get('/gastos.edit/{id}', 'edit')->name('editGasto'); 
+    //     Route::put('/gastos.update/{id}', 'update')->name('updateGasto');  
+    //     Route::delete('/gastos.destroy/{id}', 'destroy')->name('gasto.destroy');     
+    // });
     
     Route::controller(EstadisticasController::class)->group(function () {
         Route::get('.reports', 'index')->name('ReporteIndex');

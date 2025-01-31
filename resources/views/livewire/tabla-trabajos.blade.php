@@ -79,7 +79,7 @@
                                 @endphp
                                 @if ($insumos->estado)
                                     <x-layouts.btnenviodat rutaEnvio="trabPdf" dato="{{ $insumos->id }} "
-                                        nombre="Ver PDF" estado="_blank">
+                                        nombre="Cotización PDF" estado="_blank">
                                     </x-layouts.btnenviodat>
                                 @else
                                     <x-layouts.btnenviodat rutaEnvio="insumoIndex" dato="{{ $encryptedId }}"
@@ -94,7 +94,7 @@
                             <div>
                                 @if ($insumos->estado)
                                     <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"
-                                        nombre="Verificar" estado="disabled">
+                                        nombre="No disponible" estado="disabled">
                                     </x-layouts.btnmodif>
                                 @else
                                     <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"

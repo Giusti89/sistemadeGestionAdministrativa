@@ -37,12 +37,11 @@
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('gastoIndex')" :active="request()->routeIs('gastoIndex')">
                         {{ __('Gastos') }}
                     </x-nav-link>
-                </div>
-
+                </div> --}}
                
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -149,11 +148,11 @@
             </x-responsive-nav-link>
         </div>
 
-        <div class="pt-2 pb-3 space-y-1">
+        {{-- <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('gastoIndex')" :active="request()->routeIs('gastoIndex')">
                 {{ __('Gastos') }}
             </x-responsive-nav-link>
-        </div>
+        </div> --}}
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('cuentaPrueba')" :active="request()->routeIs('cuentaPrueba')">
