@@ -8,9 +8,9 @@
         </div>
         <div>
             <label for="paginate">Filtrar por cliente:</label>
-            <input type="text" wire:model.live="search"> 
+            <input type="text" wire:model.live="search">
         </div>
-        
+
         <div>
             <label for="filtro">Filtrar por mes: </label>
             <input type="month" min="2018-03" wire:model="searchMonth">
@@ -34,8 +34,9 @@
                     <th>Costo Produccion</th>
                     <th>Ganancia efectiva</th>
                     <th>Costo Final</th>
-                    <th>Acción</th>
+                    <th>estado de la cotización</th>
                     <th>Fecha de creación</th>
+                    <th>Acción</th>
                     <th>Modificación</th>
                     <th>Eliminar</th>
 
@@ -68,6 +69,10 @@
                             {{ $insumos->Costofinal }}
                         </td>
 
+                         <td class="filas-tabla">
+                            {{ $insumos->estadotrabajo->nombre}}
+                        </td>
+
                         <td class="filas-tabla">
                             {{ \Carbon\Carbon::parse($insumos->created_at)->format('d/m/Y') }}
                         </td>
@@ -86,7 +91,6 @@
                                         nombre="Cotizar">
                                     </x-layouts.btnenviodat>
                                 @endif
-
                             </div>
                         </td>
 

@@ -8,7 +8,7 @@
 
                 <div class="mt-4">
                     <div class="contenido">
-                        <label  class="subtitulo" for="Cliente">Cliente:</label>
+                        <label class="subtitulo" for="Cliente">Cliente:</label>
                         <select id="cliente" name="cliente" class="selector" required autocomplete="cliente">
                             <option value=""></option>
                             @foreach ($cliente as $nombre => $id)
@@ -50,7 +50,7 @@
 
                     <div class="mt-4">
                         <div class="contenido">
-                            <label class="subtitulo" for="ganancia">Costo producción:</label>                            
+                            <label class="subtitulo" for="ganancia">Porcentaje sobre costo producción:</label>
                             <x-input-error :messages="$errors->get('ganancia')" class="mt-2" />
                             <input class="datos" type="decimal" required id="ganancia" name="ganancia"
                                 :value="old('ganancia')" autofocus autocomplete="ganancia">
@@ -65,7 +65,7 @@
                 <div class="cortos">
                     <div class="mt-4">
                         <div class="contenido">
-                            <label class="subtitulo" for="cantidad">Cantidades:</label>                          
+                            <label class="subtitulo" for="cantidad">Cantidades:</label>
                             <x-input-error :messages="$errors->get('cantidades')" class="mt-2" />
                             <input class="datos" type="number" id="cantidades" name="cantidades"
                                 :value="old('cantidades')" autofocus autocomplete="cantidades">
@@ -77,7 +77,7 @@
 
                     <div class="mt-4">
                         <div class="contenido">
-                            <label class="subtitulo" for="iva">Factura:</label>                            
+                            <label class="subtitulo" for="iva">Factura:</label>
                             <x-input-error :messages="$errors->get('iva')" class="mt-2" />
                             <input class="datos" type="decimal" id="iva" name="iva" :value="old('iva')"
                                 autofocus autocomplete="iva">
@@ -89,7 +89,12 @@
                 </div>
 
                 <div class="mt-4">
-                    <x-input-label for="descripcion" :value="__('Descripcion')" style="color: white;font-size:1.5rem" /> <br>
+
+                    <x-input-label for="descripcion" :value="__('Descripcion')" style="color: white;font-size:1.5rem" />
+                    <div class="tooltip">?
+                        <span class="tooltiptext">Ingresarla descripcion sobre el trabajo que se va realizar</span>
+                    </div>
+                    <br>
                     <textarea placeholder="ingresar la descripción del trabajo a realizar" name="descripcion" id="descripcion"
                         cols="20" rows="10" style="padding:9px;"></textarea>
                 </div>

@@ -25,7 +25,7 @@ class CheckActivo
     
             $request->session()->regenerateToken();
     
-            return redirect('/');
+            
             return redirect('/')->with('error', 'Tu suscripción no está activa.');
         }
 

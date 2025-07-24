@@ -82,19 +82,23 @@ class InsumoController extends Controller
     {
         $id = Crypt::decrypt($encryptedId);
         $trabajo = Trabajo::findOrFail($id);
+
         $items = Insumo::where('trabajo_id', $trabajo->id)->get();
-        $total = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');
-        $total = $total + $trabajo->manobra;
+        $costoprod = Insumo::where('trabajo_id',  $trabajo->id)->sum('costo');
+        $parcial = $costoprod + $trabajo->manobra;
         $user = Auth::user();
 
-        $ganancia = $total * $trabajo->ganancia / 100;
+        $ganancia = $parcial * $trabajo->ganancia / 100;
+        $totalconganancia = $costoprod + $ganancia;
+
+        
         if ($trabajo->iva > 0) {
-            $iva = $total * $trabajo->iva / 100;
-            $total = $total  + $ganancia + $iva;
+            $iva = $totalconganancia * $trabajo->iva / 100;
+            $total = $totalconganancia   + $iva;
         } else {
-            $total = $total + $ganancia;
+            $total = $totalconganancia + $ganancia;
         }
-        $pdf = Pdf::loadView('insumos.pdfcoti', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total,'user' => $user,]);
+        $pdf = Pdf::loadView('insumos.pdfcoti', ['trabajo' => $trabajo, 'items' => $items, 'total' => $total, 'user' => $user,]);
 
         return $pdf->stream();
     }
@@ -175,11 +179,11 @@ class InsumoController extends Controller
             $actualizar->Costoproduccion = $costoProduccion;
 
             $totalparcial = $request->total + $actualizar->manobra;
-            $porcentajeGanancia = $totalparcial*$actualizar->ganancia/100;
-            $totalfinal= $totalparcial+$porcentajeGanancia;
+            $porcentajeGanancia = $totalparcial * $actualizar->ganancia / 100;
+            $totalfinal = $totalparcial + $porcentajeGanancia;
 
-            $gananciaEfectivo =  $porcentajeGanancia+$actualizar->manobra ;
-           
+            $gananciaEfectivo =  $porcentajeGanancia + $actualizar->manobra;
+
 
             if ($actualizar->iva > 0) {
                 $porcentajeIva = $actualizar->iva / 100;

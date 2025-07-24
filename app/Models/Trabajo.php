@@ -22,6 +22,7 @@ class Trabajo extends Model
         'Costoproduccion',
         'Costofinal',
         'cliente_id',
+        'estadotrabajo_id',
     ];
 
     public function cliente()
@@ -29,7 +30,7 @@ class Trabajo extends Model
         return $this->belongsTo(Cliente::class);
     }
 
-    public function Insumos()
+    public function insumos()
     {
         return $this->hasMany(Insumo::class);
     }
@@ -37,5 +38,10 @@ class Trabajo extends Model
     public function ordenpagos()
     {
         return $this->hasMany(Ordenpago::class);
+    }
+
+    public function estadotrabajo()
+    {
+        return $this->belongsTo(Estadotrabajo::class);
     }
 }

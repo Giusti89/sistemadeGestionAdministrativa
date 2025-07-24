@@ -52,13 +52,14 @@ class TablaTrabajos extends Component
         })
             ->whereHas('cliente', function ($query) {
                 $query->where('nombre', 'like', '%' . $this->search . '%');
-            })
+            })            
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
             ->with('cliente')
             ->orderBy('estado', 'asc')
             ->paginate($this->paginate > 0 ? $this->paginate : 10);
 
+            
         return view('livewire.tabla-trabajos', compact('trab'));
     }
 }
