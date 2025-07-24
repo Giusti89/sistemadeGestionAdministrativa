@@ -75,11 +75,13 @@ class InsumoController extends Controller
      */
     public function show($encryptedId)
     {
+
         $identificador = Crypt::decrypt($encryptedId);
+        $trabajo = Trabajo::find($identificador);
         $insumos = Insumo::where('trabajo_id',  $identificador)->get();
         $costoprod = Insumo::where('trabajo_id',  $identificador)->sum('costo');
 
-        return view('insumos.show', compact('insumos', 'costoprod'));
+        return view('insumos.show', compact('insumos', 'costoprod','trabajo'));
     }
 
     public function pdf($encryptedId)

@@ -54,7 +54,7 @@
                             {{ $insumos->trabajo }}
                         </td>
                         <td class="filas-tabla">
-                            {{ $insumos->descripcion }}
+                            {{ Str::limit($insumos->descripcion, 30, '...') }}
                         </td>
 
                         <td class="filas-tabla">

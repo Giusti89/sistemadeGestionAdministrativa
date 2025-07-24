@@ -1,6 +1,15 @@
 <x-layouts.nuevos titulo="Nuevos Clientes" css="../css/cotizacion.css">
 
     <div class="contenedor">
+         <div>
+            <section class="seccion1">
+                <label class="titulo" for="titulo">
+                    <h1 style="color: yellow">Cotización sobre el trabajo de:</h1>
+                </label>
+                <br>
+                <h1>{{ $trabajo->descripcion }}</h1>
+            </section>
+        </div>
         <div class="tabla tabla1">
             <h1>Insumos</h1>
             <div class="table-container">

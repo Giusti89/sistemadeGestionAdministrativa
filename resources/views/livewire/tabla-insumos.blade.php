@@ -9,7 +9,6 @@
                 <br>
                 <h1>{{ $trabajo }}</h1>
             </section>
-
         </div>
 
         <div class="principal">
@@ -53,7 +52,7 @@
                                             {{ $trab->nombre }}
                                         </td>
                                         <td class="filas-tabla">
-                                            {{ $trab->detalle }}
+                                            {{ Str::limit($trab->detalle, 30, '...') }}
                                         </td>
                                         <td class="filas-tabla">
                                             {{ $trab->costo }}
@@ -121,7 +120,8 @@
                             <div class="frm">
 
 
-                                <input type="hidden" name="trabajo_id" value="{{ Crypt::encrypt($identificador) }}" readonly>
+                                <input type="hidden" name="trabajo_id" value="{{ Crypt::encrypt($identificador) }}"
+                                    readonly>
 
                                 <div class="datos">
                                     <label for="insumo">Nombre insumo/servicio: </label>
