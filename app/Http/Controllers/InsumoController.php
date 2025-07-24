@@ -73,9 +73,13 @@ class InsumoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Insumo $insumo)
+    public function show($encryptedId)
     {
-        //
+        $identificador = Crypt::decrypt($encryptedId);
+        $insumos = Insumo::where('trabajo_id',  $identificador)->get();
+        $costoprod = Insumo::where('trabajo_id',  $identificador)->sum('costo');
+
+        return view('insumos.show', compact('insumos', 'costoprod'));
     }
 
     public function pdf($encryptedId)
@@ -91,7 +95,7 @@ class InsumoController extends Controller
         $ganancia = $parcial * $trabajo->ganancia / 100;
         $totalconganancia = $costoprod + $ganancia;
 
-        
+
         if ($trabajo->iva > 0) {
             $iva = $totalconganancia * $trabajo->iva / 100;
             $total = $totalconganancia   + $iva;
@@ -172,6 +176,7 @@ class InsumoController extends Controller
     {
         try {
             $actualizar = Trabajo::findOrFail($request->id);
+
             $ordendopago = new OrdenPago();
             $ordendopago->trabajo_id = $request->id;
 
@@ -197,6 +202,7 @@ class InsumoController extends Controller
             $actualizar->gananciaefectivo = $gananciaEfectivo;
             $actualizar->Costofinal = $totalFinal;
             $actualizar->estado = true;
+            $actualizar->estadotrabajo_id = 2;
 
             $ordendopago->total = $totalFinal;
             $ordendopago->saldo = $totalFinal;

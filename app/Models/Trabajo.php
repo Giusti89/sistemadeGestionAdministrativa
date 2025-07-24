@@ -42,6 +42,6 @@ class Trabajo extends Model
 
     public function estadotrabajo()
     {
-        return $this->belongsTo(Estadotrabajo::class);
+        return $this->belongsTo(estadotrabajo::class);
     }
 }

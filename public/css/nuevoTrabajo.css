@@ -18,13 +18,15 @@ body {
 
 .subtitulo {
     color: white;
-    font-size: 1.0rem;
+    font-size: clamp(0.9rem, 1.0vw, 1.2rem);
     width: 150px;
 }
 
 .contenedor {
     position: relative;
-    width: 70vw;
+    width: clamp(320px, 70vw, 900px);
+    max-width: 100%;
+    padding: 2rem 1.5rem;
     background-color: transparent;
     border: 2px solid rgba(255, 255, 2, 0.5);
     border-radius: 20px;
@@ -32,7 +34,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem 3rem;
+
 }
 
 .formulario {
@@ -46,9 +48,9 @@ body {
 .selector {
     color: black;
     background-color: white;
-    width: 25vw;
-    height: 35px;
-    font-size: 1.2rem;
+    width: clamp(200px, 25vw, 300px);
+    height: 2.2rem;
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
 }
 
 .datos {
@@ -62,8 +64,8 @@ body {
 
 .cortos {
     display: flex;
-    gap: 20px;
-
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .tooltip {
@@ -127,14 +129,15 @@ body {
 }
 
 button {
-    width: 40%;
-    height: 40px;
+    width: clamp(150px, 40%, 250px);
+    height: 2.5rem;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+
     border-radius: 40px;
     background-color: #008f39;
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 1rem;
     transition: all 0.4s ease;
 
 }
@@ -188,6 +191,35 @@ input[type=number] {
     justify-content: center;
     align-items: center;
     gap: 15px;
+}
+
+@media (min-width: 1024px) {
+    .contenedor {
+        padding: 3rem 2rem;
+    }
+
+    .formulario {
+        gap: 1.5rem;
+    }
+
+    .botns {
+        width: clamp(200px, 30%, 300px);
+    }
+}
+
+/* 7. Ajustes extra para pantallas ultra-anchas */
+@media (min-width: 1440px) {
+    .contenedor {
+        width: 60vw;
+    }
+
+    .cortos {
+        gap: 2rem;
+    }
+
+    button {
+        width: clamp(200px, 30%, 350px);
+    }
 }
 
 @media (max-width: 768px) {

@@ -29,15 +29,14 @@ Route::get('/', function () {
 
 
 
-Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group(function () {
+Route::middleware(['CheckActivo', 'auth', 'CheckSubscription', 'verified'])->group(function () {
     Route::controller(ClienteController::class)->group(function () {
         Route::get('clientes.index', 'index')->name('clientIndex');
         Route::get('/clientes.nuevo', 'create')->name('nuevoCliente');
-        Route::post('/clientes.store', 'store')->name('crearCliente');        
-        Route::get('/clientes.edit/{id}', 'edit')->name('editCliente');      
+        Route::post('/clientes.store', 'store')->name('crearCliente');
+        Route::get('/clientes.edit/{id}', 'edit')->name('editCliente');
         Route::put('/clientes/{cliente}', 'update')->name('clienteUpdate');
         Route::delete('/clientes/{cliente}', 'destroy')->name('elicliente');
-       
     });
 
     Route::controller(TrabajoController::class)->group(function () {
@@ -45,18 +44,20 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group
 
         Route::get('trabajos.reporte/{id}', 'pdf')->name('trabPdf');
 
-        Route::get('/trabajos.nuevo', 'create')->name('nuevoTrab');        
+        Route::get('/trabajos.nuevo', 'create')->name('nuevoTrab');
         Route::post('/trabajos.store', 'store')->name('crearTrab');
-        Route::get('/trabajos.edit/{id}', 'edit')->name('editTrab'); 
+        Route::get('/trabajos.edit/{id}', 'edit')->name('editTrab');
         Route::put('/trabajos/{id}', 'update')->name('updateTrab');
         Route::delete('/trabajos/{id}', 'destroy')->name('eliTrab');
-       
     });
 
     Route::controller(InsumoController::class)->group(function () {
         Route::get('insumos.index/{id}', 'index')->name('insumoIndex');
         Route::post('/insumos.store', 'store')->name('createInsumo');
         Route::get('/insumos.edit/{id}', 'edit')->name('editInsumo');
+
+        Route::get('/insumos/{id}', 'show')->name('mostrarInsumos');
+
         Route::put('/insumos.update/{id}', 'update')->name('updateInsumo');
         Route::delete('/insumos/{id}', 'destroy')->name('eliInsumo');
         Route::post('/insumos', 'terminar')->name('terminarInsumo');
@@ -66,8 +67,8 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group
 
     Route::controller(OrdenpagoController::class)->group(function () {
         Route::get('ordenpago.index', 'index')->name('pagoIndex');
-        
-        Route::get('/ordenpago.pago/{id}', 'create')->name('pagoCreate'); 
+
+        Route::get('/ordenpago.pago/{id}', 'create')->name('pagoCreate');
 
         Route::get('ordenpago.cuentapagada/{ordenpago}', 'show')->name('showPagada');
     });
@@ -87,17 +88,15 @@ Route::middleware(['CheckActivo','auth', 'CheckSubscription','verified'])->group
     //     Route::put('/gastos.update/{id}', 'update')->name('updateGasto');  
     //     Route::delete('/gastos.destroy/{id}', 'destroy')->name('gasto.destroy');     
     // });
-    
+
     Route::controller(EstadisticasController::class)->group(function () {
         Route::get('.reports', 'index')->name('ReporteIndex');
-        
     });
 
     Route::controller(CuentaController::class)->group(function () {
         Route::get('.cuentas', 'index')->name('cuentaIndex');
-        Route::get('.cuentas.estadistica', 'prueba')->name('cuentaPrueba');  
+        Route::get('.cuentas.estadistica', 'prueba')->name('cuentaPrueba');
     });
-
 });
 
 Route::middleware(['auth', 'CheckAdmin'])->group(function () {

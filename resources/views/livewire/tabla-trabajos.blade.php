@@ -69,8 +69,8 @@
                             {{ $insumos->Costofinal }}
                         </td>
 
-                         <td class="filas-tabla">
-                            {{ $insumos->estadotrabajo->nombre}}
+                        <td class="filas-tabla">
+                            {{ $insumos->estadotrabajo->nombre }}
                         </td>
 
                         <td class="filas-tabla">
@@ -96,13 +96,13 @@
 
                         <td class="filas-tabla">
                             <div>
-                                @if ($insumos->estado)
-                                    <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"
-                                        nombre="No disponible" estado="disabled">
-                                    </x-layouts.btnmodif>
-                                @else
+                                @if ($insumos->estadotrabajo->nombre == 'Por cotizar')
                                     <x-layouts.btnmodif rutaEnvio="editTrab" dato="{{ $insumos->id }}"
                                         nombre="Verificar">
+                                    </x-layouts.btnmodif>
+                                @else
+                                    <x-layouts.btnmodif rutaEnvio="mostrarInsumos" dato="{{ $encryptedId }}"
+                                        nombre="ver Insumos">
                                     </x-layouts.btnmodif>
                                 @endif
                             </div>
